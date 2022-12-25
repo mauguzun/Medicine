@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EntityTranslate\TranslateDrug.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="EntityTranslate\TranslateDrug.cs" />
+  </ItemGroup>
+
+</Project>
