@@ -3,8 +3,9 @@ using Medicine.Domain.Enums;
 
 namespace Medicine.Domain.Entities
 {
-    public class Therapy : EntityWithDescriptionEntityTransate
+    public class Therapy : EntityWithDescription
     {
+        public Guid UserId { get; set; }
         public List<Course>? Courses { get; set; }
         public TherapyStatus Status { get; set; }
         public TherapyType Type { get; set; }

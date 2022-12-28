@@ -2,7 +2,9 @@
 
 namespace Medicine.Domain.Entities
 {
-    public class DrugCategory : EntityWithDescriptionEntityTransate
+    public class DrugCategory : Entity
     {
+        public List<TransatedEntityWithDescription> TranslatedDrugsCategory { get; set; }
+  
     }
 }

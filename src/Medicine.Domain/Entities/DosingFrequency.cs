@@ -2,7 +2,7 @@
 
 namespace Medicine.Domain.Entities
 {
-    public class DosingFrequency : EntityWithDescriptionEntityTransate
+    public class DosingFrequency : Entity
     {
         public Course Course { get; set; }
         public Drug Drug { get; set; }
@@ -10,5 +10,8 @@ namespace Medicine.Domain.Entities
         public List<DosageRecommendation>? DosageRecommendation { get; set; } 
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
+
+
+        public List<TranslatedDosingFrequency> TranslatedDosingFrequency { get; set; }
     }
 }

@@ -1,8 +1,9 @@
-﻿using Medicine.Domain.Enums;
+﻿using Medicine.Domain.Entities.Base;
+using Medicine.Domain.Enums;
 
 namespace Medicine.Domain.Entities
 {
-    public class CourseSettings
+    public class CourseSettings :Entity
     {
         public Sex Sex { get; set; }
         public int? MinAge { get; set; }

@@ -2,9 +2,11 @@
 
 namespace Medicine.Domain.Entities
 {
-    public class DosageRecommendation : EntityWithDescriptionEntityTransate
+    public class DosageRecommendation : Entity
     {
         public double Total { get; set; }
         public DosingFrequency DosingFrequency { get; set; }
+
+        public List<TranslatedDosageRecommendation> TranslatedDosageRecommendations { get; set; }
     }
 }

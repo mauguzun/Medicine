@@ -1,6 +1,4 @@
-﻿using Medicine.Domain.EntityTranslate.Base;
-
-namespace Medicine.Domain.Entities.Base
+﻿namespace Medicine.Domain.Entities.Base
 {
     public class TransateEntityWithDescription : TransateEntity
     {
