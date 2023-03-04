@@ -1,6 +1,6 @@
 ﻿namespace DataAccess.Interfaces
 {
-    public interface IDbContext : IDbContextReadonly
+    public interface IAppDbContext : IAppDbContextReadonly
     {
        Task<int> SaveChagesAsync(CancellationToken cancellationToken = default);
     }
