@@ -1,5 +1,5 @@
-using DataAccess.Interfaces;
-using DataAccess.Sql;
+using Medicine.DataAccess.Interfaces;
+using Medicine.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,7 +18,17 @@ ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder =>builder.UseSqlServer(configuration["connectionString"]));
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder =>builder.UseSqlServer(configuration["connectionString"]));
 
-
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("MyPolicy", builder =>
+    {
+        builder
+            .AllowAnyOrigin()
+            //.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
 
 var app = builder.Build();
 

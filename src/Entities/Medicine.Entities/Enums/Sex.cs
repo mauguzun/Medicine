@@ -1,6 +1,9 @@
 ﻿namespace Medicine.Entities.Enums
 {
-    public class Sex
+    public enum Sex
     {
+        None = 0,
+        Male = 1,
+        Female = 2,
     }
 }

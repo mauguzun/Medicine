@@ -1,9 +1,9 @@
-﻿using DataAccess.Interfaces;
+﻿using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
 
-namespace DataAccess.Sql
+namespace Medicine.DataAccess.Sql
 {
     public class AppDbContextReadOnly : DbContext, IAppDbContextReadonly
     {

@@ -2,6 +2,7 @@
 {
     public enum Language
     {
-        enUs = 0,
+        en = 0,
+        lv = 1,
     }
 }
