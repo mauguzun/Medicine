@@ -2,7 +2,7 @@
 {
     public class EntityWithDescription : EntityByUser
     {
-        public string Title { get; set; }
-        public string Descrptioin { get; set; }
+        public string? Title { get; set; }
+        public string? Descrptioin { get; set; }
     }
 }

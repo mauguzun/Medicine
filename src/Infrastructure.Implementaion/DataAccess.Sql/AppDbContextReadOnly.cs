@@ -18,7 +18,7 @@ namespace Medicine.DataAccess.Sql
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<DrugCategory> DrugCategories { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
-        public DbSet<ReminderLog> ReminderLogs { get; set; }
+        public DbSet<DosageLog> DosageLogs { get; set; }
         public DbSet<UserSettings> UserSettings { get; set; }
 
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; set; }
