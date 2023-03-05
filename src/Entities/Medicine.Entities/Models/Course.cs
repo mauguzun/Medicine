@@ -4,14 +4,14 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models
 {
-    public class Course : Entity
+    public class Course : EntityByUser
     {
         public Therapy? Therapy { get; set; }
         public CourseSettings? CourseSettings { get; set; }
-        public CourseType CourseType { get; set; }
-        public List<DosingFrequency>? DosingFrequencies { get; set; }
-        public List<Course> CourseGroup { get; set; }
+        public CourseType CourseType { get; set; } = CourseType.None;
 
-        public TranslatedCourse TranslatedCourse { get; set; }
+        public List<DosingFrequency> DosingFrequencies { get; set; } = new List<DosingFrequency>();
+        public List<Course> CourseGroup { get; set; } = new List<Course>(); 
+        public List<TranslatedCourse> TranslatedCourses { get; set; } = new List<TranslatedCourse>();
     }
 }

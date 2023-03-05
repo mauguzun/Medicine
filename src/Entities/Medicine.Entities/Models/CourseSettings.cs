@@ -3,7 +3,7 @@ using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
-    public class CourseSettings : Entity
+    public class CourseSettings : EntityByUser
     {
         public Sex Sex { get; set; }
         public int? MinAge { get; set; }

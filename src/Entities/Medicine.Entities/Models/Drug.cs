@@ -4,13 +4,15 @@ using System.ComponentModel;
 
 namespace Medicine.Entities.Models
 {
-    public class Drug : Entity
+    public class Drug : EntityByUser
     {
         public string? Recomendation { get; set; }
-        public double OneItemWeight { get; set; }
-        public List<DrugCategory> DrugCategory { get; set; }
-        public List<Drug> SimilarPreparate { get; set; }
-        public List<ActiveElement> ActiveElements { get; set; }
-        public TranslatedDrugs TranslatedDrugs { get; set; }
+        public string? Title { get; set; }
+        public double OneUnitSizeInGramm { get; set; }
+        public List<DrugCategory> DrugCategory { get; set; } = new List<DrugCategory>();
+        public List<Drug> SimilarPreparate { get; set; } = new List<Drug>();
+        public List<ActiveElement> ActiveElements { get; set; } = new List<ActiveElement>();
+        public List<TranslatedDrugs> TranslatedDrugs { get; set; } = new List<TranslatedDrugs>();
+
     }
 }

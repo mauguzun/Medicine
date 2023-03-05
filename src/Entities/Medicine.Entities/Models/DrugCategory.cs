@@ -2,7 +2,7 @@
 
 namespace Medicine.Entities.Models
 {
-    public class DrugCategory : Entity
+    public class DrugCategory : EntityByUser
     {
         public List<TransatedEntityWithDescription> TranslatedDrugsCategory { get; set; }
     }

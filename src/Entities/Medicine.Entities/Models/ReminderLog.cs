@@ -3,7 +3,7 @@ using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
-    public class ReminderLog : Entity
+    public class ReminderLog : EntityByUser
     {
         public DosageRecommendation DosageRecommendation { get; set; }
         public ReminderLogStatus Status { get; set; }
