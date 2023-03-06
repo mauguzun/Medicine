@@ -9,5 +9,6 @@ namespace Medicine.DataAccess.Sql
         public AppDbContext(DbContextOptions options) : base(options) { }
 
         public Task<int> SaveChagesAsync(CancellationToken cancellationToken = default) => base.SaveChangesAsync(cancellationToken);
+
     }
 }

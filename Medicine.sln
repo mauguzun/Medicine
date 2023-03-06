@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.WebApplication", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DB0BA1C8-530B-4709-96AE-BF0CAAC92C11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTests", "tests\LogicTests\LogicTests.csproj", "{1A050305-8528-45D1-B6DA-C08EEE9A57C5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCases", "tests\LogicTests\UseCases.csproj", "{1A050305-8528-45D1-B6DA-C08EEE9A57C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

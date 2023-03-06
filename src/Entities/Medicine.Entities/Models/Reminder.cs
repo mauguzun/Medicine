@@ -4,7 +4,7 @@ namespace Medicine.Entities.Models
 {
     public class Reminder : EntityWithDescription
     {
-        public TimeOnly TimeInUtc { get; set; } = new TimeOnly(0, 0);
+        public string TimeInUtc { get; set; } = "00:00";
         public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>();
     }
 }

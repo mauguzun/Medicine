@@ -4,7 +4,7 @@ using Medicine.Entities.Models;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
 
-namespace LogicTests
+namespace UseCases
 {
     public class LogicTest
     {
@@ -91,11 +91,11 @@ namespace LogicTests
             {
                 CreatedBy = userId,
                 Title = "Morning Reminder",
-                TimeInUtc = TimeOnly.Parse("07:20"),
+                TimeInUtc = "07:20",
                 DosageRecommendations = { dosageRecomendation }
             });
 
-            context.Reminders.Add(new Reminder { CreatedBy = userId, Title = "Evning Reminder", TimeInUtc = TimeOnly.Parse("20:20") });
+            context.Reminders.Add(new Reminder { CreatedBy = userId, Title = "Evning Reminder", TimeInUtc = "07:20" });
 
 
             context.DosageLogs.Add(new DosageLog
@@ -114,7 +114,7 @@ namespace LogicTests
 
             var remider = context.Reminders
                 .Where(
-                    reminder => reminder.TimeInUtc == TimeOnly.Parse(firstData.ToString("HH:mm"))
+                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm")
                     &&
                    (
                     reminder.DosageRecommendations.Any(x=>x.DosageLogs == null) 
