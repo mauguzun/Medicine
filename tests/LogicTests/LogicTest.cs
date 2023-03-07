@@ -114,14 +114,14 @@ namespace UseCases
 
             var remider = context.Reminders
                 .Where(
-                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm")
-                    &&
+                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
+                     &&
                    (
-                    reminder.DosageRecommendations.Any(x=>x.DosageLogs == null) 
+                    reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
                         ||
-                    reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(y =>  (firstData - y.DateTime).Days >= 
-                       y.DosageRecommendation.DosingFrequency.IntervalInDays 
-                    )) )
+                    reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
+                        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
+                    )))
                 )
                 .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
@@ -132,8 +132,7 @@ namespace UseCases
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
                     .ThenInclude(dose => dose.TranslatedDrugs)
                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x=>x.CreatedBy == userId))
-                .ToList();
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId));
 
 
 
