@@ -15,8 +15,7 @@ namespace Medicine.WebApplication.GraphQl
 
             return ctx.Reminders
                 .Where(
-                                      reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
-
+                     reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
                      &&
                    (
                     reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
@@ -40,6 +39,8 @@ namespace Medicine.WebApplication.GraphQl
         }
 
         [UseProjection]
+        [UseSorting()]
+        [UseFiltering()]
         public IQueryable<Reminder> ReadByUserId([Service] AppDbContextReadOnly ctx, int userId)
         {
             DateTime firstData = new DateTime(1900, 1, 3, 7, 20, 0, 0);

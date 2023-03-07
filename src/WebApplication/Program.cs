@@ -24,7 +24,9 @@ builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(build
 
 builder.Services.AddGraphQLServer()
     .AddQueryType<Queries>()
-    .AddProjections();
+    .AddProjections()
+    .AddFiltering()
+    .AddSorting();
 
 
 
