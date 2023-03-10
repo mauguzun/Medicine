@@ -1,0 +1,49 @@
+using AutoMapper;
+using Medicine.DataAccess.Sql;
+using Medicine.Entities.Models;
+using Medicine.Web.UseCases.Dto;
+using Microsoft.EntityFrameworkCore;
+
+namespace Medicine.WebApplication.GraphQL.Reminder.Queries
+{
+
+    public class Reminder
+    {
+
+        [UseProjection]
+        [UseSorting()]
+        [UseFiltering()]
+        public List<ReminderDto> ReadByUserId(
+            [Service] AppDbContextReadOnly ctx,
+            [Service] IMapper mapper, int userId)
+        {
+            DateTime firstData = new(1900, 1, 3, 7, 20, 0, 0);
+
+            var therapy = ctx.Reminders
+                .Where(
+                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
+                     &&
+                   (
+                    reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
+                        ||
+                    reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
+                        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
+                    )))
+                )
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(doseFrequency => doseFrequency.Course)
+                    .ThenInclude(course => course.Therapy)
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(doseFrequency => doseFrequency.Drug)
+                    .ThenInclude(dose => dose.TranslatedDrugs)
+               .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
+                    .ToList();
+
+            return mapper.Map<List<ReminderDto>>(therapy);
+        }
+    }
+
+}

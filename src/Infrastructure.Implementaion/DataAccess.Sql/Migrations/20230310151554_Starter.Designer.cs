@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.DataAccess.Sql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230306162625_init")]
-    partial class init
+    [Migration("20230310151554_Starter")]
+    partial class Starter
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,23 @@ namespace Medicine.DataAccess.Sql.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.HasSequence("TransatedEntityWithDescriptionSequence");
+
+            modelBuilder.Entity("DrugDrugCategory", b =>
+                {
+                    b.Property<int>("DrugCategoryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DrugsId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DrugCategoryId", "DrugsId");
+
+                    b.HasIndex("DrugsId");
+
+                    b.ToTable("DrugDrugCategory");
+                });
 
             modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
                 {
@@ -39,20 +56,15 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DrugId")
+                    b.Property<int>("DrugId")
                         .HasColumnType("int");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("float");
 
-                    b.Property<int>("TranslatedActiveElementId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("DrugId");
-
-                    b.HasIndex("TranslatedActiveElementId");
 
                     b.ToTable("ActiveElements");
                 });
@@ -61,9 +73,10 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -75,9 +88,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("DrugCategoryId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Language")
                         .HasColumnType("int");
 
@@ -87,11 +97,9 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DrugCategoryId");
+                    b.ToTable((string)null);
 
-                    b.ToTable("TransatedEntityWithDescription");
-
-                    b.UseTptMappingStrategy();
+                    b.UseTpcMappingStrategy();
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Course", b =>
@@ -103,9 +111,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int?>("CourseId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CourseSettingsId")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseType")
@@ -124,8 +129,6 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasIndex("CourseId");
 
-                    b.HasIndex("CourseSettingsId");
-
                     b.HasIndex("TherapyId");
 
                     b.ToTable("Courses");
@@ -138,6 +141,9 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("CourseId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -158,6 +164,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CourseId");
 
                     b.ToTable("CourseSettings");
                 });
@@ -309,12 +317,10 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<int>("CreatedBy")
                         .HasColumnType("int");
 
-                    b.Property<int?>("DrugId")
+                    b.Property<int>("DrugId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DrugId");
 
                     b.ToTable("DrugCategories");
                 });
@@ -409,6 +415,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
 
+                    b.Property<int>("ActiveElementId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("ActiveElementId")
+                        .IsUnique()
+                        .HasFilter("[ActiveElementId] IS NOT NULL");
+
                     b.ToTable("TranslatedActiveElement");
                 });
 
@@ -416,7 +429,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
 
-                    b.Property<int?>("CourseId")
+                    b.Property<int>("CourseId")
                         .HasColumnType("int");
 
                     b.Property<string>("Version")
@@ -463,6 +476,18 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.ToTable("TranslatedDrugs");
                 });
 
+            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugsCategory", b =>
+                {
+                    b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
+
+                    b.Property<int>("DrugCategoryId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("DrugCategoryId");
+
+                    b.ToTable("TranslatedDrugsCategory");
+                });
+
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedTherapy", b =>
                 {
                     b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
@@ -475,26 +500,30 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.ToTable("TranslatedTherapy");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
+            modelBuilder.Entity("DrugDrugCategory", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Drug", null)
-                        .WithMany("ActiveElements")
-                        .HasForeignKey("DrugId");
-
-                    b.HasOne("Medicine.Entities.Models.Translated.TranslatedActiveElement", "TranslatedActiveElement")
+                    b.HasOne("Medicine.Entities.Models.DrugCategory", null)
                         .WithMany()
-                        .HasForeignKey("TranslatedActiveElementId")
+                        .HasForeignKey("DrugCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("TranslatedActiveElement");
+                    b.HasOne("Medicine.Entities.Models.Drug", null)
+                        .WithMany()
+                        .HasForeignKey("DrugsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.Base.TransatedEntityWithDescription", b =>
+            modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.DrugCategory", null)
-                        .WithMany("TranslatedDrugsCategory")
-                        .HasForeignKey("DrugCategoryId");
+                    b.HasOne("Medicine.Entities.Models.Drug", "Drug")
+                        .WithMany("ActiveElements")
+                        .HasForeignKey("DrugId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Drug");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Course", b =>
@@ -503,17 +532,18 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .WithMany("CourseGroup")
                         .HasForeignKey("CourseId");
 
-                    b.HasOne("Medicine.Entities.Models.CourseSettings", "CourseSettings")
-                        .WithMany()
-                        .HasForeignKey("CourseSettingsId");
-
                     b.HasOne("Medicine.Entities.Models.Therapy", "Therapy")
                         .WithMany("Courses")
                         .HasForeignKey("TherapyId");
 
-                    b.Navigation("CourseSettings");
-
                     b.Navigation("Therapy");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.CourseSettings", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Course", null)
+                        .WithMany("CourseSettings")
+                        .HasForeignKey("CourseId");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosageLog", b =>
@@ -568,31 +598,22 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasForeignKey("DrugId");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.DrugCategory", b =>
-                {
-                    b.HasOne("Medicine.Entities.Models.Drug", null)
-                        .WithMany("DrugCategory")
-                        .HasForeignKey("DrugId");
-                });
-
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedActiveElement", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedActiveElement", "Id")
+                    b.HasOne("Medicine.Entities.Models.ActiveElement", "ActiveElement")
+                        .WithOne("TranslatedActiveElement")
+                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedActiveElement", "ActiveElementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("ActiveElement");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedCourse", b =>
                 {
                     b.HasOne("Medicine.Entities.Models.Course", null)
                         .WithMany("TranslatedCourses")
-                        .HasForeignKey("CourseId");
-
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedCourse", "Id")
+                        .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -602,12 +623,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasOne("Medicine.Entities.Models.DosageRecommendation", null)
                         .WithMany("TranslatedDosageRecommendations")
                         .HasForeignKey("DosageRecommendationId");
-
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedDosageRecommendation", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", b =>
@@ -615,12 +630,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasOne("Medicine.Entities.Models.DosingFrequency", null)
                         .WithMany("TranslatedDosingFrequency")
                         .HasForeignKey("DosingFrequencyId");
-
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugs", b =>
@@ -628,30 +637,37 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasOne("Medicine.Entities.Models.Drug", null)
                         .WithMany("TranslatedDrugs")
                         .HasForeignKey("DrugId");
+                });
 
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedDrugs", "Id")
+            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugsCategory", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.DrugCategory", "DrugCategory")
+                        .WithMany("TranslatedDrugsCategory")
+                        .HasForeignKey("DrugCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DrugCategory");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedTherapy", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Base.TransatedEntityWithDescription", null)
-                        .WithOne()
-                        .HasForeignKey("Medicine.Entities.Models.Translated.TranslatedTherapy", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Medicine.Entities.Models.Therapy", null)
                         .WithMany("TranslatedTherapies")
                         .HasForeignKey("TherapyId");
                 });
 
+            modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
+                {
+                    b.Navigation("TranslatedActiveElement")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Medicine.Entities.Models.Course", b =>
                 {
                     b.Navigation("CourseGroup");
+
+                    b.Navigation("CourseSettings");
 
                     b.Navigation("DosingFrequencies");
 
@@ -675,8 +691,6 @@ namespace Medicine.DataAccess.Sql.Migrations
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
                 {
                     b.Navigation("ActiveElements");
-
-                    b.Navigation("DrugCategory");
 
                     b.Navigation("SimilarPreparate");
 

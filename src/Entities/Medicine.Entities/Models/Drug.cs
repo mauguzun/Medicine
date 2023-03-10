@@ -9,10 +9,10 @@ namespace Medicine.Entities.Models
         public string? Recomendation { get; set; }
         public string? Title { get; set; }
         public double OneUnitSizeInGramm { get; set; }
-        public List<DrugCategory> DrugCategory { get; set; } = new List<DrugCategory>();
-        public List<Drug> SimilarPreparate { get; set; } = new List<Drug>();
-        public List<ActiveElement> ActiveElements { get; set; } = new List<ActiveElement>();
-        public List<TranslatedDrugs> TranslatedDrugs { get; set; } = new List<TranslatedDrugs>();
+        public ICollection<DrugCategory> DrugCategory { get; set; } 
+        public ICollection<Drug> SimilarPreparate { get; set; }
+        public ICollection<ActiveElement> ActiveElements { get; set; } 
+        public ICollection<TranslatedDrugs> TranslatedDrugs { get; set; }
 
     }
 }

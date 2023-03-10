@@ -6,27 +6,27 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Medicine.DataAccess.Sql.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class Starter : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateSequence(
+                name: "TransatedEntityWithDescriptionSequence");
+
             migrationBuilder.CreateTable(
-                name: "CourseSettings",
+                name: "DrugCategories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Sex = table.Column<int>(type: "int", nullable: false),
-                    MinAge = table.Column<int>(type: "int", nullable: true),
-                    MaxAge = table.Column<int>(type: "int", nullable: true),
-                    Weight = table.Column<int>(type: "int", nullable: false),
+                    DrugId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CourseSettings", x => x.Id);
+                    table.PrimaryKey("PK_DrugCategories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -104,20 +104,91 @@ namespace Medicine.DataAccess.Sql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DrugCategories",
+                name: "TranslatedDrugsCategory",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DrugCategoryId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TranslatedDrugsCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDrugsCategory_DrugCategories_DrugCategoryId",
+                        column: x => x.DrugCategoryId,
+                        principalTable: "DrugCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ActiveElements",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    DrugId = table.Column<int>(type: "int", nullable: true),
+                    DrugId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<double>(type: "float", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DrugCategories", x => x.Id);
+                    table.PrimaryKey("PK_ActiveElements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DrugCategories_Drugs_DrugId",
+                        name: "FK_ActiveElements_Drugs_DrugId",
+                        column: x => x.DrugId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DrugDrugCategory",
+                columns: table => new
+                {
+                    DrugCategoryId = table.Column<int>(type: "int", nullable: false),
+                    DrugsId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugDrugCategory", x => new { x.DrugCategoryId, x.DrugsId });
+                    table.ForeignKey(
+                        name: "FK_DrugDrugCategory_DrugCategories_DrugCategoryId",
+                        column: x => x.DrugCategoryId,
+                        principalTable: "DrugCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DrugDrugCategory_Drugs_DrugsId",
+                        column: x => x.DrugsId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TranslatedDrugs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DrugId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDrugs_Drugs_DrugId",
                         column: x => x.DrugId,
                         principalTable: "Drugs",
                         principalColumn: "Id");
@@ -130,7 +201,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TherapyId = table.Column<int>(type: "int", nullable: true),
-                    CourseSettingsId = table.Column<int>(type: "int", nullable: true),
                     CourseType = table.Column<int>(type: "int", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -139,11 +209,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Courses_CourseSettings_CourseSettingsId",
-                        column: x => x.CourseSettingsId,
-                        principalTable: "CourseSettings",
-                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Courses_Courses_CourseId",
                         column: x => x.CourseId,
@@ -157,25 +222,71 @@ namespace Medicine.DataAccess.Sql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TransatedEntityWithDescription",
+                name: "TranslatedTherapy",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DrugCategoryId = table.Column<int>(type: "int", nullable: true),
+                    TherapyId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedBy = table.Column<int>(type: "int", nullable: false),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TransatedEntityWithDescription", x => x.Id);
+                    table.PrimaryKey("PK_TranslatedTherapy", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TransatedEntityWithDescription_DrugCategories_DrugCategoryId",
-                        column: x => x.DrugCategoryId,
-                        principalTable: "DrugCategories",
+                        name: "FK_TranslatedTherapy_Therapies_TherapyId",
+                        column: x => x.TherapyId,
+                        principalTable: "Therapies",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TranslatedActiveElement",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActiveElementId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TranslatedActiveElement", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedActiveElement_ActiveElements_ActiveElementId",
+                        column: x => x.ActiveElementId,
+                        principalTable: "ActiveElements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CourseSettings",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sex = table.Column<int>(type: "int", nullable: false),
+                    MinAge = table.Column<int>(type: "int", nullable: true),
+                    MaxAge = table.Column<int>(type: "int", nullable: true),
+                    Weight = table.Column<int>(type: "int", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CourseSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseSettings_Courses_CourseId",
+                        column: x => x.CourseId,
+                        principalTable: "Courses",
                         principalColumn: "Id");
                 });
 
@@ -210,29 +321,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TranslatedActiveElement",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TranslatedActiveElement", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TranslatedActiveElement_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "TranslatedCourse",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CourseId = table.Column<int>(type: "int", nullable: false),
                     Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CourseId = table.Column<int>(type: "int", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -241,57 +340,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         name: "FK_TranslatedCourse_Courses_CourseId",
                         column: x => x.CourseId,
                         principalTable: "Courses",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedCourse_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TranslatedDrugs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    DrugId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TranslatedDrugs_Drugs_DrugId",
-                        column: x => x.DrugId,
-                        principalTable: "Drugs",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedDrugs_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TranslatedTherapy",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    TherapyId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TranslatedTherapy", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TranslatedTherapy_Therapies_TherapyId",
-                        column: x => x.TherapyId,
-                        principalTable: "Therapies",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedTherapy_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -328,8 +376,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "TranslatedDosingFrequency",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    DosingFrequencyId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DosingFrequencyId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -339,40 +392,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         column: x => x.DosingFrequencyId,
                         principalTable: "DosingFrequencies",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedDosingFrequency_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActiveElements",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Quantity = table.Column<double>(type: "float", nullable: false),
-                    TranslatedActiveElementId = table.Column<int>(type: "int", nullable: false),
-                    DrugId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActiveElements", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActiveElements_Drugs_DrugId",
-                        column: x => x.DrugId,
-                        principalTable: "Drugs",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ActiveElements_TranslatedActiveElement_TranslatedActiveElementId",
-                        column: x => x.TranslatedActiveElementId,
-                        principalTable: "TranslatedActiveElement",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -403,8 +422,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "TranslatedDosageRecommendation",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    DosageRecommendationId = table.Column<int>(type: "int", nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DosageRecommendationId = table.Column<int>(type: "int", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -414,12 +438,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         column: x => x.DosageRecommendationId,
                         principalTable: "DosageRecommendations",
                         principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedDosageRecommendation_TransatedEntityWithDescription_Id",
-                        column: x => x.Id,
-                        principalTable: "TransatedEntityWithDescription",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -428,24 +446,19 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActiveElements_TranslatedActiveElementId",
-                table: "ActiveElements",
-                column: "TranslatedActiveElementId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Courses_CourseId",
                 table: "Courses",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_CourseSettingsId",
-                table: "Courses",
-                column: "CourseSettingsId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Courses_TherapyId",
                 table: "Courses",
                 column: "TherapyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseSettings_CourseId",
+                table: "CourseSettings",
+                column: "CourseId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosageLogs_DosageRecommendationId",
@@ -473,9 +486,9 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DrugCategories_DrugId",
-                table: "DrugCategories",
-                column: "DrugId");
+                name: "IX_DrugDrugCategory_DrugsId",
+                table: "DrugDrugCategory",
+                column: "DrugsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Drugs_DrugId",
@@ -483,9 +496,11 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TransatedEntityWithDescription_DrugCategoryId",
-                table: "TransatedEntityWithDescription",
-                column: "DrugCategoryId");
+                name: "IX_TranslatedActiveElement_ActiveElementId",
+                table: "TranslatedActiveElement",
+                column: "ActiveElementId",
+                unique: true,
+                filter: "[ActiveElementId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourse_CourseId",
@@ -508,6 +523,11 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDrugsCategory_DrugCategoryId",
+                table: "TranslatedDrugsCategory",
+                column: "DrugCategoryId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedTherapy_TherapyId",
                 table: "TranslatedTherapy",
                 column: "TherapyId");
@@ -517,10 +537,16 @@ namespace Medicine.DataAccess.Sql.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ActiveElements");
+                name: "CourseSettings");
 
             migrationBuilder.DropTable(
                 name: "DosageLogs");
+
+            migrationBuilder.DropTable(
+                name: "DrugDrugCategory");
+
+            migrationBuilder.DropTable(
+                name: "TranslatedActiveElement");
 
             migrationBuilder.DropTable(
                 name: "TranslatedCourse");
@@ -535,19 +561,22 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "TranslatedDrugs");
 
             migrationBuilder.DropTable(
+                name: "TranslatedDrugsCategory");
+
+            migrationBuilder.DropTable(
                 name: "TranslatedTherapy");
 
             migrationBuilder.DropTable(
                 name: "UserSettings");
 
             migrationBuilder.DropTable(
-                name: "TranslatedActiveElement");
+                name: "ActiveElements");
 
             migrationBuilder.DropTable(
                 name: "DosageRecommendations");
 
             migrationBuilder.DropTable(
-                name: "TransatedEntityWithDescription");
+                name: "DrugCategories");
 
             migrationBuilder.DropTable(
                 name: "DosingFrequencies");
@@ -556,19 +585,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "Reminders");
 
             migrationBuilder.DropTable(
-                name: "DrugCategories");
-
-            migrationBuilder.DropTable(
                 name: "Courses");
 
             migrationBuilder.DropTable(
                 name: "Drugs");
 
             migrationBuilder.DropTable(
-                name: "CourseSettings");
-
-            migrationBuilder.DropTable(
                 name: "Therapies");
+
+            migrationBuilder.DropSequence(
+                name: "TransatedEntityWithDescriptionSequence");
         }
     }
 }

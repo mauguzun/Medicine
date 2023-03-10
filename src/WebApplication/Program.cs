@@ -1,6 +1,7 @@
 using Medicine.DataAccess.Interfaces;
 using Medicine.DataAccess.Sql;
-using Medicine.WebApplication.GraphQl;
+using Medicine.Web.UseCases.Utils;
+using Medicine.WebApplication.GraphQL.Reminder.Queries;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -23,12 +24,12 @@ builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder =>builder.Use
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder =>builder.UseSqlServer(configuration["connectionString"]));
 
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Queries>()
+    .AddQueryType<Reminder>()
     .AddProjections()
     .AddFiltering()
     .AddSorting();
 
-
+builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 builder.Services.AddCors(options =>
 {

@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Entities\Medicine.Entities\Medicine.Entities.csproj" />
     <ProjectReference Include="..\..\src\Infrastructure.Implementaion\DataAccess.Sql\Medicine.DataAccess.Sql.csproj" />
   </ItemGroup>
 

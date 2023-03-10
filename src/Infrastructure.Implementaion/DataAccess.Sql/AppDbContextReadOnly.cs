@@ -1,5 +1,6 @@
 ﻿using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models;
+using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,6 +9,15 @@ namespace Medicine.DataAccess.Sql
     public class AppDbContextReadOnly : DbContext, IAppDbContextReadonly
     {
         public AppDbContextReadOnly(DbContextOptions options) : base(options) { }
+
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TransatedEntityWithDescription>().UseTpcMappingStrategy();
+        }
+
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Therapy> Therapies { get; set; }
