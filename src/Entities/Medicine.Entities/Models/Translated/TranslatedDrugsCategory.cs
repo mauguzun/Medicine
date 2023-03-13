@@ -7,7 +7,6 @@ namespace Medicine.Entities.Models.Translated
     public class TranslatedDrugsCategory : TransatedEntityWithDescription
     {
         public DrugCategory DrugCategory { get; set; }
-        public int DrugCategoryId { get; set; }
     }
 
 }

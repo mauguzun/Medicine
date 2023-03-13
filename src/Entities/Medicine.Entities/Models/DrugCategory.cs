@@ -3,10 +3,9 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models
 {
-    public class DrugCategory : EntityByUser
+    public class DrugCategory : TranslationsEntityByUserWith<TranslatedDrugsCategory>
     {
-        public ICollection<Drug> Drugs { get; set; }
         public int DrugId { get; set; }
-        public ICollection<TranslatedDrugsCategory> TranslatedDrugsCategory { get; set; }
+        public List<Drug> Drugs { get; set; } = new List<Drug>();   
     }
 }

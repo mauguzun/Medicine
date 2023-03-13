@@ -6,6 +6,7 @@ namespace Medicine.Entities.Models.Translated
     [Table(nameof(TranslatedTherapy))]
     public class TranslatedTherapy : TransatedEntityWithDescription
     {
+        public Therapy Therapy { get; set; }
     }
 
 }

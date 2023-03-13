@@ -22,10 +22,10 @@ namespace UseCases
             {
                 Id = userId,
                 OneUnitSizeInGramm = 11.22,
-                TranslatedDrugs =
+                Translations =
                 {
-                     new TranslatedDrugs {    Title = "Drug Name", Descrptioin = "Drug Descrption" },
-                     new TranslatedDrugs {    Title = "Drug Name", Descrptioin = "Drug Descrption", Language = Language.en }
+                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption" },
+                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption", Language = Language.en }
                 },
                 Recomendation = "use before eat 15 min",
                 Title = "Citramonium"
@@ -40,14 +40,14 @@ namespace UseCases
 
                     Type = TherapyType.AutoCreated,
                     Status = TherapyStatus.Statret,
-                    TranslatedTherapies = {
+                    Translations = {
                        new TranslatedTherapy
                        {
-                           Title = "AutoCrated", Descrptioin = "AutoCreated"
+                           Title = "AutoCrated", Description = "AutoCreated"
                        },
                        new TranslatedTherapy
                        {
-                            Title = "AutoCrated2", Descrptioin = "AutoCreated2",Language = Language.lv
+                            Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv
                        }
                     },
                     Courses =
@@ -55,9 +55,9 @@ namespace UseCases
                        new Course
                        {
                              CreatedBy = userId,
-                             TranslatedCourses ={
-                               new TranslatedCourse { Title = "AutoCrated2", Descrptioin = "AutoCreated2",Language = Language.lv },
-                               new TranslatedCourse { Title = "AutoCrated", Descrptioin = "AutoCreated"}
+                             Translations ={
+                               new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
+                               new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
                            },
                            DosingFrequencies =
                            {
@@ -71,9 +71,9 @@ namespace UseCases
                                        new DosageRecommendation{
                                             Id = 1,
                                             Quantity  = 1,
-                                             TranslatedDosageRecommendations =
+                                             Translations =
                                            {
-                                                new TranslatedDosageRecommendation { Title = "AutoCrated", Descrptioin = "AutoCreated"}
+                                                new TranslatedDosageRecommendation { Title = "AutoCrated", Description = "AutoCreated"}
                                            }
                                        }
                                    }
@@ -110,7 +110,7 @@ namespace UseCases
             await context.SaveChagesAsync();
             context.ChangeTracker.Clear();
 
-            DateTime firstData = new DateTime(1900, 1, 3, 7, 20, 0, 0);
+            DateTime firstData = new (1900, 1, 3, 7, 20, 0, 0);
 
             var remider = context.Reminders
                 .Where(
@@ -130,7 +130,7 @@ namespace UseCases
                 .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
-                    .ThenInclude(dose => dose.TranslatedDrugs)
+                    .ThenInclude(dose => dose.Translations)
                .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId));
 

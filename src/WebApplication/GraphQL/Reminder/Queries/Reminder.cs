@@ -1,5 +1,6 @@
 using AutoMapper;
 using Medicine.DataAccess.Sql;
+using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
             [Service] IMapper mapper, int userId)
         {
             DateTime firstData = new(1900, 1, 3, 7, 20, 0, 0);
+            var lang = Language.en;
 
             var therapy = ctx.Reminders
                 .Where(
@@ -31,13 +33,23 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
                     )))
                 )
                 .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(doseFrequency => doseFrequency.Course)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Course)
                     .ThenInclude(course => course.Therapy)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                 .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
-                    .ThenInclude(dose => dose.TranslatedDrugs)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
                     .ToList();

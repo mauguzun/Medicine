@@ -2,7 +2,7 @@
 
 namespace Medicine.Entities.Models.Base
 {
-    public class TransatedEntity : EntityByUser
+    public abstract class TransatedEntity : EntityByUser
     {
         public Language Language { get; set; }
     }

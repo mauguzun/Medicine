@@ -16,12 +16,11 @@ namespace Medicine.Web.UseCases.Utils
         {
             CreateMap<Therapy, TherapyDto>()
                 .ForMember(dest => dest.Title,
-                    opt => opt.MapFrom(x => x.TranslatedTherapies.FirstOrDefault().Title ?? string.Empty));
-
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty));
 
             CreateMap<Course, CourseDto>()
                 .ForMember(dest => dest.Title,
-                    opt => opt.MapFrom(x => x.TranslatedCourses.FirstOrDefault().Title ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty));
 
 
             CreateMap<Reminder, ReminderDto>()
@@ -29,19 +28,19 @@ namespace Medicine.Web.UseCases.Utils
             
             CreateMap<DosageRecommendation, DosageRecommendationDto>()
                 .ForMember(dest => dest.Title, 
-                opt => opt.MapFrom(x => x.TranslatedDosageRecommendations.FirstOrDefault().Title));
+                opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title));
 
             CreateMap<DosingFrequency, DosingFrequencyDto>()
                 .ForMember(dest => dest.Title,
-                    opt => opt.MapFrom(x => x.TranslatedDosingFrequency.FirstOrDefault().Title));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title));
 
             CreateMap<Drug, DrugDto>()
                 .ForMember(dest => dest.Title,
-                    opt => opt.MapFrom(x => x.TranslatedDrugs.FirstOrDefault().Title));  
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title));  
             
             CreateMap<Drug, DrugDto>()
                 .ForMember(dest => dest.Title,
-                    opt => opt.MapFrom(x => x.TranslatedDrugs.FirstOrDefault().Title));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title));
         }
     }
 }
