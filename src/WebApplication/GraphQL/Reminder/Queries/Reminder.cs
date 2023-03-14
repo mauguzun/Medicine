@@ -1,7 +1,6 @@
 using AutoMapper;
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Enums;
-using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,13 +9,13 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
 
     public class Reminder
     {
-
         [UseProjection]
         [UseSorting()]
         [UseFiltering()]
         public List<ReminderDto> ReadByUserId(
             [Service] AppDbContextReadOnly ctx,
-            [Service] IMapper mapper, int userId)
+            [Service] IMapper mapper,
+            int userId)
         {
             DateTime firstData = new(1900, 1, 3, 7, 20, 0, 0);
             var lang = Language.en;

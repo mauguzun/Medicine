@@ -8,8 +8,8 @@ namespace Medicine.Web.UseCases.Dto
         public string? Recomendation { get; set; }
         public string? Title { get; set; }
         public double OneUnitSizeInGramm { get; set; }
-        public List<DrugCategory> DrugCategory { get; set; } = new List<DrugCategory>();
-        public List<Drug> SimilarPreparate { get; set; } = new List<Drug>();
-        public List<ActiveElement> ActiveElements { get; set; } = new List<ActiveElement>();
+        public List<DrugCategoryDto> DrugCategory { get; set; } 
+        public List<DrugDto> SimilarPreparate { get; set; } 
+        public List<ActiveElementDto> ActiveElements { get; set; }
     }
 }

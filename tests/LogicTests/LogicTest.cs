@@ -112,7 +112,9 @@ namespace UseCases
 
             DateTime firstData = new (1900, 1, 3, 7, 20, 0, 0);
 
-            var remider = context.Reminders
+            var lang = Language.en;
+
+            var therapy = context.Reminders
                 .Where(
                     reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
                      &&
@@ -124,16 +126,26 @@ namespace UseCases
                     )))
                 )
                 .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(doseFrequency => doseFrequency.Course)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Course)
                     .ThenInclude(course => course.Therapy)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                 .Include(reminder => reminder.DosageRecommendations)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
-                    .ThenInclude(dose => dose.Translations)
+                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId));
-
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
+                    .ToList();
 
 
         }

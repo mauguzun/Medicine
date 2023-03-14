@@ -10,15 +10,13 @@ namespace Medicine.Web.UseCases.Dto
 {
     public class DosingFrequencyDto : TransatedEntityWithDescriptionDto
     {
-        public Course Course { get; set; }
-        public Drug? Drug { get; set; }
+        public CourseDto Course { get; set; }
+        public DrugDto? Drug { get; set; }
 
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
 
-        public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>();
-
-        public List<TranslatedDosingFrequency> TranslatedDosingFrequency { get; set; } = new List<TranslatedDosingFrequency>();
-
+        public List<DosageRecommendationDto> DosageRecommendations { get; set; }
+        public List<TranslatedDosingFrequency> TranslatedDosingFrequency { get; set; } 
     }
 }
