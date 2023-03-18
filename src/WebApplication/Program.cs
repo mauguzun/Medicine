@@ -20,11 +20,12 @@ builder.Services.AddSwaggerGen();
 ConfigurationManager configuration = builder.Configuration;
 
 //Add database
-builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder =>builder.UseSqlServer(configuration["connectionString"]));
-builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder =>builder.UseSqlServer(configuration["connectionString"]));
+builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseSqlServer(configuration["connectionString"]));
+builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseSqlServer(configuration["connectionString"]));
 
 builder.Services.AddGraphQLServer()
     .AddQueryType<Reminder>()
+    .AddMutationType<ReminderMutation>()
     .AddProjections()
     .AddFiltering()
     .AddSorting();
