@@ -17,7 +17,6 @@ namespace Medicine.DataAccess.Interfaces
         public DbSet<DrugCategory> DrugCategories { get; }
         public DbSet<Reminder> Reminders { get; }
         public DbSet<DosageLog> DosageLogs { get; }
-        public DbSet<UserSettings> UserSettings { get; }
 
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; }
         public DbSet<TranslatedCourse> TranslatedCourses { get; }

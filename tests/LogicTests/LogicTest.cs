@@ -36,7 +36,7 @@ namespace UseCases
             context.Therapies.Add(
                 new Therapy
                 {
-                    CreatedBy = userId,
+                    UserId = userId,
 
                     Type = TherapyType.AutoCreated,
                     Status = TherapyStatus.Statret,
@@ -54,7 +54,7 @@ namespace UseCases
                     {
                        new Course
                        {
-                             CreatedBy = userId,
+                             UserId = userId,
                              Translations ={
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
@@ -89,18 +89,18 @@ namespace UseCases
 
             context.Reminders.Add(new Reminder
             {
-                CreatedBy = userId,
+                UserId = userId,
                 Title = "Morning Reminder",
                 TimeInUtc = "07:20",
                 DosageRecommendations = { dosageRecomendation }
             });
 
-            context.Reminders.Add(new Reminder { CreatedBy = userId, Title = "Evning Reminder", TimeInUtc = "07:20" });
+            context.Reminders.Add(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "07:20" });
 
 
             context.DosageLogs.Add(new DosageLog
             {
-                CreatedBy = userId,
+                UserId = userId,
                 Quantity = 1,
                 DosageRecommendation = dosageRecomendation,
                 DateTime = new DateTime(1900, 1, 1, 7, 20, 0, 0)
@@ -116,7 +116,7 @@ namespace UseCases
 
             var therapy = context.Reminders
                 .Where(
-                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
+                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
                      &&
                    (
                     reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
@@ -144,7 +144,7 @@ namespace UseCases
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
                     .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
                     .ToList();
 
 

@@ -1,4 +1,5 @@
 using Medicine.DataAccess.Sql;
+using Medicine.Entities.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,8 @@ var app = builder.Build();
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContextReadOnly>(builder => builder.UseSqlServer(configuration["connectionString"]));
 
-builder.Services.AddIdentity<IdentityUser<int>, IdentityRole<int>>()
-    .AddRoleManager<RoleManager<IdentityRole<int>>>()
+builder.Services.AddIdentity<User, Role>()
+    .AddRoleManager<RoleManager<Role>>()
     .AddDefaultUI()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<AppDbContextReadOnly>();

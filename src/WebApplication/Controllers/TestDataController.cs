@@ -27,7 +27,7 @@ namespace Medicine.WebApplication.Controllers
 
             _context.Drugs.Add(new Drug
             {
-                CreatedBy = userId,
+                UserId = userId,
                 OneUnitSizeInGramm = 11.22,
                 Translations = new List<TranslatedDrugs>
                 {
@@ -43,7 +43,7 @@ namespace Medicine.WebApplication.Controllers
             _context.Therapies.Add(
                 new Therapy
                 {
-                    CreatedBy = userId,
+                    UserId = userId,
 
                     Type = TherapyType.AutoCreated,
                     Status = TherapyStatus.Statret,
@@ -61,7 +61,7 @@ namespace Medicine.WebApplication.Controllers
                     {
                        new Course
                        {
-                             CreatedBy = userId,
+                             UserId = userId,
                              Translations = new  List<TranslatedCourse>  {
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
@@ -110,18 +110,18 @@ namespace Medicine.WebApplication.Controllers
 
             _context.Reminders.Add(new Reminder
             {
-                CreatedBy = userId,
+                UserId = userId,
                 Title = "Morning Reminder",
                 TimeInUtc = "07:20",
                 DosageRecommendations =  new List<DosageRecommendation>{ dosageRecomendation }
             });
 
-            _context.Reminders.Add(new Reminder { CreatedBy = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
+            _context.Reminders.Add(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
 
 
             _context.DosageLogs.Add(new DosageLog
             {
-                CreatedBy = userId,
+                UserId = userId,
                 Quantity = 1,
                 DosageRecommendation = dosageRecomendation,
                 DateTime = new DateTime(1900, 1, 1, 7, 20, 0, 0)
@@ -170,7 +170,7 @@ namespace Medicine.WebApplication.Controllers
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
                     .ThenInclude(dose => dose.Translations)
                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
             .ToList();
 
 

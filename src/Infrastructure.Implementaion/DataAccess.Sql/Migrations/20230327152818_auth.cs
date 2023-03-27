@@ -6,13 +6,164 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Medicine.DataAccess.Sql.Migrations
 {
     /// <inheritdoc />
-    public partial class Starter : Migration
+    public partial class auth : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateSequence(
                 name: "TransatedEntityWithDescriptionSequence");
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUsers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Sex = table.Column<int>(type: "int", nullable: false),
+                    Language = table.Column<int>(type: "int", nullable: false),
+                    TimeZone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
+                    EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    SecurityStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ConcurrencyStamp = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PhoneNumberConfirmed = table.Column<bool>(type: "bit", nullable: false),
+                    TwoFactorEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    LockoutEnd = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: true),
+                    LockoutEnabled = table.Column<bool>(type: "bit", nullable: false),
+                    AccessFailedCount = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetRoleClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserClaims",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    ClaimType = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ClaimValue = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserClaims_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserLogins",
+                columns: table => new
+                {
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderKey = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ProviderDisplayName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserLogins_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserRoles",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
+                        column: x => x.RoleId,
+                        principalTable: "AspNetRoles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUserRoles_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AspNetUserTokens",
+                columns: table => new
+                {
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginProvider = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Value = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
+                        name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateTable(
                 name: "CourseGroup",
@@ -22,12 +173,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseGroup", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseGroup_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -38,11 +194,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DrugId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugCategories", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DrugCategories_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -56,11 +217,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     OneUnitSizeInGramm = table.Column<double>(type: "float", nullable: false),
                     DrugId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drugs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Drugs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Drugs_Drugs_DrugId",
                         column: x => x.DrugId,
@@ -76,13 +242,18 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     TimeInUtc = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Descrptioin = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reminders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Reminders_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -94,29 +265,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     UserId = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     Type = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Therapies", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "UserSettings",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Sex = table.Column<int>(type: "int", nullable: false),
-                    TimeZone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Therapies_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -128,12 +287,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CourseGroupId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedCourseGroup", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedCourseGroup_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedCourseGroup_CourseGroup_CourseGroupId",
                         column: x => x.CourseGroupId,
@@ -151,12 +315,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DrugCategoryId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDrugsCategory", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDrugsCategory_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedDrugsCategory_DrugCategories_DrugCategoryId",
                         column: x => x.DrugCategoryId,
@@ -174,11 +343,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     DrugId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActiveElements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActiveElements_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_ActiveElements_Drugs_DrugId",
                         column: x => x.DrugId,
@@ -220,12 +394,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DrugId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDrugs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedDrugs_Drugs_DrugId",
                         column: x => x.DrugId,
@@ -244,11 +423,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     CourseGroupId = table.Column<int>(type: "int", nullable: true),
                     CourseType = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Courses_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Courses_CourseGroup_CourseGroupId",
                         column: x => x.CourseGroupId,
@@ -271,12 +455,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TherapyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedTherapy", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedTherapy_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedTherapy_Therapies_TherapyId",
                         column: x => x.TherapyId,
@@ -294,7 +483,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ActiveElementId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -306,6 +495,11 @@ namespace Medicine.DataAccess.Sql.Migrations
                         principalTable: "ActiveElements",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TranslatedActiveElement_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -320,11 +514,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     MaxAge = table.Column<int>(type: "int", nullable: true),
                     Weight = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseSettings", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CourseSettings_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_CourseSettings_Courses_CourseId",
                         column: x => x.CourseId,
@@ -344,11 +543,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Total = table.Column<double>(type: "float", nullable: false),
                     IntervalInDays = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosingFrequencies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DosingFrequencies_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DosingFrequencies_Courses_CourseId",
                         column: x => x.CourseId,
@@ -373,12 +577,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     Version = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedCourse", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedCourse_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedCourse_Courses_CourseId",
                         column: x => x.CourseId,
@@ -397,11 +606,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     DosingFrequencyId = table.Column<int>(type: "int", nullable: false),
                     ReminderId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosageRecommendations", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DosageRecommendations_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DosageRecommendations_DosingFrequencies_DosingFrequencyId",
                         column: x => x.DosingFrequencyId,
@@ -424,12 +638,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DosingFrequencyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDosingFrequency", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDosingFrequency_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedDosingFrequency_DosingFrequencies_DosingFrequencyId",
                         column: x => x.DosingFrequencyId,
@@ -449,11 +668,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     DateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosageLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_DosageLogs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_DosageLogs_DosageRecommendations_DosageRecommendationId",
                         column: x => x.DosageRecommendationId,
@@ -471,12 +695,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DosageRecommendationId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDosageRecommendation", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedDosageRecommendation_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_TranslatedDosageRecommendation_DosageRecommendations_DosageRecommendationId",
                         column: x => x.DosageRecommendationId,
@@ -491,6 +720,55 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActiveElements_UserId",
+                table: "ActiveElements",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetRoleClaims_RoleId",
+                table: "AspNetRoleClaims",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "RoleNameIndex",
+                table: "AspNetRoles",
+                column: "NormalizedName",
+                unique: true,
+                filter: "[NormalizedName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserClaims_UserId",
+                table: "AspNetUserClaims",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserLogins_UserId",
+                table: "AspNetUserLogins",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_RoleId",
+                table: "AspNetUserRoles",
+                column: "RoleId");
+
+            migrationBuilder.CreateIndex(
+                name: "EmailIndex",
+                table: "AspNetUsers",
+                column: "NormalizedEmail");
+
+            migrationBuilder.CreateIndex(
+                name: "UserNameIndex",
+                table: "AspNetUsers",
+                column: "NormalizedUserName",
+                unique: true,
+                filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CourseGroup_UserId",
+                table: "CourseGroup",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Courses_CourseGroupId",
                 table: "Courses",
                 column: "CourseGroupId");
@@ -501,14 +779,29 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "TherapyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Courses_UserId",
+                table: "Courses",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CourseSettings_CourseId",
                 table: "CourseSettings",
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_CourseSettings_UserId",
+                table: "CourseSettings",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DosageLogs_DosageRecommendationId",
                 table: "DosageLogs",
                 column: "DosageRecommendationId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DosageLogs_UserId",
+                table: "DosageLogs",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosageRecommendations_DosingFrequencyId",
@@ -521,6 +814,11 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "ReminderId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_DosageRecommendations_UserId",
+                table: "DosageRecommendations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_DosingFrequencies_CourseId",
                 table: "DosingFrequencies",
                 column: "CourseId");
@@ -529,6 +827,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "IX_DosingFrequencies_DrugId",
                 table: "DosingFrequencies",
                 column: "DrugId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DosingFrequencies_UserId",
+                table: "DosingFrequencies",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DrugCategories_UserId",
+                table: "DrugCategories",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DrugDrugCategory_DrugsId",
@@ -541,9 +849,29 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Drugs_UserId",
+                table: "Drugs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Reminders_UserId",
+                table: "Reminders",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Therapies_UserId",
+                table: "Therapies",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedActiveElement_ActiveElementId",
                 table: "TranslatedActiveElement",
                 column: "ActiveElementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedActiveElement_UserId",
+                table: "TranslatedActiveElement",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourse_CourseId",
@@ -551,9 +879,19 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedCourse_UserId",
+                table: "TranslatedCourse",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourseGroup_CourseGroupId",
                 table: "TranslatedCourseGroup",
                 column: "CourseGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedCourseGroup_UserId",
+                table: "TranslatedCourseGroup",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDosageRecommendation_DosageRecommendationId",
@@ -561,9 +899,19 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DosageRecommendationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDosageRecommendation_UserId",
+                table: "TranslatedDosageRecommendation",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDosingFrequency_DosingFrequencyId",
                 table: "TranslatedDosingFrequency",
                 column: "DosingFrequencyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDosingFrequency_UserId",
+                table: "TranslatedDosingFrequency",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugs_DrugId",
@@ -571,19 +919,49 @@ namespace Medicine.DataAccess.Sql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDrugs_UserId",
+                table: "TranslatedDrugs",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugsCategory_DrugCategoryId",
                 table: "TranslatedDrugsCategory",
                 column: "DrugCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDrugsCategory_UserId",
+                table: "TranslatedDrugsCategory",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedTherapy_TherapyId",
                 table: "TranslatedTherapy",
                 column: "TherapyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedTherapy_UserId",
+                table: "TranslatedTherapy",
+                column: "UserId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "AspNetRoleClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserClaims");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserLogins");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserRoles");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUserTokens");
+
             migrationBuilder.DropTable(
                 name: "CourseSettings");
 
@@ -618,7 +996,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "TranslatedTherapy");
 
             migrationBuilder.DropTable(
-                name: "UserSettings");
+                name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "ActiveElements");
@@ -646,6 +1024,9 @@ namespace Medicine.DataAccess.Sql.Migrations
 
             migrationBuilder.DropTable(
                 name: "Therapies");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
 
             migrationBuilder.DropSequence(
                 name: "TransatedEntityWithDescriptionSequence");

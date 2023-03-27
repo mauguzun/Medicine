@@ -1,5 +1,6 @@
 ﻿using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models;
+using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Microsoft.AspNetCore.Identity;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.DataAccess.Sql
 {
-    public class AppDbContextReadOnly : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>, IAppDbContextReadonly
+    public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
 
         public AppDbContextReadOnly(DbContextOptions options) : base(options) { }
@@ -32,8 +33,6 @@ namespace Medicine.DataAccess.Sql
         public DbSet<DrugCategory> DrugCategories { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<DosageLog> DosageLogs { get; set; }
-        public DbSet<UserSettings> UserSettings { get; set; }
-
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; set; }
         public DbSet<TranslatedCourse> TranslatedCourses { get; set; }
         public DbSet<TranslatedDosageRecommendation> TranslatedDosageRecommendations { get; set; }

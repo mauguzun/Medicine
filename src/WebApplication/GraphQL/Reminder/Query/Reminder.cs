@@ -22,7 +22,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
 
             var therapy = ctx.Reminders
                 .Where(
-                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.CreatedBy == userId
+                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
                      &&
                    (
                     reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
@@ -50,7 +50,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
                     .ThenInclude(doseFrequency => doseFrequency.Drug)
                     .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.CreatedBy == userId))
+                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
                     .ToList();
 
             return mapper.Map<List<ReminderDto>>(therapy);

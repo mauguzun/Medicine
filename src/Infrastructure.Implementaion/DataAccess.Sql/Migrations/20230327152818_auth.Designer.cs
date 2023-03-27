@@ -11,16 +11,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Medicine.DataAccess.Sql.Migrations
 {
-    [DbContext(typeof(AppDbContext))]
-    [Migration("20230313182328_Starter")]
-    partial class Starter
+    [DbContext(typeof(AppDbContextReadOnly))]
+    [Migration("20230327152818_auth")]
+    partial class auth
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "7.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -53,20 +53,133 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("DrugId")
                         .HasColumnType("int");
 
                     b.Property<double>("Quantity")
                         .HasColumnType("float");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrugId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("ActiveElements");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Auth.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Auth.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("Birthday")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Language")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Sex")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeZone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Base.TransatedEntityWithDescription", b =>
@@ -81,9 +194,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -94,6 +204,9 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -119,10 +232,10 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
+                    b.Property<int>("TherapyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TherapyId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -130,6 +243,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasIndex("CourseGroupId");
 
                     b.HasIndex("TherapyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -148,9 +263,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int?>("MaxAge")
                         .HasColumnType("int");
 
@@ -160,12 +272,17 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Weight")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CourseSettings");
                 });
@@ -181,9 +298,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
@@ -196,9 +310,14 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DosageRecommendationId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DosageLogs");
                 });
@@ -214,9 +333,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("DosingFrequencyId")
                         .HasColumnType("int");
 
@@ -226,11 +342,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<int?>("ReminderId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DosingFrequencyId");
 
                     b.HasIndex("ReminderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DosageRecommendations");
                 });
@@ -249,9 +370,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("DrugId")
                         .HasColumnType("int");
 
@@ -261,11 +379,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CourseId");
 
                     b.HasIndex("DrugId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DosingFrequencies");
                 });
@@ -281,9 +404,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int?>("DrugId")
                         .HasColumnType("int");
 
@@ -296,9 +416,14 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DrugId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Drugs");
                 });
@@ -314,13 +439,15 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("DrugId")
                         .HasColumnType("int");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DrugCategories");
                 });
@@ -336,9 +463,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<string>("Descrptioin")
                         .HasColumnType("nvarchar(max)");
 
@@ -349,7 +473,12 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Reminders");
                 });
@@ -365,9 +494,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -379,10 +505,12 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Therapies");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.UserSettings", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -390,30 +518,106 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("Birthday")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CreatedBy")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Sex")
-                        .HasColumnType("int");
-
-                    b.Property<string>("TimeZone")
-                        .IsRequired()
+                    b.Property<string>("ClaimType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.ToTable("UserSettings");
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LoginProvider")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.CourseGroup", b =>
                 {
                     b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("CourseGroup");
                 });
@@ -426,6 +630,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasIndex("ActiveElementId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TranslatedActiveElement");
                 });
@@ -442,6 +648,8 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasIndex("CourseId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("TranslatedCourse");
                 });
 
@@ -453,6 +661,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasIndex("CourseGroupId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TranslatedCourseGroup");
                 });
@@ -466,6 +676,8 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasIndex("DosageRecommendationId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("TranslatedDosageRecommendation");
                 });
 
@@ -477,6 +689,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasIndex("DosingFrequencyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TranslatedDosingFrequency");
                 });
@@ -490,6 +704,8 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasIndex("DrugId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("TranslatedDrugs");
                 });
 
@@ -502,6 +718,8 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasIndex("DrugCategoryId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("TranslatedDrugsCategory");
                 });
 
@@ -513,6 +731,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasIndex("TherapyId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("TranslatedTherapy");
                 });
@@ -540,7 +760,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Drug");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Course", b =>
@@ -555,9 +781,15 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("CourseGroup");
 
                     b.Navigation("Therapy");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.CourseSettings", b =>
@@ -568,7 +800,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosageLog", b =>
@@ -579,7 +817,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DosageRecommendation");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosageRecommendation", b =>
@@ -594,7 +838,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .WithMany("DosageRecommendations")
                         .HasForeignKey("ReminderId");
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DosingFrequency");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosingFrequency", b =>
@@ -611,9 +861,15 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Course");
 
                     b.Navigation("Drug");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
@@ -621,6 +877,101 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasOne("Medicine.Entities.Models.Drug", null)
                         .WithMany("SimilarPreparate")
                         .HasForeignKey("DrugId");
+
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.DrugCategory", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Reminder", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Therapy", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Medicine.Entities.Models.Auth.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.CourseGroup", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedActiveElement", b =>
@@ -631,7 +982,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("ActiveElement");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedCourse", b =>
@@ -642,7 +999,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Course");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedCourseGroup", b =>
@@ -653,7 +1016,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("CourseGroup");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosageRecommendation", b =>
@@ -664,7 +1033,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DosageRecommendation");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", b =>
@@ -675,7 +1050,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DosingFrequency");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugs", b =>
@@ -686,7 +1067,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Drug");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugsCategory", b =>
@@ -697,7 +1084,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("DrugCategory");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedTherapy", b =>
@@ -708,7 +1101,13 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
                     b.Navigation("Therapy");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
