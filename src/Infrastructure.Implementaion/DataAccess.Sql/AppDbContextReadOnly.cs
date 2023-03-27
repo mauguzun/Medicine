@@ -2,12 +2,15 @@
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.DataAccess.Sql
 {
-    public class AppDbContextReadOnly : DbContext, IAppDbContextReadonly
+    public class AppDbContextReadOnly : IdentityDbContext<IdentityUser<int>, IdentityRole<int>, int>, IAppDbContextReadonly
     {
+
         public AppDbContextReadOnly(DbContextOptions options) : base(options) { }
 
 

@@ -25,11 +25,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCases", "tests\LogicTest
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{FEBDEE77-5309-495F-A48D-F755FBD6A012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Web.UseCases", "src\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj", "{803A33BA-9089-4A09-9559-EEB3A142FCC8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Web.UseCases", "src\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj", "{803A33BA-9089-4A09-9559-EEB3A142FCC8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{4DE40D8F-6336-4FD1-A178-7B25FE5D35B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "src\Utils\Utils\Utils.csproj", "{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "src\Utils\Utils\Utils.csproj", "{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Auth", "src\Web\Medicine.Auth\Medicine.Auth.csproj", "{C494B2AD-B685-4204-8EE3-B851EF701D6D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -65,6 +67,10 @@ Global
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{803A33BA-9089-4A09-9559-EEB3A142FCC8} = {FEBDEE77-5309-495F-A48D-F755FBD6A012}
 		{4DE40D8F-6336-4FD1-A178-7B25FE5D35B5} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8} = {4DE40D8F-6336-4FD1-A178-7B25FE5D35B5}
+		{C494B2AD-B685-4204-8EE3-B851EF701D6D} = {FEBDEE77-5309-495F-A48D-F755FBD6A012}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFF5CBFB-D984-4C29-BE37-F8ED595528F6}
