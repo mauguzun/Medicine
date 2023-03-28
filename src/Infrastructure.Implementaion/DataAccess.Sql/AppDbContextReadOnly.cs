@@ -1,4 +1,5 @@
 ﻿using Medicine.DataAccess.Interfaces;
+using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
@@ -20,8 +21,13 @@ namespace Medicine.DataAccess.Sql
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TransatedEntityWithDescription>().UseTpcMappingStrategy();
-        }
 
+            // seeding
+            modelBuilder.Entity<Role>().HasData(
+                new Role { Id = 1, Name = SystemRole.User.ToString() },
+                new Role { Id = 2, Name = SystemRole.Doctor.ToString() }
+            );
+        }
 
         public DbSet<Course> Courses { get; set; }
         public DbSet<Therapy> Therapies { get; set; }

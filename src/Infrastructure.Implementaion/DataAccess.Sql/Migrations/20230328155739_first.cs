@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace Medicine.DataAccess.Sql.Migrations
 {
     /// <inheritdoc />
-    public partial class auth : Migration
+    public partial class first : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -712,6 +714,15 @@ namespace Medicine.DataAccess.Sql.Migrations
                         principalTable: "DosageRecommendations",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { 1, null, "User", null },
+                    { 2, null, "Doctor", null }
                 });
 
             migrationBuilder.CreateIndex(

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Medicine.Entities.Models;
+using Medicine.Entities.Models.Base;
 using Medicine.Web.UseCases.Dto;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,10 @@ namespace Medicine.Web.UseCases.Utils
         {
 
             CreateMap<Reminder, ReminderDto>();
+
+
+
+
 
             CreateMap<Therapy, TherapyDto>()
                 .ForMember(
@@ -58,7 +63,7 @@ namespace Medicine.Web.UseCases.Utils
                     dest => dest.Description,
                     opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
 
-    
+
         }
     }
 }

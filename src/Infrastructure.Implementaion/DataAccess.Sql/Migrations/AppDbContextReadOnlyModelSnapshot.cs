@@ -96,6 +96,18 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Doctor"
+                        });
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Auth.User", b =>

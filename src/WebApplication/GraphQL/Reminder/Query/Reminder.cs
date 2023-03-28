@@ -53,7 +53,10 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
                     .ToList();
 
-            return mapper.Map<List<ReminderDto>>(therapy);
+
+            var result = mapper.Map<List<ReminderDto>>(therapy);
+
+            return result;
         }
     }
 

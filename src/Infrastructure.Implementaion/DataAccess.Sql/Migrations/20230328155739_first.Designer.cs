@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Medicine.DataAccess.Sql.Migrations
 {
     [DbContext(typeof(AppDbContextReadOnly))]
-    [Migration("20230327152818_auth")]
-    partial class auth
+    [Migration("20230328155739_first")]
+    partial class first
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -99,6 +99,18 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "User"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Doctor"
+                        });
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Auth.User", b =>

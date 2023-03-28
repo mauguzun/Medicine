@@ -22,7 +22,7 @@ namespace UseCases
             {
                 Id = userId,
                 OneUnitSizeInGramm = 11.22,
-                Translations =
+                Translations = new List<TranslatedDrugs>
                 {
                      new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption" },
                      new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption", Language = Language.en }
@@ -40,7 +40,7 @@ namespace UseCases
 
                     Type = TherapyType.AutoCreated,
                     Status = TherapyStatus.Statret,
-                    Translations = {
+                    Translations = new List<TranslatedTherapy> {
                        new TranslatedTherapy
                        {
                            Title = "AutoCrated", Description = "AutoCreated"
@@ -55,7 +55,7 @@ namespace UseCases
                        new Course
                        {
                              UserId = userId,
-                             Translations ={
+                             Translations = new List<TranslatedCourse> {
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
                            },
@@ -66,17 +66,17 @@ namespace UseCases
                                     Total = 10,
                                     Drug =  context.Drugs.Single(),
                                     IntervalInDays = 2,
-                                    DosageRecommendations =
+                                    DosageRecommendations = new List<DosageRecommendation>{
                                    {
                                        new DosageRecommendation{
                                             Id = 1,
                                             Quantity  = 1,
-                                             Translations =
+                                             Translations = new List<TranslatedDosageRecommendation>{
                                            {
                                                 new TranslatedDosageRecommendation { Title = "AutoCrated", Description = "AutoCreated"}
-                                           }
+                                           } }
                                        }
-                                   }
+                                   }}
                                }
                            }
                        }
@@ -110,44 +110,44 @@ namespace UseCases
             await context.SaveChagesAsync();
             context.ChangeTracker.Clear();
 
-            DateTime firstData = new (1900, 1, 3, 7, 20, 0, 0);
+            DateTime firstData = new(1900, 1, 3, 7, 20, 0, 0);
 
             var lang = Language.en;
 
             var therapy = context.Reminders
-                .Where(
-                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
-                     &&
-                   (
-                    reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
-                        ||
-                    reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
-                        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
-                    )))
-                )
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Course)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Course)
-                    .ThenInclude(course => course.Therapy)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Drug)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-               .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
-                    .ToList();
+                      .Where(
+                          reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
+                           &&
+                         (
+                          reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
+                              ||
+                          reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
+                              y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
+                          )))
+                      )
+                      .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                      .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                          .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                      .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                          .ThenInclude(doseFrequency => doseFrequency.Course)
+                          .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                      .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                          .ThenInclude(doseFrequency => doseFrequency.Course)
+                          .ThenInclude(course => course.Therapy)
+                          .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                      .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                          .ThenInclude(doseFrequency => doseFrequency.Drug)
+                          .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
+                     .Include(reminder => reminder.DosageRecommendations)
+                          .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
+                          .ToList();
 
-
+            var s = 1;
         }
     }
 }
