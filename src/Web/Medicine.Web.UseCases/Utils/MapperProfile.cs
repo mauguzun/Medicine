@@ -25,43 +25,44 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<Therapy, TherapyDto>()
                 .ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty))
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description));
+
 
 
             CreateMap<Course, CourseDto>()
                     .ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty))
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
 
             CreateMap<DosageRecommendation, DosageRecommendationDto>()
                   .ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty))
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
 
             CreateMap<DosingFrequency, DosingFrequencyDto>()
                 .ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty))
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
 
             CreateMap<Drug, DrugDto>()
                 .ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title ?? string.Empty))
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description ?? string.Empty));
+                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
 
 
         }
