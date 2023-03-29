@@ -21,48 +21,56 @@ namespace Medicine.Web.UseCases.Utils
 
 
 
-
-            CreateMap<Therapy, TherapyDto>()
-                .ForMember(
+            CreateMap<Therapy, TherapyDto>().ForMember(
                     dest => dest.Title,
                     opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description))
+                 .ForMember(
+                    dest => dest.Language,
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Language));
 
 
-
-            CreateMap<Course, CourseDto>()
-                    .ForMember(
+            CreateMap<Course, CourseDto>().ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description))
+                 .ForMember(
+                    dest => dest.Language,
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Language));
 
-            CreateMap<DosageRecommendation, DosageRecommendationDto>()
-                  .ForMember(
+            CreateMap<DosageRecommendation, DosageRecommendationDto>().ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description))
+                 .ForMember(
+                    dest => dest.Language,
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Language));
 
-            CreateMap<DosingFrequency, DosingFrequencyDto>()
-                .ForMember(
+            CreateMap<DosingFrequency, DosingFrequencyDto>().ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description))
+                 .ForMember(
+                    dest => dest.Language,
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Language));
 
-            CreateMap<Drug, DrugDto>()
-                .ForMember(
+            CreateMap<Drug, DrugDto>().ForMember(
                     dest => dest.Title,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Title))
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
                  .ForMember(
                     dest => dest.Description,
-                    opt => opt.MapFrom(x => x.Translations.FirstOrDefault().Description));
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Description))
+                 .ForMember(
+                    dest => dest.Language,
+                    opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Language));
 
 
         }
