@@ -18,7 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Medicine.Notification.Imlemenation\Medicine.Notifications.Imlemenation.csproj" />
     <ProjectReference Include="..\..\Infrastructure.Implementaion\DataAccess.Sql\Medicine.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\..\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj" />
   </ItemGroup>
 
 </Project>

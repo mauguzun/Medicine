@@ -37,8 +37,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Sex = table.Column<int>(type: "int", nullable: false),
+                    Birthday = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Sex = table.Column<int>(type: "int", nullable: true),
                     Language = table.Column<int>(type: "int", nullable: false),
                     TimeZone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

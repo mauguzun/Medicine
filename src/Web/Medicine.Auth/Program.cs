@@ -1,24 +1,39 @@
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Models.Auth;
+using Medicine.Notification.Imlemenation;
+using Medicine.Notifications.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddControllers();
 
-var app = builder.Build();
+
 
 ConfigurationManager configuration = builder.Configuration;
 builder.Services.AddDbContext<AppDbContextReadOnly>(builder => builder.UseSqlServer(configuration["connectionString"]));
 
-builder.Services.AddIdentity<User, Role>()
+
+
+builder.Services.AddIdentity<User, Role>(options=>
+{
+    options.User.RequireUniqueEmail = true;
+    options.SignIn.RequireConfirmedAccount = true;
+
+})
     .AddRoleManager<RoleManager<Role>>()
     .AddDefaultUI()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<AppDbContextReadOnly>();
 
+
+builder.Services.AddScoped<IEmailService, GmailService>();
+
+var app = builder.Build();
 
 
 // Configure the HTTP request pipeline.
@@ -35,7 +50,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-
+app.MapControllers();
 app.MapRazorPages();
 
 app.Run();

@@ -18,9 +18,6 @@ namespace Medicine.Web.UseCases.Utils
 
             CreateMap<Reminder, ReminderDto>();
 
-
-
-
             CreateMap<Therapy, TherapyDto>().ForMember(
                     dest => dest.Title,
                     opt => opt.MapFrom(x => x.Translations == null ? default : x.Translations.First().Title))
