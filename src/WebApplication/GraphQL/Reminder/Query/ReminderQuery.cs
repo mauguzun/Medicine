@@ -1,13 +1,15 @@
 using AutoMapper;
+using HotChocolate.Authorization;
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Enums;
+using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.WebApplication.GraphQL.Reminder.Queries
 {
 
-    public class Reminder
+    public class ReminderQuery
     {
         [UseProjection]
         [UseSorting()]
@@ -57,6 +59,31 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
             var result = mapper.Map<List<ReminderDto>>(therapy);
 
             return result;
+        }
+
+
+        [UseProjection]
+        [UseSorting()]
+        [UseFiltering()]
+        public List<Medicine.Entities.Models.Reminder> GetAll(
+           [Service] AppDbContextReadOnly ctx,
+           [Service] IMapper mapper
+          )
+        {
+            return ctx.Reminders.ToList();
+        }
+
+
+        [Authorize]
+        [UseProjection]
+        [UseSorting()]
+        [UseFiltering()]
+        public List<Medicine.Entities.Models.Reminder> Logined(
+         [Service] AppDbContextReadOnly ctx,
+         [Service] IMapper mapper
+        )
+        {
+            return ctx.Reminders.ToList();
         }
     }
 

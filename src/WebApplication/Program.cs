@@ -12,7 +12,21 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 
-
+builder.Services.AddAuthorization();
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidIssuer = AuthOptions.ISSUER,
+            ValidateAudience = true,
+            ValidAudience = AuthOptions.AUDIENCE,
+            ValidateLifetime = true,
+            IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+            ValidateIssuerSigningKey = true,
+        };
+    });
 
 builder.Services.AddControllers()
         .AddNewtonsoftJson(options =>
@@ -32,7 +46,8 @@ builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.Us
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseSqlServer(configuration["connectionString"]));
 
 builder.Services.AddGraphQLServer()
-    .AddQueryType<Reminder>()
+     .AddAuthorization()
+    .AddQueryType<ReminderQuery>()
     .AddMutationType<ReminderMutation>()
     .AddProjections()
     .AddFiltering()
