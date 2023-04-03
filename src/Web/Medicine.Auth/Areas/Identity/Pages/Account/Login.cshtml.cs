@@ -113,13 +113,13 @@ namespace Medicine.Auth.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
 
-                    var claims = new List<Claim> { new Claim(ClaimTypes.Email, Input.Email) };
+                    var claims = new List<Claim> { new Claim( ClaimTypes.Email, Input.Email) };
 
                     var jwt = new JwtSecurityToken(
                             issuer: AuthOptions.ISSUER,
                             audience: AuthOptions.AUDIENCE,
                             claims: claims,
-                            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(2)), // время действия 2 минуты
+                            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(AuthOptions.EXPIERSINMIN)),
                             signingCredentials: new SigningCredentials(AuthOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
 

@@ -79,10 +79,12 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
         [UseSorting()]
         [UseFiltering()]
         public List<Medicine.Entities.Models.Reminder> Logined(
+         [Service] IHttpContextAccessor context,
          [Service] AppDbContextReadOnly ctx,
          [Service] IMapper mapper
         )
         {
+            var user = context.HttpContext.User;
             return ctx.Reminders.ToList();
         }
     }

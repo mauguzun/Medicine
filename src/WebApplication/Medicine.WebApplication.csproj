@@ -35,4 +35,8 @@
     <ProjectReference Include="..\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="HttpHandler\" />
+  </ItemGroup>
+
 </Project>

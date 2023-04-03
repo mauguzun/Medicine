@@ -5,6 +5,7 @@ namespace Medicine.Auth
 {
     public class AuthOptions
     {
+        public const int EXPIERSINMIN = 5; 
         public const string ISSUER = "MyAuthServer"; 
         public const string AUDIENCE = "MyAuthClient"; 
         const string KEY = "mysupersecret_secretkey!123";

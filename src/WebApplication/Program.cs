@@ -5,6 +5,7 @@ using Medicine.Web.UseCases.Utils;
 using Medicine.WebApplication.GraphQL.Reminder.Queries;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -39,16 +40,24 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-ConfigurationManager configuration = builder.Configuration;
+var connnectionString  = builder.Configuration["connectionString"];
 
-//Add database
-builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseSqlServer(configuration["connectionString"]));
-builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseSqlServer(configuration["connectionString"]));
+
+//dataaccess
+builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseSqlServer(connnectionString));
+builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseSqlServer(connnectionString));
+
+
+// graphql
+builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddGraphQLServer()
-     .AddAuthorization()
+    .AddHttpRequestInterceptor<HttpRequestInterceptor>()
+    .AddAuthorization()
+
     .AddQueryType<ReminderQuery>()
     .AddMutationType<ReminderMutation>()
+
     .AddProjections()
     .AddFiltering()
     .AddSorting();
@@ -84,5 +93,12 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.MapGraphQL("/graphql");
+
+//app.UseEndpoints(endpoints =>
+//{
+//    endpoints.MapGraphQL().RequireAuthorization();
+//});
+
+
 
 app.Run();
