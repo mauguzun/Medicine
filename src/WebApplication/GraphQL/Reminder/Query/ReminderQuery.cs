@@ -74,7 +74,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
         }
 
 
-        [Authorize]
+        [Authorize(Roles = new[] { nameof(SystemRole.User) })]
         [UseProjection]
         [UseSorting()]
         [UseFiltering()]
