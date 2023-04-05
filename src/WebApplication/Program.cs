@@ -2,6 +2,8 @@ using Medicine.Auth;
 using Medicine.DataAccess.Interfaces;
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Models.Auth;
+using Medicine.Notification.Imlemenation;
+using Medicine.Notifications.Interfaces;
 using Medicine.Web.UseCases.Utils;
 using Medicine.WebApplication.GraphQL.Reminder.Queries;
 using Medicine.WebApplication.HttpHandler;
@@ -20,10 +22,6 @@ builder.Configuration.GetSection(nameof(TokenSettings)).Bind(tokenOptions);
 builder.Services.Configure<TokenSettings>(builder.Configuration.GetSection(nameof(TokenSettings)));
 
 // add authoriztion
-
-
-
-
 
 builder.Services.AddIdentity<User, Role>(options =>
 {
@@ -67,10 +65,14 @@ builder.Services.AddSwaggerGen();
 var connnectionString = builder.Configuration["connectionString"];
 
 
-//dataaccess
+//dataAcess
 builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseSqlServer(connnectionString));
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseSqlServer(connnectionString));
 
+
+// infrastracture
+
+builder.Services.AddScoped<IEmailService, GmailService>();
 
 // graphql
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
