@@ -8,10 +8,16 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="MediatR" Version="12.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
+    <ProjectReference Include="..\..\Infrastructure.Interfaces\DataAccess.Interfaces\Medicine.DataAccess.Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Reminder\Commands\" />
   </ItemGroup>
 
 </Project>

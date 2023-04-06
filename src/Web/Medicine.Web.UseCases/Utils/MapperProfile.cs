@@ -2,6 +2,7 @@
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Web.UseCases.Dto;
+using Medicine.Web.UseCases.Reminder.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;

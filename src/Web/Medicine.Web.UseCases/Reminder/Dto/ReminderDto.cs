@@ -1,8 +1,9 @@
 ﻿using Medicine.Entities.Models;
+using Medicine.Web.UseCases.Dto;
 
-namespace Medicine.Web.UseCases.Dto
+namespace Medicine.Web.UseCases.Reminder.Dto
 {
-    public class ReminderDto 
+    public class ReminderDto
     {
         public int Id { get; set; }
         public string? Title { get; set; }
@@ -10,5 +11,5 @@ namespace Medicine.Web.UseCases.Dto
         public string TimeInUtc { get; set; } = "00:00";
         public List<DosageRecommendationDto>? DosageRecommendations { get; set; }
     }
- 
+
 }

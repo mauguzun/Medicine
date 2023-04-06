@@ -1,6 +1,6 @@
 using AutoMapper;
 using Medicine.DataAccess.Sql;
-using Medicine.Web.UseCases.Dto;
+using Medicine.Web.UseCases.Reminder.Dto;
 
 namespace Medicine.WebApplication.GraphQL.Reminder.Queries
 {
