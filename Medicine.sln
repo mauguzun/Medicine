@@ -31,11 +31,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{4DE40D8F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Utils", "src\Utils\Utils\Medicine.Utils.csproj", "{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Auth", "src\Web\Medicine.Auth\Medicine.Auth.csproj", "{C494B2AD-B685-4204-8EE3-B851EF701D6D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Notifications.Interfaces", "src\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj", "{32798188-5D39-4D4F-A1DE-6D50E84EFE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Notifications.Interfaces", "src\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj", "{32798188-5D39-4D4F-A1DE-6D50E84EFE97}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Notifications.Imlemenation", "Medicine.Notification.Imlemenation\Medicine.Notifications.Imlemenation.csproj", "{D6E010A4-E02B-4536-935D-375FA8239C55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Notifications.Imlemenation", "Medicine.Notification.Imlemenation\Medicine.Notifications.Imlemenation.csproj", "{D6E010A4-E02B-4536-935D-375FA8239C55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,10 +69,6 @@ Global
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C494B2AD-B685-4204-8EE3-B851EF701D6D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{32798188-5D39-4D4F-A1DE-6D50E84EFE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{32798188-5D39-4D4F-A1DE-6D50E84EFE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32798188-5D39-4D4F-A1DE-6D50E84EFE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,7 +94,6 @@ Global
 		{803A33BA-9089-4A09-9559-EEB3A142FCC8} = {FEBDEE77-5309-495F-A48D-F755FBD6A012}
 		{4DE40D8F-6336-4FD1-A178-7B25FE5D35B5} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8} = {4DE40D8F-6336-4FD1-A178-7B25FE5D35B5}
-		{C494B2AD-B685-4204-8EE3-B851EF701D6D} = {FEBDEE77-5309-495F-A48D-F755FBD6A012}
 		{32798188-5D39-4D4F-A1DE-6D50E84EFE97} = {9F503B83-CBD7-463F-A08B-D04B07CF21CC}
 		{D6E010A4-E02B-4536-935D-375FA8239C55} = {FB88845F-E906-48D9-A860-DEFAB228A550}
 	EndGlobalSection
