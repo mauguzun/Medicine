@@ -6,5 +6,6 @@ namespace Medicine.Entities.Models
     {
         public string TimeInUtc { get; set; } = "00:00";
         public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>(); 
+
     }
 }

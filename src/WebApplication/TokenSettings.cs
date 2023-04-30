@@ -2,7 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace Medicine.Auth
+namespace Medicine.WebApplication
 {
     public class TokenSettings
     {
@@ -12,7 +12,7 @@ namespace Medicine.Auth
         public string? Key { get; set; }
 
 
-        public  SymmetricSecurityKey GetSymmetricSecurityKey() =>
+        public SymmetricSecurityKey GetSymmetricSecurityKey() =>
          new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Key));
     }
 

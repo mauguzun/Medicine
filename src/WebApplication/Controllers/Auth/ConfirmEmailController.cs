@@ -1,17 +1,9 @@
-﻿using GreenDonut;
-using Medicine.Auth;
-using Medicine.Entities.Models.Auth;
-using Medicine.Notifications.Interfaces;
+﻿using Medicine.Entities.Models.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Medicine.WebApplication.Controllers.Auth
 {

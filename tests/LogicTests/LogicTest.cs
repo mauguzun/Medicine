@@ -9,7 +9,7 @@ namespace UseCases
     public class LogicTest
     {
         [Fact]
-        public async Task ReminderSelector()
+        public async Task UnitTest1()
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseInMemoryDatabase(databaseName: "AuthorDb");

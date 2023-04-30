@@ -8,7 +8,7 @@ using System.Net;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace Medicine.WebApplication.Controllers
+namespace Medicine.WebApplication.Controllers.Auth
 {
     [ApiController]
     [Route("auth/[controller]")]
@@ -75,7 +75,7 @@ namespace Medicine.WebApplication.Controllers
             return new ContentResult()
             {
                 StatusCode = (int)HttpStatusCode.Forbidden,
-                Content = String.Join(",", result.Errors.ToList().Select(x => x.Description))
+                Content = string.Join(",", result.Errors.ToList().Select(x => x.Description))
             };
         }
 
@@ -93,7 +93,7 @@ namespace Medicine.WebApplication.Controllers
             }
         }
 
-        private IUserEmailStore<User> _GetEmailStore() => (!_userManager.SupportsUserEmail) ?
+        private IUserEmailStore<User> _GetEmailStore() => !_userManager.SupportsUserEmail ?
               throw new NotSupportedException("The default UI requires a user store with email support.") :
               (IUserEmailStore<User>)_userStore;
 

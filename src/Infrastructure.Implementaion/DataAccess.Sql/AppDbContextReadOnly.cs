@@ -45,5 +45,12 @@ namespace Medicine.DataAccess.Sql
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; set; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; set; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; set; }
+
+
+        public DbSet<T> Set<T>() where T : class, IEntity
+        {
+            return base.Set<T>();
+        }
+
     }
 }

@@ -2,7 +2,7 @@ using AutoMapper;
 using Medicine.DataAccess.Sql;
 using Medicine.Web.UseCases.Reminder.Dto;
 
-namespace Medicine.WebApplication.GraphQL.Reminder.Queries
+namespace Medicine.WebApplication.GraphQL.Reminder.Mutatiion
 {
 
     public class ReminderMutation
@@ -15,7 +15,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
             ReminderDto reminder)
         {
 
-            var current =  ctx.Reminders.Find(reminder.Id);
+            var current = ctx.Reminders.Find(reminder.Id);
             current.Title = reminder.Title;
             current.Descrptioin = reminder.Descrptioin;
 

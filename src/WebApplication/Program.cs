@@ -1,11 +1,12 @@
-using Medicine.Auth;
 using Medicine.DataAccess.Interfaces;
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Models.Auth;
 using Medicine.Notification.Imlemenation;
 using Medicine.Notifications.Interfaces;
-using Medicine.Web.UseCases.Utils;
-using Medicine.WebApplication.GraphQL.Reminder.Queries;
+using Medicine.WebApplication;
+using Medicine.WebApplication.GraphQL.DataLoaders;
+using Medicine.WebApplication.GraphQL.Reminder.Mutatiion;
+using Medicine.WebApplication.GraphQL.Reminder.Query;
 using Medicine.WebApplication.HttpHandler;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -89,6 +90,11 @@ builder.Services.AddGraphQLServer()
     .AddSorting();
 
 builder.Services.AddAutoMapper(typeof(MapperProfile));
+
+
+
+builder.Services.AddScoped(typeof(DataLoader<,>));
+
 
 builder.Services.AddCors(options =>
 {

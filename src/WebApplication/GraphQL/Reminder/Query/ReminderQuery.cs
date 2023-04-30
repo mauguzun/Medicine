@@ -4,73 +4,28 @@ using Medicine.DataAccess.Sql;
 using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Reminder.Dto;
+using Medicine.WebApplication.GraphQL.DataLoaders;
+using Medicine.WebApplication.GraphQL.Reminder.Response;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.WebApplication.GraphQL.Reminder.Queries
+namespace Medicine.WebApplication.GraphQL.Reminder.Query
 {
 
     public class ReminderQuery
     {
-        [UseProjection]
-        [UseSorting()]
-        [UseFiltering()]
-        public List<ReminderDto> ReadByUserId(
-            [Service] AppDbContextReadOnly ctx,
-            [Service] IMapper mapper,
-            int userId)
-        {
-            DateTime firstData = new(1900, 1, 3, 7, 20, 0, 0);
-            var lang = Language.en;
 
-            var therapy = ctx.Reminders
-                .Where(
-                    reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
-                     &&
-                   (
-                    reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
-                        ||
-                    reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
-                        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
-                    )))
-                )
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Course)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Course)
-                    .ThenInclude(course => course.Therapy)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-                .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-                    .ThenInclude(doseFrequency => doseFrequency.Drug)
-                    .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-               .Include(reminder => reminder.DosageRecommendations)
-                    .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
-                    .ToList();
-
-
-            var result = mapper.Map<List<ReminderDto>>(therapy);
-
-            return result;
-        }
-
-
-        [UseProjection]
-        [UseSorting()]
-        [UseFiltering()]
-        public List<Medicine.Entities.Models.Reminder> GetAll(
-           [Service] AppDbContextReadOnly ctx,
-           [Service] IMapper mapper
+        //[UseProjection]
+        //[UseSorting()]
+        //[UseFiltering()]
+        public async Task<IEnumerable<ReminderResponse>> GetAll(
+            DataLoader<Entities.Models.Reminder, ReminderResponse> dataLoader
           )
         {
-            return ctx.Reminders.ToList();
+            // nada chtobi bil dataloader bez kluchej ili chto v takom sluchae delat ?, i mne pochemu ta ne rabotat s int id . xotja v primeri rabotaet
+
+            var  x = await dataLoader.LoadAsync();
+
+            return x;
         }
 
 
@@ -78,7 +33,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Queries
         [UseProjection]
         [UseSorting()]
         [UseFiltering()]
-        public List<Medicine.Entities.Models.Reminder> Logined(
+        public List<Entities.Models.Reminder> Logined(
          [Service] IHttpContextAccessor context,
          [Service] AppDbContextReadOnly ctx,
          [Service] IMapper mapper

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Net;
 using System.Text;
 
-namespace Medicine.WebApplication.Controllers
+namespace Medicine.WebApplication.Controllers.Auth
 {
     [ApiController]
     [Route("auth/[controller]")]
@@ -34,7 +34,7 @@ namespace Medicine.WebApplication.Controllers
             return new ContentResult()
             {
                 StatusCode = (int)HttpStatusCode.Forbidden,
-                Content = String.Join(",", result.Errors.ToList().Select(x => x.Description))
+                Content = string.Join(",", result.Errors.ToList().Select(x => x.Description))
             };
 
         }

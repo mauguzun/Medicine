@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.WebUtilities;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace Medicine.WebApplication.Controllers
+namespace Medicine.WebApplication.Controllers.Auth
 {
     [ApiController]
     [Route("auth/[controller]")]
@@ -28,7 +28,7 @@ namespace Medicine.WebApplication.Controllers
         {
             var user = await _userManager.FindByEmailAsync(email);
 
-            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+            if (user == null || !await _userManager.IsEmailConfirmedAsync(user))
             {
                 return NotFound($"Unable to load user with email '{email}'.");
             }
@@ -39,7 +39,7 @@ namespace Medicine.WebApplication.Controllers
             var callbackUrl = Url.Page(
                 "/Auth/ResetPassword",
                 pageHandler: null,
-                values: new {  code },
+                values: new { code },
                 //values: new { area = "Identity", code },
                 protocol: Request.Scheme);
 

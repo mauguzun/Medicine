@@ -1,4 +1,3 @@
-using Medicine.Auth;
 using Medicine.Entities.Models.Auth;
 using Medicine.Web.UseCases.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
@@ -9,7 +8,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 
-namespace Medicine.WebApplication.Controllers
+namespace Medicine.WebApplication.Controllers.Auth
 {
     [ApiController]
     [Route("auth/[controller]")]
