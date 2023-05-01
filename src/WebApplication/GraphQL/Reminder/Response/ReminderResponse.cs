@@ -11,7 +11,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Response
 
         // tut mne nada evo tozhe v responce peredlivat , kak ja ponumaju 
         public async Task<IEnumerable<DosageRecommendation>>
-            DosageRecommendations(DataLoader<DosageRecommendation, 
+            DosageRecommendations(BatchLoader<DosageRecommendation, 
              DosageRecommendation> dataLoader, CancellationToken ct)
         {
             // mne tut nado takoj zapros ,mozhet kakoj ta delegat ? tut netu otnoshnioe id == id 

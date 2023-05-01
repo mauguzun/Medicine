@@ -18,13 +18,11 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Query
         //[UseSorting()]
         //[UseFiltering()]
         public async Task<IEnumerable<ReminderResponse>> GetAll(
-            DataLoader<Entities.Models.Reminder, ReminderResponse> dataLoader
+            IDataLoader<int, ReminderResponse> dataLoader
           )
         {
-            // nada chtobi bil dataloader bez kluchej ili chto v takom sluchae delat ?, i mne pochemu ta ne rabotat s int id . xotja v primeri rabotaet
-            
-            var  x = await dataLoader.LoadAsync();
-            return x;
+            var reminder = await dataLoader.LoadAsync();
+            return reminder;
         }
 
 

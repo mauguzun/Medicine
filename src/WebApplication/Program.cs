@@ -93,8 +93,9 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 
 
-builder.Services.AddScoped(typeof(DataLoader<,>));
+//builder.Services.AddScoped(typeof(BatchLoader<,>));
 
+builder.Services.AddScoped(typeof(IDataLoader<,>), typeof(DataLoader<,>));
 
 builder.Services.AddCors(options =>
 {
