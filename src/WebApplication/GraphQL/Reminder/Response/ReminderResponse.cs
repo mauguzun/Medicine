@@ -14,7 +14,7 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Response
             DosageRecommendations(DataLoader<DosageRecommendation, 
              DosageRecommendation> dataLoader, CancellationToken ct)
         {
-            // mne tut nado takoj zapros ,mozhet kakoj ta delegat ?
+            // mne tut nado takoj zapros ,mozhet kakoj ta delegat ? tut netu otnoshnioe id == id 
             // await _dbContext.Set<DosageRecommendation>().Where(t => t.ReminderId == Id) 
             var dosageRecommendation = await dataLoader.LoadAsync(Id, ct); 
             return new List<DosageRecommendation>() { dosageRecommendation};

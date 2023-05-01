@@ -22,9 +22,8 @@ namespace Medicine.WebApplication.GraphQL.Reminder.Query
           )
         {
             // nada chtobi bil dataloader bez kluchej ili chto v takom sluchae delat ?, i mne pochemu ta ne rabotat s int id . xotja v primeri rabotaet
-
+            
             var  x = await dataLoader.LoadAsync();
-
             return x;
         }
 
