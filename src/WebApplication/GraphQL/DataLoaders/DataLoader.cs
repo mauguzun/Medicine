@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.Configuration.Annotations;
 using Medicine.DataAccess.Interfaces;
+using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,6 +31,9 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
             LoadBatchAsync(IReadOnlyList<int> keys, CancellationToken cancellationToken)
         {
             var items = await _dbContext.Set<TEntity>().Where(t => keys.Contains(t.Id)).ToListAsync();
+
+
+
 
             return items.ToDictionary(p => p.Id, p => _mapper.Map<TRespose>(p));
         }
