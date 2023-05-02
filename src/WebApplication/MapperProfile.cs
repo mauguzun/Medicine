@@ -2,7 +2,8 @@
 using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 using Medicine.Web.UseCases.Reminder.Dto;
-using Medicine.WebApplication.GraphQL.Reminder.Response;
+using Medicine.WebApplication.GraphQL.Entities.Reminders.Response;
+using Medicine.WebApplication.GraphQL.Reminders.Response;
 
 namespace Medicine.WebApplication
 {
@@ -13,12 +14,11 @@ namespace Medicine.WebApplication
         {
 
             CreateMap<Reminder, ReminderDto>();
-            CreateMap<System.Collections.Generic.IEnumerable<DosageRecommendation>, IEnumerable<DosageRecommendation>>().ReverseMap();
 
 
-
-            CreateMap<Reminder, ReminderResponse>();
-                   //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate());
+            CreateMap<DosageRecommendation,DosageRecommendationResponse>().ReverseMap();
+            CreateMap<Reminder, ReminderResponse>().ReverseMap();
+            //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate());
 
 
 

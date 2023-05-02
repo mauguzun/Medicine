@@ -5,8 +5,8 @@ using Medicine.Notification.Imlemenation;
 using Medicine.Notifications.Interfaces;
 using Medicine.WebApplication;
 using Medicine.WebApplication.GraphQL.DataLoaders;
-using Medicine.WebApplication.GraphQL.Reminder.Mutatiion;
-using Medicine.WebApplication.GraphQL.Reminder.Query;
+using Medicine.WebApplication.GraphQL.Entities.Reminders.Mutatiion;
+using Medicine.WebApplication.GraphQL.Entities.Reminders.Query;
 using Medicine.WebApplication.HttpHandler;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -95,7 +95,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 //builder.Services.AddScoped(typeof(BatchLoader<,>));
 
-builder.Services.AddScoped(typeof(IDataLoader<,>), typeof(DataLoader<,>));
+builder.Services.AddScoped(typeof(IResponseLoader<,,>), typeof(ResponseLoader<,,>));
 
 builder.Services.AddCors(options =>
 {

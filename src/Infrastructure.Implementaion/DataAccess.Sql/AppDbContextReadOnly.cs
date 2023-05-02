@@ -4,7 +4,6 @@ using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,7 +12,10 @@ namespace Medicine.DataAccess.Sql
     public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
 
-        public AppDbContextReadOnly(DbContextOptions options) : base(options) { }
+        public AppDbContextReadOnly(DbContextOptions options) : base(options)
+        {
+            ChangeTracker.QueryTrackingBehavior =QueryTrackingBehavior.NoTracking;
+        }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
