@@ -14,7 +14,7 @@ namespace Medicine.DataAccess.Sql
 
         public AppDbContextReadOnly(DbContextOptions options) : base(options)
         {
-            ChangeTracker.QueryTrackingBehavior =QueryTrackingBehavior.NoTracking;
+            ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
 
@@ -49,12 +49,12 @@ namespace Medicine.DataAccess.Sql
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; set; }
 
 
-        public DbSet<T> Set<T>() where T : class, IEntity
+        public new DbSet<T> Set<T>() where T : class, IEntity
         {
             return base.Set<T>();
         }
 
-  
+
 
     }
 }

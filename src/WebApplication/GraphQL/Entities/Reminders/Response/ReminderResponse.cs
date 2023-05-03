@@ -13,7 +13,7 @@ namespace Medicine.WebApplication.GraphQL.Reminders.Response
             DosageRecommendations(IResponseLoader<int, DosageRecommendation, DosageRecommendationResponse> dataLoader, CancellationToken ct)
         {
 
-            var dosageRecommendation = await dataLoader.LoadAsync(new List<int> { 1 }, ct);
+            var dosageRecommendation = await dataLoader.LoadAsync(x => x.ReminderId == Id);
             return dosageRecommendation;
         }
     }

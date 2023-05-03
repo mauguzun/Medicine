@@ -11,6 +11,7 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
         where TEntity : class, IEntity
         where TResponse : class, IEntity
     {
+        public Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda);
 
     }
 
@@ -40,6 +41,14 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
             throw new NotImplementedException();
         }
 
+        public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
+        {
+            var items = _dbContext.Set<TEntity>().Where(conditionLambda);
+            var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
+
+            return convertedItems;
+        }
+
         public async Task<TResponse> LoadAsync(TKey key, CancellationToken cancellationToken = default)
         {
             var items = await _dbContext.Set<TEntity>().FindAsync(key);
@@ -48,8 +57,9 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
 
         public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items = _dbContext.Set<TEntity>().AsAsyncEnumerable();
+            var items = _dbContext.Set<TEntity>();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
+
             return convertedItems;
         }
 
