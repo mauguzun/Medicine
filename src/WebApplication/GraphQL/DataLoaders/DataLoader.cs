@@ -46,11 +46,11 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
             return _mapper.Map<TResponse>(items);
         }
 
-        public Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items = _dbContext.Set<TEntity>();
+            var items = _dbContext.Set<TEntity>().AsAsyncEnumerable();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
-            return Task.FromResult(convertedItems);
+            return convertedItems;
         }
 
         public Task<object?> LoadAsync(object key, CancellationToken cancellationToken = default)
