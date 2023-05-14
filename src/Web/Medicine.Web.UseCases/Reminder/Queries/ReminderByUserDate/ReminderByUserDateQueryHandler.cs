@@ -4,10 +4,9 @@ using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Enums;
 using Medicine.Entities.Models.Auth;
 using Medicine.Web.UseCases.Reminder.Dto;
-using Medicine.Web.UseCases.Reminder.Queries.ReminderByUserDate;
 using Microsoft.EntityFrameworkCore;
 
-namespace Mobile.UseCases.Orders.Queries.GetOrderBy
+namespace Medicine.Web.UseCases.Reminder.Queries.ReminderByUserDate
 {
     public class ReminderByUserDateQueryHandler : IRequestHandler<ReminderByUserDateQuery, List<ReminderDto>>
     {

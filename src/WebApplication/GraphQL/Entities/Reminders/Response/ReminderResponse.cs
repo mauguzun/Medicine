@@ -1,9 +1,9 @@
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models;
-using Medicine.WebApplication.GraphQL.DataLoaders;
-using Medicine.WebApplication.GraphQL.Entities.Reminders.Response;
+using Medicine.WebApplication.GraphQL.Entities.DosageRecommendations.Response;
+using Medicine.WebApplication.GraphQL.BaseDataLoader;
 
-namespace Medicine.WebApplication.GraphQL.Reminders.Response
+namespace Medicine.WebApplication.GraphQL.Entities.Reminders.Response
 {
     public class ReminderResponse : EntityWithDescription
     {

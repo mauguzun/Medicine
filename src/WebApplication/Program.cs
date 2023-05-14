@@ -1,10 +1,10 @@
 using Medicine.DataAccess.Interfaces;
 using Medicine.DataAccess.Sql;
 using Medicine.Entities.Models.Auth;
-using Medicine.Notification.Imlemenation;
+using Medicine.Implementation.GmailNotification;
 using Medicine.Notifications.Interfaces;
 using Medicine.WebApplication;
-using Medicine.WebApplication.GraphQL.DataLoaders;
+using Medicine.WebApplication.GraphQL.BaseDataLoader;
 using Medicine.WebApplication.GraphQL.Entities.Reminders.Mutatiion;
 using Medicine.WebApplication.GraphQL.Entities.Reminders.Query;
 using Medicine.WebApplication.HttpHandler;

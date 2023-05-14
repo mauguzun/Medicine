@@ -14,6 +14,7 @@ namespace Medicine.Entities.Models
 
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
+        public int DosageRecommendationId { get; set; }
 
         public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>(); 
   

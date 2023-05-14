@@ -31,11 +31,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Medicine.Notification.Imlemenation\Medicine.Notifications.Imlemenation.csproj" />
     <ProjectReference Include="..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
     <ProjectReference Include="..\Infrastructure.Implementaion\DataAccess.Sql\Medicine.DataAccess.Sql.csproj" />
+    <ProjectReference Include="..\Infrastructure.Implementaion\Medicine.Implementation.GmailNotification\Medicine.Implementation.GmailNotification.csproj" />
     <ProjectReference Include="..\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj" />
     <ProjectReference Include="..\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GraphQL\BaseEntity\" />
+    <Folder Include="GraphQL\Entities\Course\Response\" />
+    <Folder Include="GraphQL\Entities\DosageLog\Response\" />
+    <Folder Include="GraphQL\Entities\Drug\Response\" />
   </ItemGroup>
 
 </Project>

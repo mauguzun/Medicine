@@ -3,18 +3,8 @@ using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.WebApplication.GraphQL.DataLoaders
+namespace Medicine.WebApplication.GraphQL.BaseDataLoader
 {
-
-    public interface IResponseLoader<TKey, TEntity, TResponse> : IDataLoader<TKey, TResponse>
-        where TKey : notnull
-        where TEntity : class, IEntity
-        where TResponse : class, IEntity
-    {
-        public Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda);
-
-    }
-
     public class ResponseLoader<TKey, TEntity, TResponse> : IResponseLoader<TKey, TEntity, TResponse>
        where TKey : notnull
        where TEntity : class, IEntity
@@ -24,7 +14,6 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
         private readonly IAppDbContextReadonly _dbContext;
         private readonly IMapper _mapper;
 
-
         public ResponseLoader(
         IAppDbContextReadonly dbContext,
         IMapper mapper)
@@ -33,9 +22,6 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
             _dbContext = dbContext;
             _mapper = mapper;
         }
-
-
-
         public void Clear()
         {
             throw new NotImplementedException();
@@ -57,7 +43,7 @@ namespace Medicine.WebApplication.GraphQL.DataLoaders
 
         public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items = _dbContext.Set<TEntity>();
+            var items = await _dbContext.Set<TEntity>().ToListAsync();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
 
             return convertedItems;
