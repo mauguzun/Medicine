@@ -3,10 +3,10 @@ using MediatR;
 using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Enums;
 using Medicine.Entities.Models.Auth;
-using Medicine.Web.UseCases.Reminder.Dto;
+using Medicine.Web.UseCases.CQRS.Reminder.Dto;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.Web.UseCases.Reminder.Queries.ReminderByUserDate
+namespace Medicine.Web.UseCases.CQRS.Reminder.Queries.ReminderByUserDate
 {
     public class ReminderByUserDateQueryHandler : IRequestHandler<ReminderByUserDateQuery, List<ReminderDto>>
     {

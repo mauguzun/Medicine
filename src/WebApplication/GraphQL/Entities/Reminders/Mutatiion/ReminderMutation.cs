@@ -1,6 +1,6 @@
 using AutoMapper;
 using Medicine.DataAccess.Sql;
-using Medicine.Web.UseCases.Reminder.Dto;
+using Medicine.Web.UseCases.CQRS.Reminder.Dto;
 
 namespace Medicine.WebApplication.GraphQL.Entities.Reminders.Mutatiion
 {

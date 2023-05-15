@@ -17,7 +17,7 @@ namespace Medicine.WebApplication.GraphQL.Entities.DosingFrequency.Response
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
 
-        public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>();
+        //public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>();
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 
-namespace Medicine.Web.UseCases.Reminder.Dto
+namespace Medicine.Web.UseCases.CQRS.Reminder.Dto
 {
     public class ReminderDto
     {

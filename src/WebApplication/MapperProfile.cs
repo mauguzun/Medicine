@@ -3,6 +3,7 @@ using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Dto;
 using Medicine.Web.UseCases.Reminder.Dto;
 using Medicine.WebApplication.GraphQL.Entities.DosageRecommendations.Response;
+using Medicine.WebApplication.GraphQL.Entities.DosingFrequency.Response;
 using Medicine.WebApplication.GraphQL.Entities.Reminders.Response;
 
 namespace Medicine.WebApplication
@@ -19,6 +20,7 @@ namespace Medicine.WebApplication
             CreateMap<DosageRecommendation,DosageRecommendationResponse>().ReverseMap();
             CreateMap<Reminder, ReminderResponse>().ReverseMap();
             CreateMap<DosageRecommendation, DosageRecommendationResponse>().ReverseMap();
+            CreateMap<DosingFrequency, DosingFrequencyResponse>().ReverseMap();
             //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate());
 
 

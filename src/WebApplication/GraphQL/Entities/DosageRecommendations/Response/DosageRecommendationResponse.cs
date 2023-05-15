@@ -1,3 +1,4 @@
+using AutoMapper.Configuration.Annotations;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
@@ -13,13 +14,12 @@ namespace Medicine.WebApplication.GraphQL.Entities.DosageRecommendations.Respons
 
         public int ReminderId { get; set; }
 
-
+        public int DosingFrequencyId { get; set; }
 
         public async Task<DosingFrequencyResponse>
             DosingFrequency(IResponseLoader<int, Medicine.Entities.Models.DosingFrequency, DosingFrequencyResponse> dataLoader, CancellationToken ct)
         {
-
-            var dosingFrequency = await dataLoader.LoadAsync(x => x.DosageRecommendationId == Id);
+            var dosingFrequency = await dataLoader.LoadAsync(x => x.Id == DosingFrequencyId);
             return dosingFrequency?.FirstOrDefault();
         }
 

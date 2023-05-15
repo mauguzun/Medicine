@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Medicine.Web.UseCases.Reminder.Dto;
+using Medicine.Web.UseCases.CQRS.Reminder.Dto;
 
-namespace Medicine.Web.UseCases.Reminder.Queries.ReminderByUserDate
+namespace Medicine.Web.UseCases.CQRS.Reminder.Queries.ReminderByUserDate
 {
     public class ReminderByUserDateQuery : IRequest<List<ReminderDto>>
     {

@@ -29,8 +29,8 @@ namespace Medicine.WebApplication.GraphQL.BaseDataLoader
 
         public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
         {
-            var items = _dbContext.Set<TEntity>().Where(conditionLambda);
-            var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
+            var items = _dbContext.Set<TEntity>().Where(conditionLambda).ToList();
+            var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
 
             return convertedItems;
         }

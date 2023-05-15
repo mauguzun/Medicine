@@ -10,6 +10,7 @@ namespace Medicine.Entities.Models
         public int ReminderId { get; set; }
 
         public DosingFrequency DosingFrequency { get; set; }
+        public int DosingFrequencyId { get; set; }
         public List<DosageLog> DosageLogs { get; set; } = new List<DosageLog>();
     }
 }

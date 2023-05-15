@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Reminder\Commands\" />
+    <Folder Include="CQRS\Reminder\Commands\" />
   </ItemGroup>
 
 </Project>
