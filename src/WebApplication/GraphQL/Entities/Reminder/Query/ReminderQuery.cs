@@ -1,9 +1,5 @@
-using AutoMapper;
-using HotChocolate.Authorization;
-using Medicine.DataAccess.Sql;
-using Medicine.Entities.Enums;
-using Medicine.WebApplication.GraphQL.BaseDataLoader;
-using Medicine.WebApplication.GraphQL.Entities.Reminders.Response;
+using Medicine.Web.UseCases.Responses;
+using Medicine.Web.UseCases.Responses.BaseDataLoader;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.WebApplication.GraphQL.Entities.Reminders.Query
@@ -12,9 +8,9 @@ namespace Medicine.WebApplication.GraphQL.Entities.Reminders.Query
     public class ReminderQuery
     {
 
-        //[UseProjection]
-        //[UseSorting()]
-        //[UseFiltering()]
+        [UseProjection]
+        [UseSorting()]
+        [UseFiltering()]
         public async Task<IEnumerable<ReminderResponse>> GetAll(
             IResponseLoader<int, Medicine.Entities.Models.Reminder, ReminderResponse> dataLoader )
         {

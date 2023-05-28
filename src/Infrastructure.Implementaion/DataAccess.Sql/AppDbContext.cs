@@ -1,6 +1,7 @@
 ﻿using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace Medicine.DataAccess.Sql
 {

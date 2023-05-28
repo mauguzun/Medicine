@@ -5,6 +5,7 @@ namespace Medicine.Entities.Models
 {
     public class CourseSettings : EntityByUser
     {
+        public int  CourseId  { get; set; }
         public Course Course  { get; set; }
         public Sex Sex { get; set; }
         public int? MinAge { get; set; }

@@ -8,18 +8,18 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="HotChocolate.AspNetCore" Version="13.0.5" />
     <PackageReference Include="HotChocolate.AspNetCore.Authorization" Version="13.0.5" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.4" />
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.4" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.4">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="7.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.5" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.5" />
     
     <PackageReference Include="HotChocolate.Data" Version="13.0.5" />
     <PackageReference Include="HotChocolate.Data.EntityFramework" Version="13.0.5" />
@@ -40,9 +40,11 @@
 
   <ItemGroup>
     <Folder Include="GraphQL\BaseEntity\" />
-    <Folder Include="GraphQL\Entities\Course\Response\" />
-    <Folder Include="GraphQL\Entities\DosageLog\Response\" />
-    <Folder Include="GraphQL\Entities\Drug\Response\" />
+    <Folder Include="GraphQL\Entities\Course\" />
+    <Folder Include="GraphQL\Entities\DosageLog\" />
+    <Folder Include="GraphQL\Entities\DosageRecommendations\" />
+    <Folder Include="GraphQL\Entities\DosingFrequency\" />
+    <Folder Include="GraphQL\Entities\Drug\" />
   </ItemGroup>
 
 </Project>

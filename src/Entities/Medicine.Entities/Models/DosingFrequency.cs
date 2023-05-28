@@ -4,18 +4,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Medicine.Entities.Models
 {
+    /// <summary>
+    /// Created inside course , containt time interval ,total , and course 
+    /// Description 
+    /// </summary>
     public class DosingFrequency : TranslationsEntityByUserWith<TranslatedDosingFrequency>
     {
         public Course Course { get; set; }
+        public int CourseId { get; set; }
 
-        public Drug  Drug { get; set; }
+        public Drug Drug { get; set; }
 
         public int DrugId { get; set; }
 
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
 
-        public List<DosageRecommendation> DosageRecommendations { get; set; } = new List<DosageRecommendation>(); 
+        public List<DosingFrequencyReminder> DosageReminders { get; set; } = new List<DosingFrequencyReminder>(); 
   
     }
 }

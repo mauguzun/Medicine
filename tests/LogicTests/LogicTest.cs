@@ -66,14 +66,14 @@ namespace UseCases
                                     Total = 10,
                                     Drug =  context.Drugs.Single(),
                                     IntervalInDays = 2,
-                                    DosageRecommendations = new List<DosageRecommendation>{
+                                    DosageReminders = new List<DosingFrequencyReminder>{
                                    {
-                                       new DosageRecommendation{
+                                       new DosingFrequencyReminder{
                                             Id = 1,
                                             Quantity  = 1,
-                                             Translations = new List<TranslatedDosageRecommendation>{
+                                             Translations = new List<TranslatedDosingFrequencyReminder>{
                                            {
-                                                new TranslatedDosageRecommendation { Title = "AutoCrated", Description = "AutoCreated"}
+                                                new TranslatedDosingFrequencyReminder { Title = "AutoCrated", Description = "AutoCreated"}
                                            } }
                                        }
                                    }}

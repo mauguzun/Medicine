@@ -4,6 +4,10 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models
 {
+    /// <summary>
+    /// Therapy can be assigned to user , or crate manualy 
+    /// Each therapy can contain many courses
+    /// </summary>
     public class Therapy : TranslationsEntityByUserWith<TranslatedTherapy>
     {
         public int UserId { get; set; }

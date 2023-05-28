@@ -3,7 +3,7 @@ using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models.Base;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.WebApplication.GraphQL.BaseDataLoader
+namespace Medicine.Web.UseCases.Responses.BaseDataLoader
 {
     public class ResponseLoader<TKey, TEntity, TResponse> : IResponseLoader<TKey, TEntity, TResponse>
        where TKey : notnull
@@ -29,7 +29,7 @@ namespace Medicine.WebApplication.GraphQL.BaseDataLoader
 
         public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
         {
-            var items = _dbContext.Set<TEntity>().Where(conditionLambda).ToList();
+            var items = _dbContext.Set<TEntity>()?.Where(conditionLambda).ToList();
             var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
 
             return convertedItems;

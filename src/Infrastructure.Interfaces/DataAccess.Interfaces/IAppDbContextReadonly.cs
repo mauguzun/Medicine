@@ -2,6 +2,7 @@
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Collections.Generic;
 
 
@@ -13,7 +14,7 @@ namespace Medicine.DataAccess.Interfaces
         public DbSet<Therapy> Therapies { get; }
         public DbSet<ActiveElement> ActiveElements { get; }
         public DbSet<CourseSettings> CourseSettings { get; }
-        public DbSet<DosageRecommendation> DosageRecommendations { get; }
+        public DbSet<DosingFrequencyReminder> DosageRecommendations { get; }
         public DbSet<DosingFrequency> DosingFrequencies { get; }
         public DbSet<Drug> Drugs { get; }
         public DbSet<DrugCategory> DrugCategories { get; }
@@ -22,7 +23,7 @@ namespace Medicine.DataAccess.Interfaces
 
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; }
         public DbSet<TranslatedCourse> TranslatedCourses { get; }
-        public DbSet<TranslatedDosageRecommendation> TranslatedDosageRecommendations { get; }
+        public DbSet<TranslatedDosingFrequencyReminder> TranslatedDosageRecommendations { get; }
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; }

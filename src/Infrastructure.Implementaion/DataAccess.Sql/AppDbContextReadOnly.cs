@@ -35,7 +35,7 @@ namespace Medicine.DataAccess.Sql
         public DbSet<Therapy> Therapies { get; set; }
         public DbSet<ActiveElement> ActiveElements { get; set; }
         public DbSet<CourseSettings> CourseSettings { get; set; }
-        public DbSet<DosageRecommendation> DosageRecommendations { get; set; }
+        public DbSet<DosingFrequencyReminder> DosageRecommendations { get; set; }
         public DbSet<DosingFrequency> DosingFrequencies { get; set; }
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<DrugCategory> DrugCategories { get; set; }
@@ -43,7 +43,7 @@ namespace Medicine.DataAccess.Sql
         public DbSet<DosageLog> DosageLogs { get; set; }
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; set; }
         public DbSet<TranslatedCourse> TranslatedCourses { get; set; }
-        public DbSet<TranslatedDosageRecommendation> TranslatedDosageRecommendations { get; set; }
+        public DbSet<TranslatedDosingFrequencyReminder> TranslatedDosageRecommendations { get; set; }
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; set; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; set; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; set; }

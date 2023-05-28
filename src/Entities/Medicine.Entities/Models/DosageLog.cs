@@ -5,7 +5,8 @@ namespace Medicine.Entities.Models
 {
     public class DosageLog : EntityByUser
     {
-        public DosageRecommendation DosageRecommendation { get; set; }
+        public int DosageRecommendationId { get; set; }
+        public DosingFrequencyReminder DosageRecommendation { get; set; }
         public ReminderLogStatus Status { get; set; }
         public double Quantity { get; set; }
         public DateTime DateTime { get; set; }

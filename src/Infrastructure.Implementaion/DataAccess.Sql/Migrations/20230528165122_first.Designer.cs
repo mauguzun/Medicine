@@ -4,20 +4,23 @@ using Medicine.DataAccess.Sql;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace Medicine.DataAccess.Sql.Migrations
 {
-    [DbContext(typeof(AppDbContextReadOnly))]
-    partial class AppDbContextReadOnlyModelSnapshot : ModelSnapshot
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20230528165122_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.4")
+                .HasAnnotation("ProductVersion", "7.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -26,13 +29,13 @@ namespace Medicine.DataAccess.Sql.Migrations
 
             modelBuilder.Entity("DrugDrugCategory", b =>
                 {
-                    b.Property<int>("DrugCategoryId")
+                    b.Property<int>("DrugCategoriesId")
                         .HasColumnType("int");
 
                     b.Property<int>("DrugsId")
                         .HasColumnType("int");
 
-                    b.HasKey("DrugCategoryId", "DrugsId");
+                    b.HasKey("DrugCategoriesId", "DrugsId");
 
                     b.HasIndex("DrugsId");
 
@@ -232,7 +235,7 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("CourseGroupId")
+                    b.Property<int?>("CourseGroupID")
                         .HasColumnType("int");
 
                     b.Property<int>("CourseType")
@@ -249,7 +252,7 @@ namespace Medicine.DataAccess.Sql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseGroupId");
+                    b.HasIndex("CourseGroupID");
 
                     b.HasIndex("TherapyId");
 
@@ -331,40 +334,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.ToTable("DosageLogs");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.DosageRecommendation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DosingFrequencyId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Quantity")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("ReminderId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DosingFrequencyId");
-
-                    b.HasIndex("ReminderId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("DosageRecommendations");
-                });
-
             modelBuilder.Entity("Medicine.Entities.Models.DosingFrequency", b =>
                 {
                     b.Property<int>("Id")
@@ -402,7 +371,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.ToTable("DosingFrequencies");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
+            modelBuilder.Entity("Medicine.Entities.Models.DosingFrequencyReminder", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -413,8 +382,39 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("DrugId")
+                    b.Property<int>("DosingFrequencyId")
                         .HasColumnType("int");
+
+                    b.Property<double>("Quantity")
+                        .HasColumnType("float");
+
+                    b.Property<int>("ReminderId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DosingFrequencyId");
+
+                    b.HasIndex("ReminderId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DosageRecommendations");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<double>("OneUnitSizeInGramm")
                         .HasColumnType("float");
@@ -429,8 +429,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DrugId");
 
                     b.HasIndex("UserId");
 
@@ -676,20 +674,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.ToTable("TranslatedCourseGroup");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosageRecommendation", b =>
-                {
-                    b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
-
-                    b.Property<int>("DosageRecommendationId")
-                        .HasColumnType("int");
-
-                    b.HasIndex("DosageRecommendationId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("TranslatedDosageRecommendation");
-                });
-
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", b =>
                 {
                     b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
@@ -702,6 +686,20 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("TranslatedDosingFrequency");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequencyReminder", b =>
+                {
+                    b.HasBaseType("Medicine.Entities.Models.Base.TransatedEntityWithDescription");
+
+                    b.Property<int>("DosageRecommendationId")
+                        .HasColumnType("int");
+
+                    b.HasIndex("DosageRecommendationId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("TranslatedDosingFrequencyReminder");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugs", b =>
@@ -750,7 +748,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     b.HasOne("Medicine.Entities.Models.DrugCategory", null)
                         .WithMany()
-                        .HasForeignKey("DrugCategoryId")
+                        .HasForeignKey("DrugCategoriesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -782,7 +780,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     b.HasOne("Medicine.Entities.Models.CourseGroup", "CourseGroup")
                         .WithMany("Courses")
-                        .HasForeignKey("CourseGroupId");
+                        .HasForeignKey("CourseGroupID");
 
                     b.HasOne("Medicine.Entities.Models.Therapy", "Therapy")
                         .WithMany("Courses")
@@ -820,7 +818,7 @@ namespace Medicine.DataAccess.Sql.Migrations
 
             modelBuilder.Entity("Medicine.Entities.Models.DosageLog", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.DosageRecommendation", "DosageRecommendation")
+                    b.HasOne("Medicine.Entities.Models.DosingFrequencyReminder", "DosageRecommendation")
                         .WithMany("DosageLogs")
                         .HasForeignKey("DosageRecommendationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -831,27 +829,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("DosageRecommendation");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Medicine.Entities.Models.DosageRecommendation", b =>
-                {
-                    b.HasOne("Medicine.Entities.Models.DosingFrequency", "DosingFrequency")
-                        .WithMany("DosageRecommendations")
-                        .HasForeignKey("DosingFrequencyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Medicine.Entities.Models.Reminder", null)
-                        .WithMany("DosageRecommendations")
-                        .HasForeignKey("ReminderId");
-
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("DosingFrequency");
 
                     b.Navigation("User");
                 });
@@ -881,12 +858,33 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Medicine.Entities.Models.DosingFrequencyReminder", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.DosingFrequency", "DosingFrequency")
+                        .WithMany("DosageReminders")
+                        .HasForeignKey("DosingFrequencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Medicine.Entities.Models.Reminder", "Reminder")
+                        .WithMany("DosageRecommendations")
+                        .HasForeignKey("ReminderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("DosingFrequency");
+
+                    b.Navigation("Reminder");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Drug", null)
-                        .WithMany("SimilarPreparate")
-                        .HasForeignKey("DrugId");
-
                     b.HasOne("Medicine.Entities.Models.Auth.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
@@ -1034,23 +1032,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosageRecommendation", b =>
-                {
-                    b.HasOne("Medicine.Entities.Models.DosageRecommendation", "DosageRecommendation")
-                        .WithMany("Translations")
-                        .HasForeignKey("DosageRecommendationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
-                    b.Navigation("DosageRecommendation");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", b =>
                 {
                     b.HasOne("Medicine.Entities.Models.DosingFrequency", "DosingFrequency")
@@ -1064,6 +1045,23 @@ namespace Medicine.DataAccess.Sql.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("DosingFrequency");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequencyReminder", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.DosingFrequencyReminder", "DosageRecommendation")
+                        .WithMany("Translations")
+                        .HasForeignKey("DosageRecommendationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("DosageRecommendation");
 
                     b.Navigation("User");
                 });
@@ -1133,16 +1131,16 @@ namespace Medicine.DataAccess.Sql.Migrations
                     b.Navigation("Translations");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.DosageRecommendation", b =>
+            modelBuilder.Entity("Medicine.Entities.Models.DosingFrequency", b =>
                 {
-                    b.Navigation("DosageLogs");
+                    b.Navigation("DosageReminders");
 
                     b.Navigation("Translations");
                 });
 
-            modelBuilder.Entity("Medicine.Entities.Models.DosingFrequency", b =>
+            modelBuilder.Entity("Medicine.Entities.Models.DosingFrequencyReminder", b =>
                 {
-                    b.Navigation("DosageRecommendations");
+                    b.Navigation("DosageLogs");
 
                     b.Navigation("Translations");
                 });
@@ -1150,8 +1148,6 @@ namespace Medicine.DataAccess.Sql.Migrations
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
                 {
                     b.Navigation("ActiveElements");
-
-                    b.Navigation("SimilarPreparate");
 
                     b.Navigation("Translations");
                 });

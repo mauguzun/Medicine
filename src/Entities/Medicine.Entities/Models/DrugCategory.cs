@@ -3,6 +3,9 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models
 {
+    /// <summary>
+    /// Drug category , can containt many drugs
+    /// </summary>
     public class DrugCategory : TranslationsEntityByUserWith<TranslatedDrugsCategory>
     {
         public int DrugId { get; set; }
