@@ -29,7 +29,7 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
 
         public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
         {
-            var items = _dbContext.Set<TEntity>()?.Where(conditionLambda).ToList();
+            var items = _dbContext.Set<TEntity>()?.Where(conditionLambda);
             var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
 
             return convertedItems;
@@ -43,7 +43,7 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
 
         public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items = await _dbContext.Set<TEntity>().ToListAsync();
+            var items =  _dbContext.Set<TEntity>();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
 
             return convertedItems;
