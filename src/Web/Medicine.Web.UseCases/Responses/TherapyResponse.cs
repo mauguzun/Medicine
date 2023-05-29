@@ -5,7 +5,7 @@ using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class TherapyResponse : EntityWithDescription
+    public class TherapyResponse : EntityTitleDescription
     {
         public int UserId { get; set; }
         public TherapyStatus Status { get; set; } = TherapyStatus.None;

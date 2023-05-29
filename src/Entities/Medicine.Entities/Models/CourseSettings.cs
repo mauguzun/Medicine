@@ -3,7 +3,7 @@ using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
-    public class CourseSettings : EntityByUser
+    public class CourseSettings : EntityAuthor
     {
         public int  CourseId  { get; set; }
         public Course Course  { get; set; }

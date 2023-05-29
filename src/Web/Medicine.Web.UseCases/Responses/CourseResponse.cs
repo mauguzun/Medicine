@@ -5,7 +5,7 @@ using Medicine.Entities.Enums;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class CourseResponse : EntityWithDescription
+    public class CourseResponse : EntityTitleDescription
     {
         public int TherapyId { get; set; }
 

@@ -5,7 +5,7 @@ using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class DosageRecommendationResponse : TranslationsEntityByUserWith<TranslatedDosingFrequencyReminder>
+    public class DosageRecommendationResponse : TranslationEntity<TranslatedDosingFrequencyReminder>
     {
         public double Quantity { get; set; }
 

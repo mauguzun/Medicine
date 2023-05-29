@@ -3,7 +3,7 @@ using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
-    public class DosageLog : EntityByUser
+    public class DosageLog : EntityAuthor
     {
         public int DosageRecommendationId { get; set; }
         public DosingFrequencyReminder DosageRecommendation { get; set; }

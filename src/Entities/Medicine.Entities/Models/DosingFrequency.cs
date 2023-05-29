@@ -8,7 +8,7 @@ namespace Medicine.Entities.Models
     /// Created inside course , containt time interval ,total , and course 
     /// Description 
     /// </summary>
-    public class DosingFrequency : TranslationsEntityByUserWith<TranslatedDosingFrequency>
+    public class DosingFrequency : TranslationEntity<TranslatedDosingFrequency>
     {
         public Course Course { get; set; }
         public int CourseId { get; set; }
@@ -20,7 +20,7 @@ namespace Medicine.Entities.Models
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
 
-        public List<DosingFrequencyReminder> DosageReminders { get; set; } = new List<DosingFrequencyReminder>(); 
+        public List<DosingFrequencyReminder> DosingFrequencyReminders { get; set; } = new List<DosingFrequencyReminder>(); 
   
     }
 }

@@ -1,5 +1,5 @@
 using Medicine.Entities.Models;
-using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Translated.Base;
 using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses

@@ -4,10 +4,13 @@ using Medicine.Entities.Models.Translated;
 namespace Medicine.Entities.Models
 {
     /// <summary>
-    /// Created by user , 
+    /// Created by user ,contains link to dosingfrequence, reminder , and quantity
     /// </summary>
-    public class DosingFrequencyReminder : TranslationsEntityByUserWith<TranslatedDosingFrequencyReminder>
-    {
+    public class DosingFrequencyReminder : EntityAuthor
+    { 
+        public string Title { get; set; }
+        public string UsingDescription { get; set; }
+
         public double Quantity { get; set; }
         public int ReminderId { get; set; }
         public Reminder Reminder { get; set; }

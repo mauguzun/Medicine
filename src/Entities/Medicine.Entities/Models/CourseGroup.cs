@@ -1,5 +1,5 @@
-﻿using Medicine.Entities.Models.Base;
-using Medicine.Entities.Models.Translated;
+﻿using Medicine.Entities.Models.Translated;
+using Medicine.Entities.Models.Translated.Base;
 
 namespace Medicine.Entities.Models
 {

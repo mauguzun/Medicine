@@ -1,6 +1,6 @@
 ﻿namespace Medicine.Entities.Models.Base
 {
-    public abstract class TranslationsEntityByUserWith<T> : EntityByUser
+    public abstract class TranslationEntity<T> : EntityAuthor
     {
         public virtual List<T> Translations { get; set; }
     }

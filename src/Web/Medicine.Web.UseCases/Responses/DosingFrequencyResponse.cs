@@ -1,12 +1,12 @@
-using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Medicine.Entities.Models;
 using Medicine.Web.UseCases.Responses.BaseDataLoader;
+using Medicine.Entities.Models.Base;
 
 namespace Medicine.Web.UseCases.Responses
 {
 
-    public class DosingFrequencyResponse : TranslationsEntityByUserWith<TranslatedDosingFrequency>
+    public class DosingFrequencyResponse : TranslationEntity<TranslatedDosingFrequency>
     {
         public int CourseId { get; set; }
 

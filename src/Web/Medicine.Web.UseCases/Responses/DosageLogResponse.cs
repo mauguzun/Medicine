@@ -5,7 +5,7 @@ using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class DosageLogResponse : EntityByUser
+    public class DosageLogResponse : EntityAuthor
     {
 
         public ReminderLogStatus Status { get; set; }

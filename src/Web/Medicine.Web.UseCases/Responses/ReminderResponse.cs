@@ -4,7 +4,7 @@ using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class ReminderResponse : EntityWithDescription
+    public class ReminderResponse : EntityTitleDescription
     {
         public string TimeInUtc { get; set; } = "00:00";
 

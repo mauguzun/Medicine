@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Medicine.Entities.Models.Base
 {
-    public abstract class EntityByUser : Entity
+    public abstract class EntityAuthor : Entity
     {
         public User? User { get; set; }
 

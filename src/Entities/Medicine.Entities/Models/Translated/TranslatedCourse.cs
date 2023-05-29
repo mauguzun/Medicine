@@ -1,4 +1,4 @@
-﻿using Medicine.Entities.Models.Base;
+﻿using Medicine.Entities.Models.Translated.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Medicine.Entities.Models.Translated

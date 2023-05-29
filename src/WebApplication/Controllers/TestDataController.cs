@@ -26,7 +26,7 @@ namespace Medicine.WebApplication.Controllers
         {
 
 
-          
+
 
             var user = new User()
             {
@@ -44,10 +44,10 @@ namespace Medicine.WebApplication.Controllers
                 OneUnitSizeInGramm = 11.22,
                 Translations = new List<TranslatedDrugs>
                 {
-                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption" },
-                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption", Language = Language.lv }
+                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption",      Recomendation = "use before eat 15 min",  },
+                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption",     Recomendation = "use before eat 15 min",  Language = Language.lv }
                 },
-                Recomendation = "use before eat 15 min",
+
                 Title = "Citramonium"
             });
             _context.SaveChanges();
@@ -113,16 +113,14 @@ namespace Medicine.WebApplication.Controllers
                                              Language = Language.lv
                                          }
                                     },
-                                    DosageReminders =
+                                    DosingFrequencyReminders =
                                    {
                                        new DosingFrequencyReminder{
                                             Quantity  = 1,
                                             ReminderId  = _context.Reminders.FirstOrDefault().Id,
-                                             Translations = new List<TranslatedDosingFrequencyReminder>
-                                           {
-                                                new TranslatedDosingFrequencyReminder {
-                                                    Title = "AutoCrated", Description = "AutoCreated"}
-                                           }
+                                            Title = "Title",
+                                            UsingDescription ="before eat"
+
                                        }
                                    }
                                }

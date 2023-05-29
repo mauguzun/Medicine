@@ -8,7 +8,7 @@ namespace Medicine.Entities.Models
     /// Therapy can be assigned to user , or crate manualy 
     /// Each therapy can contain many courses
     /// </summary>
-    public class Therapy : TranslationsEntityByUserWith<TranslatedTherapy>
+    public class Therapy : TranslationEntity<TranslatedTherapy>
     {
         public int UserId { get; set; }
         public TherapyStatus Status { get; set; } = TherapyStatus.None;

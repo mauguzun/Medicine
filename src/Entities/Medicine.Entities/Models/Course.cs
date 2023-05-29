@@ -4,7 +4,7 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models
 {
-    public class Course : TranslationsEntityByUserWith<TranslatedCourse>
+    public class Course : TranslationEntity<TranslatedCourse>
     {
         public int TherapyId { get; set; }
         public Therapy Therapy { get; set; }

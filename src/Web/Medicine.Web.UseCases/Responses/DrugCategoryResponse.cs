@@ -5,7 +5,7 @@ using Medicine.Web.UseCases.Responses.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class DrugCategoryResponse : TranslationsEntityByUserWith<TranslatedDrugsCategory>
+    public class DrugCategoryResponse : TranslationEntity<TranslatedDrugsCategory>
     {
         public int DrugId { get; set; }
 

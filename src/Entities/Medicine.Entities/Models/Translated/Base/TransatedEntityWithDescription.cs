@@ -1,4 +1,4 @@
-﻿namespace Medicine.Entities.Models.Base
+﻿namespace Medicine.Entities.Models.Translated.Base
 {
     public abstract class TransatedEntityWithDescription : TransatedEntity
     {
