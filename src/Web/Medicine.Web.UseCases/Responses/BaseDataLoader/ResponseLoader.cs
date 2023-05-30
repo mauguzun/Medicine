@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Medicine.Application.Interfaces;
 using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models.Base;
 using Microsoft.EntityFrameworkCore;
@@ -12,16 +13,10 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
     {
 
         private readonly IAppDbContextReadonly _dbContext;
+        private readonly ILanguageService _languageService;
         private readonly IMapper _mapper;
 
-        public ResponseLoader(
-        IAppDbContextReadonly dbContext,
-        IMapper mapper)
-
-        {
-            _dbContext = dbContext;
-            _mapper = mapper;
-        }
+        
         public void Clear()
         {
             throw new NotImplementedException();

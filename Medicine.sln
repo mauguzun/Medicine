@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{2E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Entities", "src\Entities\Medicine.Entities\Medicine.Entities.csproj", "{9B95F1E3-5AB5-496C-95FB-CDF9A2EDA7DD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Implementaion", "Infrastructure.Implementaion", "{FB88845F-E906-48D9-A860-DEFAB228A550}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementaion", "Implementaion", "{FB88845F-E906-48D9-A860-DEFAB228A550}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure.Interfaces", "Infrastructure.Interfaces", "{9F503B83-CBD7-463F-A08B-D04B07CF21CC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{9F503B83-CBD7-463F-A08B-D04B07CF21CC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.DataAccess.Sql", "src\Infrastructure.Implementaion\DataAccess.Sql\Medicine.DataAccess.Sql.csproj", "{CD055301-86BE-439E-A1CB-812BA3F8FF71}"
 EndProject
@@ -33,7 +33,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Utils", "src\Utils
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Notifications.Interfaces", "src\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj", "{32798188-5D39-4D4F-A1DE-6D50E84EFE97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Implementation.GmailNotification", "src\Infrastructure.Implementaion\Medicine.Implementation.GmailNotification\Medicine.Implementation.GmailNotification.csproj", "{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Implementation.GmailNotification", "src\Infrastructure.Implementaion\Medicine.Implementation.GmailNotification\Medicine.Implementation.GmailNotification.csproj", "{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Applicaton", "Applicaton", "{83899F20-3F1D-4AB4-A7EA-4BB534EFB921}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{6562DE15-4A17-4205-8C42-601E4D2A9A60}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Interfaces", "Interfaces", "{F8684E01-A394-4989-9E18-312EF5800B44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Implementation", "Implementation", "{5A0F81F9-4259-4C17-9ADF-0E79124D4CAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Application.Interfaces", "src\Applicaton\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj", "{B7117AFF-6D41-4F42-921B-414DFBCE500B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Application.Implementation", "src\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj", "{8111BEE9-611B-455D-80E7-CCE72C4A97B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -77,6 +89,14 @@ Global
 		{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7117AFF-6D41-4F42-921B-414DFBCE500B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7117AFF-6D41-4F42-921B-414DFBCE500B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7117AFF-6D41-4F42-921B-414DFBCE500B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7117AFF-6D41-4F42-921B-414DFBCE500B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8111BEE9-611B-455D-80E7-CCE72C4A97B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8111BEE9-611B-455D-80E7-CCE72C4A97B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8111BEE9-611B-455D-80E7-CCE72C4A97B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8111BEE9-611B-455D-80E7-CCE72C4A97B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,8 +104,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2E495802-17D1-4CCC-B8EE-98E659BD0C74} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
 		{9B95F1E3-5AB5-496C-95FB-CDF9A2EDA7DD} = {2E495802-17D1-4CCC-B8EE-98E659BD0C74}
-		{FB88845F-E906-48D9-A860-DEFAB228A550} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
-		{9F503B83-CBD7-463F-A08B-D04B07CF21CC} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
+		{FB88845F-E906-48D9-A860-DEFAB228A550} = {6562DE15-4A17-4205-8C42-601E4D2A9A60}
+		{9F503B83-CBD7-463F-A08B-D04B07CF21CC} = {6562DE15-4A17-4205-8C42-601E4D2A9A60}
 		{CD055301-86BE-439E-A1CB-812BA3F8FF71} = {FB88845F-E906-48D9-A860-DEFAB228A550}
 		{12C1AE7B-6750-4509-BF2C-766C24585179} = {9F503B83-CBD7-463F-A08B-D04B07CF21CC}
 		{CD3D1F23-3E80-44CD-8880-CBA5F827D62D} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
@@ -96,6 +116,12 @@ Global
 		{D6A3CA38-51DF-4C99-A4EE-6E7244A2F8B8} = {4DE40D8F-6336-4FD1-A178-7B25FE5D35B5}
 		{32798188-5D39-4D4F-A1DE-6D50E84EFE97} = {9F503B83-CBD7-463F-A08B-D04B07CF21CC}
 		{69BF68AC-1CD5-4FE3-982C-5227E8C8D50A} = {FB88845F-E906-48D9-A860-DEFAB228A550}
+		{83899F20-3F1D-4AB4-A7EA-4BB534EFB921} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
+		{6562DE15-4A17-4205-8C42-601E4D2A9A60} = {9C3F5933-8A09-4C48-B287-70767DB1732D}
+		{F8684E01-A394-4989-9E18-312EF5800B44} = {83899F20-3F1D-4AB4-A7EA-4BB534EFB921}
+		{5A0F81F9-4259-4C17-9ADF-0E79124D4CAF} = {83899F20-3F1D-4AB4-A7EA-4BB534EFB921}
+		{B7117AFF-6D41-4F42-921B-414DFBCE500B} = {F8684E01-A394-4989-9E18-312EF5800B44}
+		{8111BEE9-611B-455D-80E7-CCE72C4A97B1} = {5A0F81F9-4259-4C17-9ADF-0E79124D4CAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CFF5CBFB-D984-4C29-BE37-F8ED595528F6}

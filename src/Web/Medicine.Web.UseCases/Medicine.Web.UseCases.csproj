@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Applicaton\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj" />
     <ProjectReference Include="..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
     <ProjectReference Include="..\..\Infrastructure.Interfaces\DataAccess.Interfaces\Medicine.DataAccess.Interfaces.csproj" />
   </ItemGroup>
