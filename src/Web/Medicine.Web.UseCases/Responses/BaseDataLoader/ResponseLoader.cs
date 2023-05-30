@@ -16,7 +16,13 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
         private readonly ILanguageService _languageService;
         private readonly IMapper _mapper;
 
-        
+        public ResponseLoader(IAppDbContextReadonly dbContext, ILanguageService languageService, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _languageService = languageService;
+            _mapper = mapper;
+        }
+
         public void Clear()
         {
             throw new NotImplementedException();

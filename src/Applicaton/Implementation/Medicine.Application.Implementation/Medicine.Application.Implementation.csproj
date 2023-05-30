@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
+    <ProjectReference Include="..\..\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj" />
+  </ItemGroup>
+
 </Project>

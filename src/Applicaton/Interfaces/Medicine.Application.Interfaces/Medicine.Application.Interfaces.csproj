@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
