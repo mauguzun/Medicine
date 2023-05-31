@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Medicine.Application.Interfaces;
-using Medicine.DataAccess.Interfaces;
 using Medicine.Entities.Models.Base;
-using Microsoft.EntityFrameworkCore;
+using Medicine.Infrastructure.Interfcases.DataAccess;
 
 namespace Medicine.Web.UseCases.Responses.BaseDataLoader
 {

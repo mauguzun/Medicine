@@ -20,7 +20,7 @@ namespace Medicine.Entities.Models
         public double Total { get; set; }
         public int IntervalInDays { get; set; } = 1;
 
-        public List<DosingFrequencyReminder> DosingFrequencyReminders { get; set; } = new List<DosingFrequencyReminder>(); 
+        public List<DosingFrequencyReminder> DosingFrequencyReminders { get; set; } 
   
     }
 }

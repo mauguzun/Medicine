@@ -1,8 +1,10 @@
-using Medicine.DataAccess.Interfaces;
-using Medicine.DataAccess.Sql;
+using Medicine.Application.Implementation;
+using Medicine.Application.Interfaces;
 using Medicine.Entities.Models.Auth;
-using Medicine.Implementation.GmailNotification;
-using Medicine.Notifications.Interfaces;
+using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Medicine.Infrastructure.Implementation.GmailNotification;
+using Medicine.Infrastructure.Interfcases.DataAccess;
+using Medicine.Infrastructure.Interfcases.Notification;
 using Medicine.Web.UseCases.Responses.BaseDataLoader;
 using Medicine.Web.UseCases.Utils;
 using Medicine.WebApplication;
@@ -76,6 +78,10 @@ builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(build
 
 builder.Services.AddScoped<IEmailService, GmailService>();
 
+// application
+
+builder.Services.AddScoped<ILanguageService, LanguageService>();
+
 // graphql
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -94,9 +100,10 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 
 
-//builder.Services.AddScoped(typeof(BatchLoader<,>));
 
 builder.Services.AddScoped(typeof(IResponseLoader<,,>), typeof(ResponseLoader<,,>));
+
+
 
 builder.Services.AddCors(options =>
 {

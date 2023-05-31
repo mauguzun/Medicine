@@ -1,6 +1,6 @@
-﻿using Medicine.Notifications.Interfaces;
+﻿using Medicine.Infrastructure.Interfcases.Notification;
 
-namespace Medicine.Implementation.GmailNotification
+namespace Medicine.Infrastructure.Implementation.GmailNotification
 {
     public class GmailService : IEmailService
     {

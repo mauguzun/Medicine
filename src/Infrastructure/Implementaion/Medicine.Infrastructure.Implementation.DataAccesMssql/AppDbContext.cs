@@ -1,9 +1,7 @@
-﻿using Medicine.DataAccess.Interfaces;
-using Medicine.Entities.Models;
+﻿using Medicine.Infrastructure.Interfcases.DataAccess;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace Medicine.DataAccess.Sql
+namespace Medicine.Infrastructure.Implementation.DataAccesMssql
 {
     public class AppDbContext : AppDbContextReadOnly, IAppDbContext
     {

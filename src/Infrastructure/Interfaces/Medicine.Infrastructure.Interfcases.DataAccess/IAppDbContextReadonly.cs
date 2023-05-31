@@ -2,11 +2,9 @@
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Collections.Generic;
 
 
-namespace Medicine.DataAccess.Interfaces
+namespace Medicine.Infrastructure.Interfcases.DataAccess
 {
     public interface IAppDbContextReadonly
     {

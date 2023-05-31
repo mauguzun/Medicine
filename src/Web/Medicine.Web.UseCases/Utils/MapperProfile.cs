@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Medicine.Entities.Models;
+using Medicine.Entities.Models.Translated;
 using Medicine.Web.UseCases.Dto;
 using Medicine.Web.UseCases.Responses;
 
@@ -11,7 +12,7 @@ namespace Medicine.Web.UseCases.Utils
         public MapperProfile()
         {
 
-            CreateMap<DosingFrequencyReminder, DosageRecommendationResponse>().ReverseMap();
+            CreateMap<DosingFrequencyReminder, DosingFrequencyReminderResponse>().ReverseMap();
             CreateMap<Reminder, ReminderResponse>().ReverseMap();
             CreateMap<DosingFrequency, DosingFrequencyResponse>().ReverseMap();
             CreateMap<DosageLogResponse, DosageLog>().ReverseMap();
@@ -21,6 +22,8 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<CourseGroupResponse, CourseGroup>().ReverseMap();
             CreateMap<DrugResponse, Drug>().ReverseMap();
             CreateMap<ActiveElementResponse, ActiveElement>().ReverseMap();
+
+            CreateMap<TranslatedDosingFrequency, TranslatedResponse>().ReverseMap();
             //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate()
 
 

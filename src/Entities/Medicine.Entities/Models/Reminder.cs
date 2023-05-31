@@ -9,7 +9,7 @@ namespace Medicine.Entities.Models
     public class Reminder : EntityTitleDescription
     {
         public string TimeInUtc { get; set; } = "00:00";
-        public List<DosingFrequencyReminder> DosageRecommendations { get; set; } = new List<DosingFrequencyReminder>(); 
+        public List<DosingFrequencyReminder> DosingFrequencyReminders { get; set; } = new List<DosingFrequencyReminder>(); 
 
     }
 }

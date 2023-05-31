@@ -31,10 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj" />
     <ProjectReference Include="..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
-    <ProjectReference Include="..\Infrastructure.Implementaion\DataAccess.Sql\Medicine.DataAccess.Sql.csproj" />
-    <ProjectReference Include="..\Infrastructure.Implementaion\Medicine.Implementation.GmailNotification\Medicine.Implementation.GmailNotification.csproj" />
-    <ProjectReference Include="..\Infrastructure.Interfaces\Medicine.Notification.Interfaces\Medicine.Notifications.Interfaces.csproj" />
+    <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesMssql\Medicine.Infrastructure.Implementation.DataAccesMssql.csproj" />
+    <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.GmailNotification\Medicine.Infrastructure.Implementation.GmailNotification.csproj" />
+    <ProjectReference Include="..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj" />
+    <ProjectReference Include="..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj" />
     <ProjectReference Include="..\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj" />
   </ItemGroup>
 

@@ -1,14 +1,14 @@
-﻿using Medicine.DataAccess.Interfaces;
-using Medicine.Entities.Enums;
+﻿using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Medicine.Entities.Models.Translated.Base;
+using Medicine.Infrastructure.Interfcases.DataAccess;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.DataAccess.Sql
+namespace Medicine.Infrastructure.Implementation.DataAccesMssql
 {
     public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
@@ -54,7 +54,6 @@ namespace Medicine.DataAccess.Sql
         {
             return base.Set<T>();
         }
-
 
 
     }

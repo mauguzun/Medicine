@@ -1,11 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
-
-namespace Medicine.DataAccess.Interfaces
+﻿namespace Medicine.Infrastructure.Interfcases.DataAccess
 {
     public interface IAppDbContext : IAppDbContextReadonly
     {
-        public ChangeTracker ChangeTracker { get; }
-
         Task<int> SaveChagesAsync(CancellationToken cancellationToken = default);
         public int SaveChanges();
     }

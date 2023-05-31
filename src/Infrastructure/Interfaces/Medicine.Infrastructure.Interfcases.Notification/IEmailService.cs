@@ -1,4 +1,4 @@
-﻿namespace Medicine.Notifications.Interfaces
+﻿namespace Medicine.Infrastructure.Interfcases.Notification
 {
     public interface IEmailService
     {

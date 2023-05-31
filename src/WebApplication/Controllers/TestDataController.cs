@@ -1,13 +1,9 @@
-﻿using Medicine.DataAccess.Sql;
-using Medicine.Entities.Enums;
-using Medicine.Entities.Models.Translated;
+﻿using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Medicine.DataAccess.Interfaces;
-using static HotChocolate.ErrorCodes;
 using Medicine.Entities.Models.Auth;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Medicine.Entities.Models.Translated;
+using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Medicine.WebApplication.Controllers
 {

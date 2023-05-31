@@ -1,5 +1,5 @@
 using Medicine.Entities.Models.Auth;
-using Medicine.Notifications.Interfaces;
+using Medicine.Infrastructure.Interfcases.Notification;
 using Medicine.Web.UseCases.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

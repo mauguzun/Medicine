@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Medicine.DataAccess.Sql.Migrations
+namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 {
     /// <inheritdoc />
     public partial class first : Migration
@@ -214,7 +214,6 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Recomendation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     OneUnitSizeInGramm = table.Column<double>(type: "float", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -388,6 +387,7 @@ namespace Medicine.DataAccess.Sql.Migrations
                     Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Recomendation = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     DrugId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
@@ -598,6 +598,8 @@ namespace Medicine.DataAccess.Sql.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsingDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
                     ReminderId = table.Column<int>(type: "int", nullable: false),
                     DosingFrequencyId = table.Column<int>(type: "int", nullable: false),
@@ -687,9 +689,10 @@ namespace Medicine.DataAccess.Sql.Migrations
                 name: "TranslatedDosingFrequencyReminder",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false, defaultValueSql: "NEXT VALUE FOR [TransatedEntityWithDescriptionSequence]"),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UsingDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DosageRecommendationId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<int>(type: "int", nullable: true),
