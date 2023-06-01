@@ -2,6 +2,6 @@
 {
     public abstract class TranslationEntity<T> : EntityAuthor
     {
-        public virtual List<T> Translations { get; set; }
+        public virtual List<T>? Translations { get; set; }
     }
 }
