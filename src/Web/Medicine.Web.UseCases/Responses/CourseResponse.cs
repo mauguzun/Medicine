@@ -1,11 +1,13 @@
-using Medicine.Entities.Models.Base;
-using Medicine.Entities.Models;
-using Medicine.Web.UseCases.Responses.BaseDataLoader;
 using Medicine.Entities.Enums;
+using Medicine.Entities.Models;
+using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Translated;
+using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class CourseResponse : EntityTitleDescription
+    public class CourseResponse : Entity
     {
         public int TherapyId { get; set; }
 
@@ -35,6 +37,14 @@ namespace Medicine.Web.UseCases.Responses
 
         public async Task<IEnumerable<DosingFrequencyResponse>>
                   DosingFrequencies(IResponseLoader<int, DosingFrequency, DosingFrequencyResponse> dataLoader, CancellationToken ct)
+        {
+            var entities = await dataLoader.LoadAsync(x => x.CourseId == Id);
+            return entities;
+        }
+
+        public async Task<IEnumerable<TranslatedResponse>> Translations(ITranslateResponseLoader<int,
+          TranslatedCourse, TranslatedResponse> dataLoader,
+          CancellationToken ct)
         {
             var entities = await dataLoader.LoadAsync(x => x.CourseId == Id);
             return entities;

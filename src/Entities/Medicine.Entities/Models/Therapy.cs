@@ -1,5 +1,5 @@
 ﻿using Medicine.Entities.Enums;
-using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models

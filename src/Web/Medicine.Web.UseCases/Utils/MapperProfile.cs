@@ -24,6 +24,8 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<ActiveElementResponse, ActiveElement>().ReverseMap();
 
             CreateMap<TranslatedDosingFrequency, TranslatedResponse>().ReverseMap();
+            CreateMap<TranslatedCourse, TranslatedResponse>().ReverseMap();
+            CreateMap<TranslatedTherapy, TranslatedResponse>().ReverseMap();
             //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate()
 
 

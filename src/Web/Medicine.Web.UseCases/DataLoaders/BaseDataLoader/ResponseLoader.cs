@@ -3,7 +3,7 @@ using Medicine.Application.Interfaces;
 using Medicine.Entities.Models.Base;
 using Medicine.Infrastructure.Interfcases.DataAccess;
 
-namespace Medicine.Web.UseCases.Responses.BaseDataLoader
+namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
 {
     public class ResponseLoader<TKey, TEntity, TResponse> : IResponseLoader<TKey, TEntity, TResponse>
        where TKey : notnull
@@ -12,13 +12,11 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
     {
 
         private readonly IAppDbContextReadonly _dbContext;
-        private readonly ILanguageService _languageService;
         private readonly IMapper _mapper;
 
-        public ResponseLoader(IAppDbContextReadonly dbContext, ILanguageService languageService, IMapper mapper)
+        public ResponseLoader(IAppDbContextReadonly dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
-            _languageService = languageService;
             _mapper = mapper;
         }
 
@@ -35,6 +33,7 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
             return convertedItems;
         }
 
+
         public async Task<TResponse> LoadAsync(TKey key, CancellationToken cancellationToken = default)
         {
             var items = await _dbContext.Set<TEntity>().FindAsync(key);
@@ -43,7 +42,7 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
 
         public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items =  _dbContext.Set<TEntity>();
+            var items = _dbContext.Set<TEntity>();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
 
             return convertedItems;
@@ -58,6 +57,8 @@ namespace Medicine.Web.UseCases.Responses.BaseDataLoader
         {
             throw new NotImplementedException();
         }
+
+
 
         public void Remove(TKey key)
         {

@@ -1,5 +1,5 @@
+using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
 using Medicine.Web.UseCases.Responses;
-using Medicine.Web.UseCases.Responses.BaseDataLoader;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Query

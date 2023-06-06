@@ -1,6 +1,6 @@
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Translated.Base;
-using Medicine.Web.UseCases.Responses.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {

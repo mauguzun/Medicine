@@ -5,7 +5,8 @@ using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Medicine.Infrastructure.Implementation.GmailNotification;
 using Medicine.Infrastructure.Interfcases.DataAccess;
 using Medicine.Infrastructure.Interfcases.Notification;
-using Medicine.Web.UseCases.Responses.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
 using Medicine.Web.UseCases.Utils;
 using Medicine.WebApplication;
 using Medicine.WebApplication.GraphQL.Entities.Reminder.Mutatiion;
@@ -102,6 +103,7 @@ builder.Services.AddAutoMapper(typeof(MapperProfile));
 
 
 builder.Services.AddScoped(typeof(IResponseLoader<,,>), typeof(ResponseLoader<,,>));
+builder.Services.AddScoped(typeof(ITranslateResponseLoader<,,>), typeof(TranslateResponseLoader<,,>));
 
 
 

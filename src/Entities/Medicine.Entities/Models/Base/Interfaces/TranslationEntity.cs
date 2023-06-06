@@ -1,4 +1,4 @@
-﻿namespace Medicine.Entities.Models.Base
+﻿namespace Medicine.Entities.Models.Base.Interfaces
 {
     public abstract class TranslationEntity<T> : EntityAuthor
     {

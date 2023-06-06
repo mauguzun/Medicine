@@ -1,7 +1,7 @@
 using Medicine.Entities.Enums;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models;
-using Medicine.Web.UseCases.Responses.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
