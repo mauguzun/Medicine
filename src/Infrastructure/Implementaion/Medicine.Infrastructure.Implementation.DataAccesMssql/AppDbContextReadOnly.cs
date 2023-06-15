@@ -12,7 +12,10 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
 {
     public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
-
+        static AppDbContextReadOnly()
+        {
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        }
         public AppDbContextReadOnly(DbContextOptions options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
