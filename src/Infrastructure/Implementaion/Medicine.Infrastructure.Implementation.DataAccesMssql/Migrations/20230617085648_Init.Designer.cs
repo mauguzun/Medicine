@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230615191820_Init")]
+    [Migration("20230617085648_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -50,7 +50,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DrugId")
@@ -123,7 +123,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime?>("Birthday")
+                    b.Property<DateTimeOffset?>("Birthday")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -206,7 +206,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.Property<int>("CourseType")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("TherapyId")
@@ -237,7 +237,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int?>("MaxAge")
@@ -272,7 +272,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DateTime")
@@ -310,7 +310,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DrugId")
@@ -344,7 +344,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DosingFrequencyId")
@@ -375,7 +375,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("DosageRecommendations");
+                    b.ToTable("DosingFrequencyReminders");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
@@ -386,7 +386,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<double>("OneUnitSizeInGramm")
@@ -413,7 +413,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DrugId")
@@ -437,7 +437,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Descrptioin")
@@ -468,7 +468,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("Status")
@@ -496,7 +496,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Description")
@@ -526,7 +526,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("DosageRecommendationId")

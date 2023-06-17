@@ -38,7 +38,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Birthday = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    Birthday = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     Sex = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false),
                     TimeZone = table.Column<string>(type: "text", nullable: false),
@@ -175,7 +175,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"TransatedEntityWithDescriptionSequence\"')"),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -196,7 +196,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DrugId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -217,7 +217,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Title = table.Column<string>(type: "text", nullable: true),
                     OneUnitSizeInGramm = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -237,7 +237,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TimeInUtc = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Descrptioin = table.Column<string>(type: "text", nullable: true)
@@ -261,7 +261,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -282,7 +282,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CourseGroupId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -310,7 +310,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DrugCategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -338,7 +338,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -390,7 +390,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     Recomendation = table.Column<string>(type: "text", nullable: true),
                     DrugId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -419,7 +419,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     TherapyId = table.Column<int>(type: "integer", nullable: false),
                     CourseGroupID = table.Column<int>(type: "integer", nullable: true),
                     CourseType = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -451,7 +451,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     TherapyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -479,7 +479,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     ActiveElementId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -510,7 +510,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     MinAge = table.Column<int>(type: "integer", nullable: true),
                     MaxAge = table.Column<int>(type: "integer", nullable: true),
                     Weight = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -539,7 +539,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Total = table.Column<double>(type: "double precision", nullable: false),
                     IntervalInDays = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -573,7 +573,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     CourseId = table.Column<int>(type: "integer", nullable: false),
                     Version = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -594,7 +594,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DosageRecommendations",
+                name: "DosingFrequencyReminders",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -604,25 +604,25 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     ReminderId = table.Column<int>(type: "integer", nullable: false),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DosageRecommendations", x => x.Id);
+                    table.PrimaryKey("PK_DosingFrequencyReminders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DosageRecommendations_AspNetUsers_UserId",
+                        name: "FK_DosingFrequencyReminders_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DosageRecommendations_DosingFrequencies_DosingFrequencyId",
+                        name: "FK_DosingFrequencyReminders_DosingFrequencies_DosingFrequencyId",
                         column: x => x.DosingFrequencyId,
                         principalTable: "DosingFrequencies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DosageRecommendations_Reminders_ReminderId",
+                        name: "FK_DosingFrequencyReminders_Reminders_ReminderId",
                         column: x => x.ReminderId,
                         principalTable: "Reminders",
                         principalColumn: "Id",
@@ -637,7 +637,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -667,7 +667,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -679,9 +679,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_DosageLogs_DosageRecommendations_DosageRecommendationId",
+                        name: "FK_DosageLogs_DosingFrequencyReminders_DosageRecommendationId",
                         column: x => x.DosageRecommendationId,
-                        principalTable: "DosageRecommendations",
+                        principalTable: "DosingFrequencyReminders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -695,7 +695,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     UsingDescription = table.Column<string>(type: "text", nullable: false),
                     DosageRecommendationId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -708,9 +708,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_TranslatedDosingFrequencyReminder_DosageRecommendations_Dos~",
+                        name: "FK_TranslatedDosingFrequencyReminder_DosingFrequencyReminders_~",
                         column: x => x.DosageRecommendationId,
-                        principalTable: "DosageRecommendations",
+                        principalTable: "DosingFrequencyReminders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -812,21 +812,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DosageRecommendations_DosingFrequencyId",
-                table: "DosageRecommendations",
-                column: "DosingFrequencyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DosageRecommendations_ReminderId",
-                table: "DosageRecommendations",
-                column: "ReminderId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DosageRecommendations_UserId",
-                table: "DosageRecommendations",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_DosingFrequencies_CourseId",
                 table: "DosingFrequencies",
                 column: "CourseId");
@@ -839,6 +824,21 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_DosingFrequencies_UserId",
                 table: "DosingFrequencies",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DosingFrequencyReminders_DosingFrequencyId",
+                table: "DosingFrequencyReminders",
+                column: "DosingFrequencyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DosingFrequencyReminders_ReminderId",
+                table: "DosingFrequencyReminders",
+                column: "ReminderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DosingFrequencyReminders_UserId",
+                table: "DosingFrequencyReminders",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -1005,7 +1005,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 name: "ActiveElements");
 
             migrationBuilder.DropTable(
-                name: "DosageRecommendations");
+                name: "DosingFrequencyReminders");
 
             migrationBuilder.DropTable(
                 name: "DrugCategories");

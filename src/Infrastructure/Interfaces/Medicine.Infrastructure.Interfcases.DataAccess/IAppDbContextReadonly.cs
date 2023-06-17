@@ -12,7 +12,7 @@ namespace Medicine.Infrastructure.Interfcases.DataAccess
         public DbSet<Therapy> Therapies { get; }
         public DbSet<ActiveElement> ActiveElements { get; }
         public DbSet<CourseSettings> CourseSettings { get; }
-        public DbSet<DosingFrequencyReminder> DosageRecommendations { get; }
+        public DbSet<DosingFrequencyReminder> DosingFrequencyReminders { get; }
         public DbSet<DosingFrequency> DosingFrequencies { get; }
         public DbSet<Drug> Drugs { get; }
         public DbSet<DrugCategory> DrugCategories { get; }

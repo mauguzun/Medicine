@@ -6,7 +6,7 @@ namespace Medicine.Entities.Models.Auth
 {
     public class User : IdentityUser<int>, IEntity
     {
-        public DateTime? Birthday { get; set; }
+        public DateTimeOffset? Birthday { get; set; }
         public Sex? Sex { get; set; } 
 
         public Language Language { get; set; } = Language.en;

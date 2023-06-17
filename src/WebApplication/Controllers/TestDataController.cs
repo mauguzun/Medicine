@@ -22,11 +22,9 @@ namespace Medicine.WebApplication.Controllers
         {
 
 
-
-
             var user = new User()
             {
-                Birthday = DateTime.Now,
+                Birthday = DateTimeOffset.UtcNow
             };
 
             _context.Users.Add(user);
@@ -58,8 +56,19 @@ namespace Medicine.WebApplication.Controllers
 
             _context.Reminders.Add(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
 
-
             _context.SaveChanges();
+
+
+
+            var dosingFreqency = new DosingFrequencyReminder
+            {
+                Quantity = 1,
+                ReminderId = _context.Reminders.FirstOrDefault().Id,
+                Title = "Title",
+                UsingDescription = "before eat"
+            };
+
+            _context.DosingFrequencyReminders.Add(dosingFreqency);
 
 
             _context.Therapies.Add(
@@ -109,16 +118,8 @@ namespace Medicine.WebApplication.Controllers
                                              Language = Language.lv
                                          }
                                     },
-                                    DosingFrequencyReminders =
-                                   {
-                                       new DosingFrequencyReminder{
-                                            Quantity  = 1,
-                                            ReminderId  = _context.Reminders.FirstOrDefault().Id,
-                                            Title = "Title",
-                                            UsingDescription ="before eat"
-
-                                       }
-                                   }
+                                    DosingFrequencyReminders = new List<DosingFrequencyReminder>(){ dosingFreqency }
+                                  
                                }
                            }
                        }

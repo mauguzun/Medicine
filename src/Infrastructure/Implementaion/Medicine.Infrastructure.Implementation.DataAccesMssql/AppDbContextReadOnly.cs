@@ -12,10 +12,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
 {
     public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
-        static AppDbContextReadOnly()
-        {
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
-        }
+       
         public AppDbContextReadOnly(DbContextOptions options) : base(options)
         {
             ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
@@ -39,7 +36,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         public DbSet<Therapy> Therapies { get; set; }
         public DbSet<ActiveElement> ActiveElements { get; set; }
         public DbSet<CourseSettings> CourseSettings { get; set; }
-        public DbSet<DosingFrequencyReminder> DosageRecommendations { get; set; }
+        public DbSet<DosingFrequencyReminder> DosingFrequencyReminders { get; set; }
         public DbSet<DosingFrequency> DosingFrequencies { get; set; }
         public DbSet<Drug> Drugs { get; set; }
         public DbSet<DrugCategory> DrugCategories { get; set; }
