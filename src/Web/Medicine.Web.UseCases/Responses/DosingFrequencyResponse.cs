@@ -3,6 +3,8 @@ using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
+using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Responses
 {
@@ -11,11 +13,11 @@ namespace Medicine.Web.UseCases.Responses
     {
         public int CourseId { get; set; }
 
-        public  async Task<IEnumerable<TranslatedResponse>> Translations(IResponseLoader<int,
+        public  async Task<IEnumerable<TranslatedResponse>> Translations(ITranslateResponseLoader<int,
             TranslatedDosingFrequency, TranslatedResponse> dataLoader,
             CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.DosingFrequencyId == Id);
+            var entities = await dataLoader.LoadAsync(x => x.DosingFrequencyId == Id );
             return entities;
         }
 

@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Translated;
-using Medicine.Web.UseCases.Dto;
 using Medicine.Web.UseCases.Responses;
+using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Utils
 {
@@ -26,6 +26,9 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<TranslatedDosingFrequency, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedCourse, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedTherapy, TranslatedResponse>().ReverseMap();
+            CreateMap<TranslatedDrugs, TranslatedDrugsResponce>().ReverseMap();
+
+
             //.ForSourceMember(x => x.DosageRecommendations, opt => opt.DoNotValidate()
 
 

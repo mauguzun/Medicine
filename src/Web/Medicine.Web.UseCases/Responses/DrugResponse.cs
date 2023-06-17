@@ -2,6 +2,8 @@ using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
 using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
+using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Responses
 {
@@ -16,6 +18,14 @@ namespace Medicine.Web.UseCases.Responses
             var entities = await dataLoader.LoadAsync(x => x.DrugId == Id);
             return entities;
         }
+
+        public async Task<IEnumerable<TranslatedDrugsResponce>> Translations(ITranslateResponseLoader<int,TranslatedDrugs, TranslatedDrugsResponce> dataLoader,CancellationToken ct)
+        {
+            var entities = await dataLoader.LoadAsync(x => x.DrugId == Id);
+            return entities;
+        }
+
+
         //public async Task<IEnumerable<DrugResponse>> SimilarPreparate(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
         //{
         //    var entities = await dataLoader.LoadAsync(x => x.Id == Id);

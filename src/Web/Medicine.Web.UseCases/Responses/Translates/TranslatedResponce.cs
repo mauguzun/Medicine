@@ -1,7 +1,6 @@
-﻿using Medicine.Entities.Models.Base;
-using Medicine.Entities.Models.Translated.Base;
+﻿using Medicine.Entities.Models.Translated.Base;
 
-namespace Medicine.Web.UseCases.Responses
+namespace Medicine.Web.UseCases.Responses.Translates
 {
     public class TranslatedResponse : TransatedEntity
     {

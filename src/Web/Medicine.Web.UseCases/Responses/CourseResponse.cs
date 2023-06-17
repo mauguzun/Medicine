@@ -4,6 +4,7 @@ using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
 using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
+using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Responses
 {

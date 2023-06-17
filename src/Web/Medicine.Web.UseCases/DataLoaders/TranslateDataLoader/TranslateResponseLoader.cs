@@ -36,7 +36,6 @@ namespace Medicine.Web.UseCases.DataLoaders.TranslateDataLoader
             return convertedItems;
         }
 
-
         public async Task<TResponse> LoadAsync(TKey key, CancellationToken cancellationToken = default)
         {
             var items = await _dbContext.Set<TEntity>().FindAsync(key);
