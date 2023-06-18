@@ -14,6 +14,8 @@ namespace Medicine.Entities.Models
         public List<DrugCategory> DrugCategories { get; set; } = new();
 
         public SimilarDrugs SimilarDrugs { get; set; } = new();
+        public int SimilarDrugsId { get; set; }
+
         public List<ActiveElement> ActiveElements { get; set; } = new (); 
 
     }

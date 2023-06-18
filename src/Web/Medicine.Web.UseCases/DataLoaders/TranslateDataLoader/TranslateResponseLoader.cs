@@ -30,7 +30,7 @@ namespace Medicine.Web.UseCases.DataLoaders.TranslateDataLoader
 
         public async Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda)
         {
-            var items = _dbContext.Set<TEntity>()?.Where(x => x.Language == _languageService.Language()).Where(conditionLambda);
+            var items = _dbContext.Set<TEntity>()?.Where(item => item.Language == _languageService.Language()).Where(conditionLambda);
             var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
 
             return convertedItems;
@@ -59,8 +59,6 @@ namespace Medicine.Web.UseCases.DataLoaders.TranslateDataLoader
         {
             throw new NotImplementedException();
         }
-
-
 
         public void Remove(TKey key)
         {

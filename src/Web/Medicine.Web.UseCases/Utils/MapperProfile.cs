@@ -23,6 +23,7 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<DrugResponse, Drug>().ReverseMap();
             CreateMap<DrugCategoryResponse, DrugCategory>().ReverseMap();
             CreateMap<ActiveElementResponse, ActiveElement>().ReverseMap();
+            CreateMap<SimilarDrugsResponse, SimilarDrugs>().ReverseMap();
 
             CreateMap<TranslatedDosingFrequency, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedCourse, TranslatedResponse>().ReverseMap();
