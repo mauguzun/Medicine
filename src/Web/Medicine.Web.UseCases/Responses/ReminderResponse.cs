@@ -12,7 +12,7 @@ namespace Medicine.Web.UseCases.Responses
             DosingFrequencyReminders(IResponseLoader<int, DosingFrequencyReminder, DosingFrequencyReminderResponse> dataLoader, CancellationToken ct)
         {
 
-            var dosageRecommendation = await dataLoader.LoadAsync(x => x.ReminderId == Id);
+            var dosageRecommendation = await dataLoader.LoadByCondition(x => x.ReminderId == Id);
             return dosageRecommendation;
         }
     }

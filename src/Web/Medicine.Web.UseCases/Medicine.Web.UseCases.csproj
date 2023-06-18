@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="CQRS\**" />
+    <EmbeddedResource Remove="CQRS\**" />
+    <None Remove="CQRS\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="12.0.1" />
     <PackageReference Include="GreenDonut" Version="13.0.5" />
     <PackageReference Include="MediatR" Version="12.0.1" />
@@ -17,10 +23,6 @@
     <ProjectReference Include="..\..\Applicaton\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj" />
     <ProjectReference Include="..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
     <ProjectReference Include="..\..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="CQRS\Reminder\Commands\" />
   </ItemGroup>
 
 </Project>

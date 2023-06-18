@@ -15,13 +15,13 @@ namespace Medicine.Web.UseCases.Responses
 
         public async Task<IEnumerable<CourseResponse>> Courses(IResponseLoader<int, Course, CourseResponse> dataLoader, CancellationToken ct)
         {
-            var courses = await dataLoader.LoadAsync(x => x.CourseGroup?.Id == Id);
+            var courses = await dataLoader.LoadByCondition(x => x.CourseGroup?.Id == Id);
             return courses;
         }
 
         public async Task<IEnumerable<TranslatedResponse>> Translations(IResponseLoader<int, TranslatedTherapy, TranslatedResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.TherapyId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.TherapyId == Id);
             return entities;
         }
     }

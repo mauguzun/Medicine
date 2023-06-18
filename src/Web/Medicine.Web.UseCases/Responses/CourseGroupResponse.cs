@@ -10,7 +10,7 @@ namespace Medicine.Web.UseCases.Responses
             Courses(IResponseLoader<int, Course, CourseResponse> dataLoader, CancellationToken ct)
         {
 
-            var courses = await dataLoader.LoadAsync(x => x.CourseGroup?.Id == Id);
+            var courses = await dataLoader.LoadByCondition(x => x.CourseGroup?.Id == Id);
             return courses;
         }
 

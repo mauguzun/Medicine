@@ -1,6 +1,6 @@
 using AutoMapper;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Medicine.Web.UseCases.CQRS.Reminder.Dto;
+using Medicine.Web.UseCases.Responses;
 
 namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Mutatiion
 {
@@ -9,10 +9,10 @@ namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Mutatiion
     {
         [UseSorting()]
         [UseFiltering()]
-        public async Task<ReminderDto> UpdateReminder(
+        public async Task<ReminderResponse> UpdateReminder(
             [Service] AppDbContext ctx,
             [Service] IMapper mapper,
-            ReminderDto reminder)
+            ReminderResponse reminder)
         {
 
             var current = ctx.Reminders.Find(reminder.Id);
@@ -22,7 +22,7 @@ namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Mutatiion
             ctx.Update(current);
             ctx.SaveChanges();
 
-            return mapper.Map<ReminderDto>(current);
+            return mapper.Map<ReminderResponse>(current);
         }
     }
 

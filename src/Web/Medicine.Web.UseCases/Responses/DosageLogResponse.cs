@@ -17,7 +17,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<DosingFrequencyReminderResponse>
           DosageRecommendation(IResponseLoader<int, DosingFrequencyReminder, DosingFrequencyReminderResponse> dataLoader, CancellationToken ct)
         {
-            var dosageRecommendation = await dataLoader.LoadAsync(x => x.Id == DosageRecommendationId);
+            var dosageRecommendation = await dataLoader.LoadByCondition(x => x.Id == DosageRecommendationId);
             return  dosageRecommendation?.FirstOrDefault();
         }
     }

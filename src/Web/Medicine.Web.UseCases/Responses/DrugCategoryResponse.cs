@@ -1,19 +1,19 @@
-using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
-using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
+using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Responses
 {
     public class DrugCategoryResponse : TranslationEntity<TranslatedDrugsCategory>
     {
-        public int DrugId { get; set; }
-
-        public async Task<IEnumerable<DrugResponse>> Drugs(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
+        public async Task<IEnumerable<TranslatedResponse>> Translations(
+            ITranslateResponseLoader<int,TranslatedDrugsCategory, TranslatedResponse> dataLoader,
+            CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == DrugId);
+         
+            var entities = await dataLoader.LoadByCondition(x => x.DrugCategoryId == Id);
             return entities;
         }
-
     }
 }

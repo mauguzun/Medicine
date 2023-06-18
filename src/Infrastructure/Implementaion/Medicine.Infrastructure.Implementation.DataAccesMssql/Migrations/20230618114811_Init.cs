@@ -6,7 +6,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
+namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     /// <inheritdoc />
     public partial class Init : Migration
@@ -60,6 +60,19 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SimilarDrugs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SimilarDrugs", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,7 +208,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
@@ -204,27 +216,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     table.PrimaryKey("PK_DrugCategories", x => x.Id);
                     table.ForeignKey(
                         name: "FK_DrugCategories_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Drugs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    OneUnitSizeInGramm = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Drugs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Drugs_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
@@ -270,6 +261,34 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         name: "FK_Therapies_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Drugs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    OneUnitSizeInGramm = table.Column<double>(type: "double precision", nullable: false),
+                    SimilarDrugsId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Drugs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Drugs_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_Drugs_SimilarDrugs_SimilarDrugsId",
+                        column: x => x.SimilarDrugsId,
+                        principalTable: "SimilarDrugs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -326,86 +345,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         name: "FK_TranslatedDrugsCategory_DrugCategories_DrugCategoryId",
                         column: x => x.DrugCategoryId,
                         principalTable: "DrugCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ActiveElements",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ActiveElements", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ActiveElements_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_ActiveElements_Drugs_DrugId",
-                        column: x => x.DrugId,
-                        principalTable: "Drugs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "DrugDrugCategory",
-                columns: table => new
-                {
-                    DrugCategoriesId = table.Column<int>(type: "integer", nullable: false),
-                    DrugsId = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_DrugDrugCategory", x => new { x.DrugCategoriesId, x.DrugsId });
-                    table.ForeignKey(
-                        name: "FK_DrugDrugCategory_DrugCategories_DrugCategoriesId",
-                        column: x => x.DrugCategoriesId,
-                        principalTable: "DrugCategories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_DrugDrugCategory_Drugs_DrugsId",
-                        column: x => x.DrugsId,
-                        principalTable: "Drugs",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "TranslatedDrugs",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"TransatedEntityWithDescriptionSequence\"')"),
-                    Title = table.Column<string>(type: "text", nullable: true),
-                    Description = table.Column<string>(type: "text", nullable: true),
-                    Recomendation = table.Column<string>(type: "text", nullable: true),
-                    DrugId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
-                    Language = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_TranslatedDrugs_AspNetUsers_UserId",
-                        column: x => x.UserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_TranslatedDrugs_Drugs_DrugId",
-                        column: x => x.DrugId,
-                        principalTable: "Drugs",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -472,31 +411,83 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TranslatedActiveElement",
+                name: "ActiveElements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    DrugId = table.Column<int>(type: "integer", nullable: false),
+                    Quantity = table.Column<double>(type: "double precision", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ActiveElements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ActiveElements_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_ActiveElements_Drugs_DrugId",
+                        column: x => x.DrugId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DrugDrugCategory",
+                columns: table => new
+                {
+                    DrugCategoriesId = table.Column<int>(type: "integer", nullable: false),
+                    DrugsId = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DrugDrugCategory", x => new { x.DrugCategoriesId, x.DrugsId });
+                    table.ForeignKey(
+                        name: "FK_DrugDrugCategory_DrugCategories_DrugCategoriesId",
+                        column: x => x.DrugCategoriesId,
+                        principalTable: "DrugCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DrugDrugCategory_Drugs_DrugsId",
+                        column: x => x.DrugsId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TranslatedDrugs",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"TransatedEntityWithDescriptionSequence\"')"),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    ActiveElementId = table.Column<int>(type: "integer", nullable: false),
+                    DrugId = table.Column<int>(type: "integer", nullable: false),
+                    Recomendation = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TranslatedActiveElement", x => x.Id);
+                    table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedActiveElement_ActiveElements_ActiveElementId",
-                        column: x => x.ActiveElementId,
-                        principalTable: "ActiveElements",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_TranslatedActiveElement_AspNetUsers_UserId",
+                        name: "FK_TranslatedDrugs_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_TranslatedDrugs_Drugs_DrugId",
+                        column: x => x.DrugId,
+                        principalTable: "Drugs",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -591,6 +582,34 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         principalTable: "Courses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TranslatedActiveElement",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"TransatedEntityWithDescriptionSequence\"')"),
+                    Title = table.Column<string>(type: "text", nullable: true),
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    ActiveElementId = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    Language = table.Column<int>(type: "integer", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TranslatedActiveElement", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_TranslatedActiveElement_ActiveElements_ActiveElementId",
+                        column: x => x.ActiveElementId,
+                        principalTable: "ActiveElements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TranslatedActiveElement_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -852,6 +871,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                 column: "DrugsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Drugs_SimilarDrugsId",
+                table: "Drugs",
+                column: "SimilarDrugsId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Drugs_UserId",
                 table: "Drugs",
                 column: "UserId");
@@ -1027,6 +1051,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
             migrationBuilder.DropTable(
                 name: "Therapies");
+
+            migrationBuilder.DropTable(
+                name: "SimilarDrugs");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

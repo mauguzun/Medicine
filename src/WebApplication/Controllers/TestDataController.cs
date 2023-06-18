@@ -1,9 +1,11 @@
-﻿using Medicine.Entities.Enums;
+﻿using HotChocolate.Authorization;
+using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Translated;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Medicine.WebApplication.Controllers
 {
@@ -21,7 +23,6 @@ namespace Medicine.WebApplication.Controllers
         public IActionResult Index()
         {
 
-
             var user = new User()
             {
                 Birthday = DateTimeOffset.UtcNow
@@ -32,20 +33,87 @@ namespace Medicine.WebApplication.Controllers
 
             var userId = user.Id;
 
-            _context.Drugs.Add(new Drug
+            var activeElements = new List<ActiveElement>();
+            for (int i = 0; i < 2; i++)
             {
-                UserId = userId,
-                OneUnitSizeInGramm = 11.22,
-                Translations = new List<TranslatedDrugs>
+                var translates = new List<TranslatedActiveElement>();
+                foreach (Language lang in Enum.GetValues(typeof(Language)))
                 {
-                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption",      Recomendation = "use before eat 15 min",  },
-                     new TranslatedDrugs {    Title = "Drug Name", Description = "Drug Descrption",     Recomendation = "use before eat 15 min",  Language = Language.lv }
-                },
+                    translates.Add(new TranslatedActiveElement()
+                    {
+                        Language = lang,
+                        Title = $"{i} {nameof(TranslatedActiveElement)}  Title {lang}",
+                        Description = $"{i} {nameof(TranslatedActiveElement)}  Description  {lang}",
+                    });
+                }
 
-                Title = "Citramonium"
-            });
+                ActiveElement activeElement = new()
+                {
+                    Quantity = i + 1,
+                    Translations = translates
+                };
+            }
+
+            _context.ActiveElements.AddRange(activeElements);
             _context.SaveChanges();
 
+            var drugsCategories = new List<DrugCategory>();
+
+            for (int i = 0; i < 4; i++)
+            {
+                var translations = new List<TranslatedDrugsCategory>();
+                foreach (Language lang in Enum.GetValues(typeof(Language)))
+                {
+                    translations.Add(new TranslatedDrugsCategory()
+                    {
+                        Language = lang,
+                        Title = $"{i} {nameof(TranslatedActiveElement)}  {lang}",
+                        Description = $"{i} {nameof(DrugCategory)}  Description  {lang}",
+                    });
+                }
+
+                drugsCategories.Add(new DrugCategory { Translations = translations });
+             
+            }
+            _context.DrugCategories.AddRange(drugsCategories);
+            _context.SaveChanges();
+
+
+            var similarDrugs = new SimilarDrugs();
+
+
+            var drugs = new List<Drug>();
+            for (int i = 0; i < 2; i++)
+            {
+                var translations = new List<TranslatedDrugs>();
+                foreach (Language lang in Enum.GetValues(typeof(Language)))
+                {
+                    translations.Add(new TranslatedDrugs()
+                    {
+                        Language = lang,
+                        Title = $"{i} {nameof(TranslatedDrugs)}  {lang} ",
+                        Description = $"{i} {nameof(TranslatedDrugs)}  Description  {lang}",
+                        Recomendation = "Use befor"
+                    });
+                }
+
+                var drug = new Drug
+                {
+                    UserId = userId,
+                    OneUnitSizeInGramm = i + 1,
+                    Translations = translations,
+                    Title = $"Drug LatinName {i}",
+                    DrugCategories = drugsCategories
+                };
+                drugs.Add(drug);
+            }
+
+            similarDrugs.SimilarDrugsList = drugs;
+
+            _context.Drugs.AddRange(drugs);
+            _context.SimilarDrugs.Add(similarDrugs);
+
+            _context.SaveChanges();
 
             _context.Reminders.Add(new Reminder
             {
@@ -58,8 +126,6 @@ namespace Medicine.WebApplication.Controllers
 
             _context.SaveChanges();
 
-
-
             var dosingFreqency = new DosingFrequencyReminder
             {
                 Quantity = 1,
@@ -69,6 +135,9 @@ namespace Medicine.WebApplication.Controllers
             };
 
             _context.DosingFrequencyReminders.Add(dosingFreqency);
+
+
+            var course = new List<Course>();
 
 
             _context.Therapies.Add(
@@ -119,7 +188,7 @@ namespace Medicine.WebApplication.Controllers
                                          }
                                     },
                                     DosingFrequencyReminders = new List<DosingFrequencyReminder>(){ dosingFreqency }
-                                  
+
                                }
                            }
                        }

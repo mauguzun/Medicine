@@ -17,7 +17,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<DosingFrequencyResponse>
             DosingFrequency(IResponseLoader<int, DosingFrequency, DosingFrequencyResponse> dataLoader, CancellationToken ct)
         {
-            var dosingFrequency = await dataLoader.LoadAsync(x => x.Id == DosingFrequencyId);
+            var dosingFrequency = await dataLoader.LoadByCondition(x => x.Id == DosingFrequencyId);
             return dosingFrequency?.FirstOrDefault();
         }
 
@@ -25,7 +25,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<IEnumerable<DosageLogResponse>>
             DosageLogs(IResponseLoader<int, DosageLog, DosageLogResponse> dataLoader, CancellationToken ct)
         {
-            var dosageLogs = await dataLoader.LoadAsync(x => x.DosageRecommendationId == Id);
+            var dosageLogs = await dataLoader.LoadByCondition(x => x.DosageRecommendationId == Id);
             return dosageLogs;
         }
 

@@ -16,13 +16,13 @@ namespace Medicine.Web.UseCases.Responses
 
         public async Task<TherapyResponse> Therapy(IResponseLoader<int, Therapy, TherapyResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == TherapyId);
+            var entities = await dataLoader.LoadByCondition(x => x.Id == TherapyId);
             return entities.FirstOrDefault();
         }
 
         public async Task<CourseGroupResponse> CourseGroup(IResponseLoader<int, CourseGroup, CourseGroupResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == CourseGroupId);
+            var entities = await dataLoader.LoadByCondition(x => x.Id == CourseGroupId);
             return entities?.FirstOrDefault();
         }
         public CourseType CourseType { get; set; } = CourseType.None;
@@ -31,7 +31,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<IEnumerable<CourseSettingsResponse>>
                   CourseSettings(IResponseLoader<int, CourseSettings, CourseSettingsResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.CourseId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.CourseId == Id);
             return entities;
         }
 
@@ -39,7 +39,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<IEnumerable<DosingFrequencyResponse>>
                   DosingFrequencies(IResponseLoader<int, DosingFrequency, DosingFrequencyResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.CourseId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.CourseId == Id);
             return entities;
         }
 
@@ -47,7 +47,7 @@ namespace Medicine.Web.UseCases.Responses
           TranslatedCourse, TranslatedResponse> dataLoader,
           CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.CourseId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.CourseId == Id);
             return entities;
         }
 

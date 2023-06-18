@@ -8,7 +8,7 @@ namespace Medicine.Web.UseCases.DataLoaders.TranslateDataLoader
        where TEntity : class, IEntity
        where TResponse : class, IEntity
     {
-        public Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda);
+        public Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda);
     }
 
 }

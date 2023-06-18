@@ -1,7 +1,13 @@
 ﻿using AutoMapper;
 using Medicine.Application.Interfaces;
+using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Infrastructure.Interfcases.DataAccess;
+using Medicine.Web.UseCases.Responses;
+using Microsoft.EntityFrameworkCore;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq.Expressions;
 
 namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
 {
@@ -20,12 +26,25 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
             _mapper = mapper;
         }
 
-        public void Clear()
+        public void Clear() 
         {
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
+
+        public async Task<IEnumerable<DrugCategoryResponse>> LoadCategoriesByDrugId(int id, CancellationToken ct = default)
+        {
+            IEnumerable<DrugCategory> items = _dbContext.Drugs
+                .Where(x => x.Id == id)
+                .Include(x => x.DrugCategories)
+                .SelectMany(x => x.DrugCategories);
+
+            var convertedItems =  _mapper.Map<IEnumerable<DrugCategoryResponse>>(items) ;
+            return convertedItems;
+        }
+
+
+        public async Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda, CancellationToken ct = default)
         {
             var items = _dbContext.Set<TEntity>()?.Where(conditionLambda);
             var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
@@ -42,7 +61,8 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
 
         public async Task<IReadOnlyList<TResponse>> LoadAsync(IReadOnlyCollection<TKey> keys, CancellationToken cancellationToken = default)
         {
-            var items = _dbContext.Set<TEntity>();
+            //var items = await _dbContext.Set<TEntity>().ToListAsync();
+            var items = await _dbContext.Set<TEntity>().ToListAsync();
             var convertedItems = _mapper.Map<IReadOnlyList<TResponse>>(items);
 
             return convertedItems;
@@ -79,6 +99,8 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
         {
             throw new NotImplementedException();
         }
+
+
     }
 
 }

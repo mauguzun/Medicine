@@ -12,7 +12,7 @@ namespace Medicine.Web.UseCases.Responses
         public async Task<DrugResponse> Drug(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
         {
 
-            var drugs = await dataLoader.LoadAsync(x => x.Id == DrugId);
+            var drugs = await dataLoader.LoadByCondition(x => x.Id == DrugId);
             return drugs.FirstOrDefault() ;
         }
     }

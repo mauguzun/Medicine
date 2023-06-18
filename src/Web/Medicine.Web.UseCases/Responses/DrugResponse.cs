@@ -1,3 +1,4 @@
+using GreenDonut;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
@@ -13,29 +14,25 @@ namespace Medicine.Web.UseCases.Responses
         public string? Title { get; set; }
         public double OneUnitSizeInGramm { get; set; }
 
-        public async Task<IEnumerable<DrugCategoryResponse>> DrugCategories(IResponseLoader<int, DrugCategory, DrugCategoryResponse> dataLoader, CancellationToken ct)
+        public async Task<IEnumerable<TranslatedDrugsResponce>> Translations(ITranslateResponseLoader<int, TranslatedDrugs, TranslatedDrugsResponce> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.DrugId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.DrugId == Id);
             return entities;
         }
 
-        public async Task<IEnumerable<TranslatedDrugsResponce>> Translations(ITranslateResponseLoader<int,TranslatedDrugs, TranslatedDrugsResponce> dataLoader,CancellationToken ct)
+        public async Task<IEnumerable<DrugCategoryResponse>>
+            DrugCategories(IResponseLoader<int, DrugCategory, DrugCategoryResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.DrugId == Id);
+            var entities = await dataLoader.LoadCategoriesByDrugId(Id);
             return entities;
         }
 
 
-        //public async Task<IEnumerable<DrugResponse>> SimilarPreparate(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
-        //{
-        //    var entities = await dataLoader.LoadAsync(x => x.Id == Id);
-        //    return entities;
-        //}
-
+        public SimilarDrugs SimilarDrugs { get; set; } = new();
 
         public async Task<IEnumerable<ActiveElementResponse>> ActiveElements(IResponseLoader<int, ActiveElement, ActiveElementResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.DrugId == Id);
+            var entities = await dataLoader.LoadByCondition(x => x.DrugId == Id);
             return entities;
         }
 

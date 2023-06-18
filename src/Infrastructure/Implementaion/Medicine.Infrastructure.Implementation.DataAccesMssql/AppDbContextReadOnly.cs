@@ -23,6 +23,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         {
             base.OnModelCreating(modelBuilder);
 
+
+            //modelBuilder.Entity<DrugDrugCategory>().HasKey(sc => new { sc.DrugId, sc.DrugCategoryId });
+
             modelBuilder.Entity<TransatedEntityWithDescription>().UseTpcMappingStrategy();
 
             // seeding
@@ -39,6 +42,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         public DbSet<DosingFrequencyReminder> DosingFrequencyReminders { get; set; }
         public DbSet<DosingFrequency> DosingFrequencies { get; set; }
         public DbSet<Drug> Drugs { get; set; }
+        public DbSet<SimilarDrugs> SimilarDrugs { get; set; }
         public DbSet<DrugCategory> DrugCategories { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
         public DbSet<DosageLog> DosageLogs { get; set; }

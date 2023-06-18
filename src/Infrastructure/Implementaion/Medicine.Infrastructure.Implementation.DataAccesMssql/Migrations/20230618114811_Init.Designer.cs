@@ -9,10 +9,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
+namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230617085648_Init")]
+    [Migration("20230618114811_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -392,6 +392,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.Property<double>("OneUnitSizeInGramm")
                         .HasColumnType("double precision");
 
+                    b.Property<int>("SimilarDrugsId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
@@ -399,6 +402,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("SimilarDrugsId");
 
                     b.HasIndex("UserId");
 
@@ -415,9 +420,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
                     b.Property<DateTimeOffset>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("DrugId")
-                        .HasColumnType("integer");
 
                     b.Property<int?>("UserId")
                         .HasColumnType("integer");
@@ -458,6 +460,22 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Reminders");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.SimilarDrugs", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SimilarDrugs");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Therapy", b =>
@@ -912,9 +930,17 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
 
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.SimilarDrugs", "SimilarDrugs")
+                        .WithMany("SimilarDrugsList")
+                        .HasForeignKey("SimilarDrugsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Medicine.Entities.Models.Auth.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("SimilarDrugs");
 
                     b.Navigation("User");
                 });
@@ -1185,6 +1211,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql.Migrations
             modelBuilder.Entity("Medicine.Entities.Models.Reminder", b =>
                 {
                     b.Navigation("DosingFrequencyReminders");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.SimilarDrugs", b =>
+                {
+                    b.Navigation("SimilarDrugsList");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Therapy", b =>

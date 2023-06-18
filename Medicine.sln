@@ -39,13 +39,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Application.Interf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Application.Implementation", "src\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj", "{8111BEE9-611B-455D-80E7-CCE72C4A97B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Infrastructure.Implementation.DataAccesMssql", "src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesMssql\Medicine.Infrastructure.Implementation.DataAccesMssql.csproj", "{67C6D678-4D87-4D8B-AAF8-1D92984115D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Implementation.DataAccesPsql", "src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesMssql\Medicine.Infrastructure.Implementation.DataAccesPsql.csproj", "{67C6D678-4D87-4D8B-AAF8-1D92984115D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Infrastructure.Implementation.GmailNotification", "src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.GmailNotification\Medicine.Infrastructure.Implementation.GmailNotification.csproj", "{998271EB-9DCE-4468-9CFB-F6F912BEB3E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Implementation.GmailNotification", "src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.GmailNotification\Medicine.Infrastructure.Implementation.GmailNotification.csproj", "{998271EB-9DCE-4468-9CFB-F6F912BEB3E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Infrastructure.Interfcases.DataAccess", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj", "{8003E111-CE7D-49CD-AC27-0184D0E4BF55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Interfcases.DataAccess", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj", "{8003E111-CE7D-49CD-AC27-0184D0E4BF55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Medicine.Infrastructure.Interfcases.Notification", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj", "{FEAA8523-AF79-459E-AA6B-9B7F5F681406}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Interfcases.Notification", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj", "{FEAA8523-AF79-459E-AA6B-9B7F5F681406}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

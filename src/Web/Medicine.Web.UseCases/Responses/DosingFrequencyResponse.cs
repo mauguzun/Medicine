@@ -17,13 +17,13 @@ namespace Medicine.Web.UseCases.Responses
             TranslatedDosingFrequency, TranslatedResponse> dataLoader,
             CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.DosingFrequencyId == Id );
+            var entities = await dataLoader.LoadByCondition(x => x.DosingFrequencyId == Id );
             return entities;
         }
 
         public async Task<CourseResponse> Course(IResponseLoader<int, Course, CourseResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == CourseId);
+            var entities = await dataLoader.LoadByCondition(x => x.Id == CourseId);
             return entities?.FirstOrDefault();
         }
 
@@ -31,7 +31,7 @@ namespace Medicine.Web.UseCases.Responses
 
         public async Task<DrugResponse> Drug(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == DrugId);
+            var entities = await dataLoader.LoadByCondition(x => x.Id == DrugId);
             return entities?.FirstOrDefault();
         }
 
@@ -40,7 +40,7 @@ namespace Medicine.Web.UseCases.Responses
 
         public async Task<IEnumerable<DosingFrequencyReminderResponse>> DosageRecommendations(IResponseLoader<int, DosingFrequencyReminder, DosingFrequencyReminderResponse> dataLoader, CancellationToken ct)
         {
-            var entities = await dataLoader.LoadAsync(x => x.Id == DrugId);
+            var entities = await dataLoader.LoadByCondition(x => x.Id == DrugId);
             return entities;
         }
 

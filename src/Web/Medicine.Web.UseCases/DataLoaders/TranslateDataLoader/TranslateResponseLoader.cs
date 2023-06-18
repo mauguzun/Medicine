@@ -28,9 +28,9 @@ namespace Medicine.Web.UseCases.DataLoaders.TranslateDataLoader
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda)
+        public async Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda)
         {
-            var items = _dbContext.Set<TEntity>()?.Where(x=>x.Language == _languageService.Language() ).Where(conditionLambda);
+            var items = _dbContext.Set<TEntity>()?.Where(x => x.Language == _languageService.Language()).Where(conditionLambda);
             var convertedItems = _mapper.Map<IEnumerable<TResponse>>(items);
 
             return convertedItems;

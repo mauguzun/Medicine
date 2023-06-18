@@ -8,7 +8,6 @@ namespace Medicine.Entities.Models
     /// </summary>
     public class DrugCategory : TranslationEntity<TranslatedDrugsCategory>
     {
-        public int DrugId { get; set; }
-        public List<Drug> Drugs { get; set; } = new List<Drug>();   
+        public List<Drug> Drugs { get; } = new();
     }
 }

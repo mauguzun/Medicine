@@ -8,13 +8,13 @@ namespace Medicine.Entities.Models
     /// </summary>
     public class Drug :  TranslationEntity<TranslatedDrugs>
     {
-
         public string? Title { get; set; }
         public double OneUnitSizeInGramm { get; set; }
 
-        public List<DrugCategory> DrugCategories { get; set; }  = new List<DrugCategory>(); 
-        //public List<Drug> SimilarPreparate { get; set; } = new List<Drug>();
-        public List<ActiveElement> ActiveElements { get; set; } = new List<ActiveElement>(); 
+        public List<DrugCategory> DrugCategories { get; set; } = new();
+
+        public SimilarDrugs SimilarDrugs { get; set; } = new();
+        public List<ActiveElement> ActiveElements { get; set; } = new (); 
 
     }
 }

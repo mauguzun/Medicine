@@ -1,5 +1,6 @@
 ﻿using GreenDonut;
 using Medicine.Entities.Models.Base;
+using Medicine.Web.UseCases.Responses;
 
 namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
 {
@@ -8,8 +9,8 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
         where TEntity : class, IEntity
         where TResponse : class, IEntity
     {
-        public Task<IEnumerable<TResponse>> LoadAsync(Func<TEntity, bool> conditionLambda);
-
+        public Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda, CancellationToken ct = default);
+        public Task<IEnumerable<DrugCategoryResponse>> LoadCategoriesByDrugId(int ids, CancellationToken ct = default);
     }
 
 }
