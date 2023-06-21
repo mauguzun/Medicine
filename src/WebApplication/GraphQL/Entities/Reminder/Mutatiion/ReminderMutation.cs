@@ -1,10 +1,11 @@
 using AutoMapper;
+using HotChocolate.Authorization;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Medicine.Web.UseCases.Responses;
 
 namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Mutatiion
 {
-
+    [Authorize]
     public class ReminderMutation
     {
         [UseSorting()]

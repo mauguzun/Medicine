@@ -29,7 +29,7 @@ namespace Medicine.WebApplication.HttpHandler
 
 
 
-                identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
+                //identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
                 context.User.AddIdentity(identity);
             }
 

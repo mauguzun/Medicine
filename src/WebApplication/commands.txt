@@ -4,3 +4,77 @@ docker run --name basic-postgres --rm -e POSTGRES_USER=user -e POSTGRES_PASSWORD
 Add-Migration Init  -context AppDbContext
  
 Update-Database  -context AppDbContext
+
+
+
+ mutation{
+      updateReminder (reminder: {id:1 , createdAt: "2222-11-11"
+      timeInUtc:"22:00"}){
+         id
+      }
+ }
+
+
+
+query{
+  all(){
+    id,
+    title,
+    createdAt,
+    dosingFrequencyReminders {
+      id
+      usingDescription
+      dosingFrequency {
+        id
+        total
+        translations{
+          title,
+          description
+          language
+        }
+        drug {
+          id
+          title
+          translations{
+            title,
+            description
+          }
+          similarDrugsList{
+            id,
+           similarDrugsList{
+            id,
+            title
+            
+          }
+          }
+          drugCategories{
+            id
+            translations{
+              id
+              title
+              description
+            }
+          }
+        }
+        course {
+          id
+          translations{
+            id
+            title
+            description
+            language
+          }
+          therapy {
+            translations{
+              id
+              title
+              description
+            }
+            id
+          }
+        }
+      }
+       
+    }
+  }
+}

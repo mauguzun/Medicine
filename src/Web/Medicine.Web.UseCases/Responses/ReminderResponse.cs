@@ -6,7 +6,7 @@ namespace Medicine.Web.UseCases.Responses
 {
     public class ReminderResponse : EntityTitleDescription
     {
-        public string TimeInUtc { get; set; } = "00:00";
+        public string? TimeInUtc { get; set; } = "00:00";
 
         public async Task<IEnumerable<DosingFrequencyReminderResponse>>
             DosingFrequencyReminders(IResponseLoader<int, DosingFrequencyReminder, DosingFrequencyReminderResponse> dataLoader, CancellationToken ct)

@@ -4,6 +4,8 @@ using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Translated;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Medicine.Web.UseCases.Auth.Dto;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 
@@ -14,19 +16,24 @@ namespace Medicine.WebApplication.Controllers
     public class TestDataController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly UserManager<User> _userManager;
 
-        public TestDataController(AppDbContext context)
+        public TestDataController(AppDbContext context, UserManager<User> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
 
             var user = new User()
             {
-                Birthday = DateTimeOffset.UtcNow
+                Birthday = DateTimeOffset.UtcNow,
+                Email = "mauguzun@gmail.com",
+                EmailConfirmed  = true
             };
+            var result = await _userManager.CreateAsync(user, "De171717!");
 
             _context.Users.Add(user);
             _context.SaveChanges();

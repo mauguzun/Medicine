@@ -6,7 +6,7 @@ namespace Medicine.Infrastructure.Implementation.GmailNotification
     {
         public Task SendEmailAsync(string email, string subject, string htmlMessage)
         {
-            throw new NotImplementedException();
+            return Task.CompletedTask;
         }
     }
 }
