@@ -25,6 +25,9 @@ namespace Medicine.WebApplication.HttpHandler
                 .FirstOrDefault()
                 .RoleId);
 
+                if(role is null)
+                    throw new Exception("user without role")
+
                 identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
                 context.User.AddIdentity(identity);
             }
