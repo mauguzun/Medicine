@@ -42,7 +42,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Worker\" />
     <Folder Include="GraphQL\BaseEntity\" />
     <Folder Include="GraphQL\Entities\Course\" />
     <Folder Include="GraphQL\Entities\DosageLog\" />

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230618114811_Init")]
+    [Migration("20230627170450_Init")]
     partial class Init
     {
         /// <inheritdoc />

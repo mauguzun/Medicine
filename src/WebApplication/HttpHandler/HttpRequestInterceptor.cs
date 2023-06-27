@@ -18,8 +18,6 @@ namespace Medicine.WebApplication.HttpHandler
             if (email is not null)
             {
                 var identity = new ClaimsIdentity();
-
-
                 var dbContext = context.RequestServices.GetService<AppDbContextReadOnly>();
 
                 var role = dbContext.Roles.Where(role => role.Id ==
@@ -27,9 +25,7 @@ namespace Medicine.WebApplication.HttpHandler
                 .FirstOrDefault()
                 .RoleId);
 
-
-
-                //identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
+                identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
                 context.User.AddIdentity(identity);
             }
 

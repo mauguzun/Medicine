@@ -1,13 +1,10 @@
-﻿using HotChocolate.Authorization;
-using Medicine.Entities.Enums;
+﻿using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Translated;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Medicine.Web.UseCases.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Medicine.WebApplication.Controllers
 {
@@ -17,6 +14,7 @@ namespace Medicine.WebApplication.Controllers
     {
         private readonly AppDbContext _context;
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<User> _roleManager;
 
         public TestDataController(AppDbContext context, UserManager<User> userManager)
         {
@@ -30,12 +28,14 @@ namespace Medicine.WebApplication.Controllers
             var user = new User()
             {
                 Birthday = DateTimeOffset.UtcNow,
+                UserName = "mauguzun@gmail.com",
                 Email = "mauguzun@gmail.com",
-                EmailConfirmed  = true
+                EmailConfirmed  = true,
             };
             var result = await _userManager.CreateAsync(user, "De171717!");
+            var roleResult = await  _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
 
-            _context.Users.Add(user);
+
             _context.SaveChanges();
 
             var userId = user.Id;

@@ -23,15 +23,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         {
             base.OnModelCreating(modelBuilder);
 
-
             //modelBuilder.Entity<DrugDrugCategory>().HasKey(sc => new { sc.DrugId, sc.DrugCategoryId });
 
             modelBuilder.Entity<TransatedEntityWithDescription>().UseTpcMappingStrategy();
 
             // seeding
             modelBuilder.Entity<Role>().HasData(
-                new Role { Id = 1, Name = SystemRole.User.ToString() },
-                new Role { Id = 2, Name = SystemRole.Doctor.ToString() }
+                new Role { Id = 1, Name = SystemRole.User.ToString() , NormalizedName  = SystemRole.User.ToString().ToUpper()},
+                new Role { Id = 2, Name = SystemRole.MedicineWorker.ToString() , NormalizedName = SystemRole.MedicineWorker.ToString().ToUpper() }
             );
         }
 
