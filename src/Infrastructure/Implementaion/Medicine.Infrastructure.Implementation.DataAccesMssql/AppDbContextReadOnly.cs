@@ -1,4 +1,5 @@
-﻿using Medicine.Entities.Enums;
+﻿using Medicine.Entities;
+using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
@@ -52,6 +53,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; set; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; set; }
 
+        public DbSet<UserMedicineWorker> UserMedicineWorkers => throw new NotImplementedException();
 
         public new DbSet<T> Set<T>() where T : class, IEntity
         {

@@ -1,4 +1,5 @@
-﻿using Medicine.Entities.Models;
+﻿using Medicine.Entities;
+using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Microsoft.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace Medicine.Infrastructure.Interfcases.DataAccess
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; }
+        public DbSet<UserMedicineWorker> UserMedicineWorkers { get; }
 
         DbSet<T> Set<T>() where T : class, IEntity;
 
