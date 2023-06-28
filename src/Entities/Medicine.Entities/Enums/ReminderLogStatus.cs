@@ -1,9 +1,8 @@
 ﻿namespace Medicine.Entities.Enums
 {
-    public enum ReminderLogStatus
+    public enum  ReminderLogStatus
     {
         None = 0,
-        CompletedWithError = 5,
-        FullyCompleted = 10,
+        Readed = 1
     }
 }

@@ -7,8 +7,7 @@ namespace Medicine.Web.UseCases.Responses
 {
     public class DosageLogResponse : EntityAuthor
     {
-
-        public ReminderLogStatus Status { get; set; }
+        public Entities.Enums.DosageLogStatus Status { get; set; }
         public double Quantity { get; set; }
         public DateTime DateTime { get; set; }
         public int DosageRecommendationId { get; set; }

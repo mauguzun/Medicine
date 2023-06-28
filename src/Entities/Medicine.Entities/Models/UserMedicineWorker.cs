@@ -2,7 +2,7 @@
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 
-namespace Medicine.Entities
+namespace Medicine.Entities.Models
 {
     public class UserMedicineWorker : Entity
     {

@@ -7,7 +7,7 @@ namespace Medicine.Entities.Models
     {
         public int DosageRecommendationId { get; set; }
         public DosingFrequencyReminder DosageRecommendation { get; set; }
-        public ReminderLogStatus Status { get; set; }
+        public Enums.DosageLogStatus Status { get; set; }
         public double Quantity { get; set; }
         public DateTime DateTime { get; set; }
     }

@@ -1,4 +1,5 @@
-﻿using Medicine.Entities.Models.Base;
+﻿using Medicine.Entities.Enums;
+using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
