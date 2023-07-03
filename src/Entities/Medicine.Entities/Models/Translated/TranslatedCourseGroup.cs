@@ -7,6 +7,7 @@ namespace Medicine.Entities.Models.Translated
     public class TranslatedCourseGroup : TransatedEntityWithDescription
     {
         public CourseGroup CourseGroup { get; set; }
+        public int CourseGroupId { get; set; }
 
     }
 }

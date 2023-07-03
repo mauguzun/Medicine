@@ -1,5 +1,6 @@
 ﻿using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
+using Medicine.Application.Interfaces;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using System.Security.Claims;
 
@@ -7,6 +8,13 @@ namespace Medicine.WebApplication.HttpHandler
 {
     public class HttpRequestInterceptor : DefaultHttpRequestInterceptor
     {
+        public readonly IUserService _userService;
+
+        public HttpRequestInterceptor(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         public override ValueTask OnCreateAsync(
             HttpContext context,
             IRequestExecutor requestExecutor,

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230627170450_Init")]
+    [Migration("20230703204711_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -103,12 +103,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "User"
+                            Name = "User",
+                            NormalizedName = "USER"
                         },
                         new
                         {
                             Id = 2,
-                            Name = "Doctor"
+                            Name = "MedicineWorker",
+                            NormalizedName = "MEDICINEWORKER"
                         });
                 });
 
@@ -462,6 +464,33 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.ToTable("Reminders");
                 });
 
+            modelBuilder.Entity("Medicine.Entities.Models.ReminderLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Descrpition")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ReminderId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("ReminderLogStatus")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReminderId");
+
+                    b.ToTable("ReminderLogs");
+                });
+
             modelBuilder.Entity("Medicine.Entities.Models.SimilarDrugs", b =>
                 {
                     b.Property<int>("Id")
@@ -570,7 +599,64 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("Language", "DosageRecommendationId")
+                        .IsUnique();
+
                     b.ToTable("TranslatedDosingFrequencyReminder");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.UserMedicineWorker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset?>("AcceptedRequest")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTimeOffset?>("CreatedRequest")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int?>("MedicineWorkerId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("UserMedicineWorkerRelationStatus")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MedicineWorkerId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserMedicineWorkers");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.UserMedicineWorkerLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("UserMedicineWorkerRelationStatus")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UserMedicineWorkerLogs");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -696,6 +782,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("Language", "ActiveElementId")
+                        .IsUnique();
+
                     b.ToTable("TranslatedActiveElement");
                 });
 
@@ -713,6 +802,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("Language", "CourseId")
+                        .IsUnique();
+
                     b.ToTable("TranslatedCourse");
                 });
 
@@ -726,6 +818,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.HasIndex("CourseGroupId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("Language", "CourseGroupId")
+                        .IsUnique();
 
                     b.ToTable("TranslatedCourseGroup");
                 });
@@ -758,6 +853,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("Language", "DrugId")
+                        .IsUnique();
+
                     b.ToTable("TranslatedDrugs");
                 });
 
@@ -772,6 +870,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("UserId");
 
+                    b.HasIndex("Language", "DrugCategoryId")
+                        .IsUnique();
+
                     b.ToTable("TranslatedDrugsCategory");
                 });
 
@@ -785,6 +886,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.HasIndex("TherapyId");
 
                     b.HasIndex("UserId");
+
+                    b.HasIndex("Language", "TherapyId")
+                        .IsUnique();
 
                     b.ToTable("TranslatedTherapy");
                 });
@@ -963,6 +1067,17 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Medicine.Entities.Models.ReminderLog", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Reminder", "Reminder")
+                        .WithMany()
+                        .HasForeignKey("ReminderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reminder");
+                });
+
             modelBuilder.Entity("Medicine.Entities.Models.Therapy", b =>
                 {
                     b.HasOne("Medicine.Entities.Models.Auth.User", "User")
@@ -987,6 +1102,21 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("DosageRecommendation");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Medicine.Entities.Models.UserMedicineWorker", b =>
+                {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "MedicineWorker")
+                        .WithMany()
+                        .HasForeignKey("MedicineWorkerId");
+
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("MedicineWorker");
 
                     b.Navigation("User");
                 });

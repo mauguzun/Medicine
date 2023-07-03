@@ -7,6 +7,7 @@ namespace Medicine.Entities.Models.Translated
     public class TranslatedActiveElement : TransatedEntityWithDescription
     {
         public ActiveElement ActiveElement { get; set; }
+        public int ActiveElementId { get; set; }
     }
 
 }

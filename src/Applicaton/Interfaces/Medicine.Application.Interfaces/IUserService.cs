@@ -8,5 +8,6 @@ namespace Medicine.Application.Interfaces
 {
     public interface IUserService
     {
+        
     }
 }

@@ -26,6 +26,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
 
             modelBuilder.Entity<TransatedEntityWithDescription>().UseTpcMappingStrategy();
 
+            modelBuilder.Entity<TranslatedActiveElement>().HasIndex(p => new { p.Language, p.ActiveElementId }).IsUnique();
+            modelBuilder.Entity<TranslatedCourse>().HasIndex(p => new { p.Language, p.CourseId }).IsUnique();
+            modelBuilder.Entity<TranslatedCourseGroup>().HasIndex(p => new { p.Language, p.CourseGroupId }).IsUnique();
+            modelBuilder.Entity<TranslatedDosingFrequencyReminder>().HasIndex(p => new { p.Language, p.DosageRecommendationId }).IsUnique();
+            modelBuilder.Entity<TranslatedActiveElement>().HasIndex(p => new { p.Language, p.ActiveElementId }).IsUnique();
+            modelBuilder.Entity<TranslatedDrugs>().HasIndex(p => new { p.Language, p.DrugId }).IsUnique();
+            modelBuilder.Entity<TranslatedDrugsCategory>().HasIndex(p => new { p.Language, p.DrugCategoryId }).IsUnique();
+            modelBuilder.Entity<TranslatedTherapy>().HasIndex(p => new { p.Language, p.TherapyId }).IsUnique();
+
             // seeding
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = SystemRole.User.ToString(), NormalizedName = SystemRole.User.ToString().ToUpper() },

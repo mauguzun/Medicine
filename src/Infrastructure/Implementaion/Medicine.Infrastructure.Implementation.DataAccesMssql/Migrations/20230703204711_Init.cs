@@ -76,6 +76,20 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserMedicineWorkerLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserMedicineWorkerRelationStatus = table.Column<int>(type: "integer", nullable: false),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMedicineWorkerLogs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -266,6 +280,34 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "UserMedicineWorkers",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    MedicineWorkerId = table.Column<int>(type: "integer", nullable: true),
+                    UserMedicineWorkerRelationStatus = table.Column<int>(type: "integer", nullable: false),
+                    CreatedRequest = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    AcceptedRequest = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMedicineWorkers", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_UserMedicineWorkers_AspNetUsers_MedicineWorkerId",
+                        column: x => x.MedicineWorkerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_UserMedicineWorkers_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Drugs",
                 columns: table => new
                 {
@@ -345,6 +387,28 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         name: "FK_TranslatedDrugsCategory_DrugCategories_DrugCategoryId",
                         column: x => x.DrugCategoryId,
                         principalTable: "DrugCategories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ReminderLogs",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    ReminderId = table.Column<int>(type: "integer", nullable: false),
+                    ReminderLogStatus = table.Column<int>(type: "integer", nullable: false),
+                    Descrpition = table.Column<string>(type: "text", nullable: true),
+                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ReminderLogs", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ReminderLogs_Reminders_ReminderId",
+                        column: x => x.ReminderId,
+                        principalTable: "Reminders",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -739,8 +803,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, null, "User", null },
-                    { 2, null, "Doctor", null }
+                    { 1, null, "User", "USER" },
+                    { 2, null, "MedicineWorker", "MEDICINEWORKER" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -881,6 +945,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ReminderLogs_ReminderId",
+                table: "ReminderLogs",
+                column: "ReminderId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reminders_UserId",
                 table: "Reminders",
                 column: "UserId");
@@ -896,6 +965,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "ActiveElementId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedActiveElement_Language_ActiveElementId",
+                table: "TranslatedActiveElement",
+                columns: new[] { "Language", "ActiveElementId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedActiveElement_UserId",
                 table: "TranslatedActiveElement",
                 column: "UserId");
@@ -906,6 +981,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedCourse_Language_CourseId",
+                table: "TranslatedCourse",
+                columns: new[] { "Language", "CourseId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourse_UserId",
                 table: "TranslatedCourse",
                 column: "UserId");
@@ -914,6 +995,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 name: "IX_TranslatedCourseGroup_CourseGroupId",
                 table: "TranslatedCourseGroup",
                 column: "CourseGroupId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedCourseGroup_Language_CourseGroupId",
+                table: "TranslatedCourseGroup",
+                columns: new[] { "Language", "CourseGroupId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourseGroup_UserId",
@@ -936,6 +1023,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DosageRecommendationId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDosingFrequencyReminder_Language_DosageRecommenda~",
+                table: "TranslatedDosingFrequencyReminder",
+                columns: new[] { "Language", "DosageRecommendationId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDosingFrequencyReminder_UserId",
                 table: "TranslatedDosingFrequencyReminder",
                 column: "UserId");
@@ -944,6 +1037,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 name: "IX_TranslatedDrugs_DrugId",
                 table: "TranslatedDrugs",
                 column: "DrugId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDrugs_Language_DrugId",
+                table: "TranslatedDrugs",
+                columns: new[] { "Language", "DrugId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugs_UserId",
@@ -956,9 +1055,21 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DrugCategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TranslatedDrugsCategory_Language_DrugCategoryId",
+                table: "TranslatedDrugsCategory",
+                columns: new[] { "Language", "DrugCategoryId" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugsCategory_UserId",
                 table: "TranslatedDrugsCategory",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedTherapy_Language_TherapyId",
+                table: "TranslatedTherapy",
+                columns: new[] { "Language", "TherapyId" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedTherapy_TherapyId",
@@ -968,6 +1079,16 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedTherapy_UserId",
                 table: "TranslatedTherapy",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMedicineWorkers_MedicineWorkerId",
+                table: "UserMedicineWorkers",
+                column: "MedicineWorkerId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMedicineWorkers_UserId",
+                table: "UserMedicineWorkers",
                 column: "UserId");
         }
 
@@ -999,6 +1120,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 name: "DrugDrugCategory");
 
             migrationBuilder.DropTable(
+                name: "ReminderLogs");
+
+            migrationBuilder.DropTable(
                 name: "TranslatedActiveElement");
 
             migrationBuilder.DropTable(
@@ -1021,6 +1145,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
             migrationBuilder.DropTable(
                 name: "TranslatedTherapy");
+
+            migrationBuilder.DropTable(
+                name: "UserMedicineWorkerLogs");
+
+            migrationBuilder.DropTable(
+                name: "UserMedicineWorkers");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

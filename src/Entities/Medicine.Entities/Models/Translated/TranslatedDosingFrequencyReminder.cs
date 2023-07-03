@@ -9,5 +9,6 @@ namespace Medicine.Entities.Models.Translated
         public string Title { get; set; }
         public string UsingDescription { get; set; }
         public DosingFrequencyReminder DosageRecommendation { get; set; }
+        public int DosageRecommendationId { get; set; }
     }
 }
