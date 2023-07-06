@@ -1,6 +1,8 @@
 ﻿using Medicine.Entities.Models;
+using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 
@@ -28,6 +30,9 @@ namespace Medicine.Infrastructure.Interfcases.DataAccess
         public DbSet<UserMedicineWorker> UserMedicineWorkers { get; }
         public DbSet<UserMedicineWorkerLog> UserMedicineWorkerLogs { get; }
         public DbSet<ReminderLog> ReminderLogs { get; }
+        public DbSet<Entities.Models.Auth.Role> Roles { get; }
+        public DbSet<User> Users { get; }
+        public DbSet<IdentityUserRole<int>> UserRoles { get; }
 
         DbSet<T> Set<T>() where T : class, IEntity;
 

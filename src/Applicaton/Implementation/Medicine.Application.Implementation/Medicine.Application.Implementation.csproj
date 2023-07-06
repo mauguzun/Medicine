@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
+    <ProjectReference Include="..\..\..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj" />
     <ProjectReference Include="..\..\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj" />
   </ItemGroup>
 

@@ -2,18 +2,14 @@
 using HotChocolate.Execution;
 using Medicine.Application.Interfaces;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Medicine.WebApplication.HttpHandler
 {
     public class HttpRequestInterceptor : DefaultHttpRequestInterceptor
     {
-        public readonly IUserService _userService;
 
-        public HttpRequestInterceptor(IUserService userService)
-        {
-            _userService = userService;
-        }
 
         public override ValueTask OnCreateAsync(
             HttpContext context,
@@ -26,17 +22,14 @@ namespace Medicine.WebApplication.HttpHandler
             if (email is not null)
             {
                 var identity = new ClaimsIdentity();
-                var dbContext = context.RequestServices.GetService<AppDbContextReadOnly>();
+                var service = context.RequestServices.GetService<IUserService>();
 
-                var role = dbContext.Roles.Where(role => role.Id ==
-                dbContext.UserRoles.Where(userRoles => userRoles.UserId == dbContext.Users.Where(user => user.Email == email).FirstOrDefault().Id)
-                .FirstOrDefault()
-                .RoleId);
+                var role = service.GeRole(email);
 
                 if (role is null)
                     throw new Exception("user without role");
 
-                identity.AddClaim(new Claim(ClaimTypes.Role, role.FirstOrDefault().Name));
+                identity.AddClaim(new Claim(ClaimTypes.Role, role.Name));
                 context.User.AddIdentity(identity);
             }
 

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Medicine.Entities.Models.Auth;
 
 namespace Medicine.Application.Interfaces
 {
     public interface IUserService
     {
-        
+        public Role? GeRole(string email);
+       
     }
 }

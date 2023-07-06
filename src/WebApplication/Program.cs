@@ -82,6 +82,7 @@ builder.Services.AddScoped<IEmailService, GmailService>();
 // application
 
 builder.Services.AddScoped<ILanguageService, LanguageService>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 // graphql
 builder.Services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
