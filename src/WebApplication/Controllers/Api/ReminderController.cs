@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Query.Internal;
 namespace Medicine.WebApplication.Controllers
 {
 
-    [Route("Worker/[controller]")]
+    [Route("Api/[controller]")]
     public class CurrentReminderController : Controller
     {
        
