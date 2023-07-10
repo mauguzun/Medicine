@@ -1,4 +1,5 @@
-﻿using Medicine.Entities.Models.Base;
+﻿using Medicine.Entities.Enums;
+using Medicine.Entities.Models.Base;
 
 namespace Medicine.Entities.Models
 {
@@ -6,7 +7,7 @@ namespace Medicine.Entities.Models
     {
         public int ReminderId { get; set; } 
         public Reminder? Reminder { get; set; } 
-        public Enums.ReminderLogStatus ReminderLogStatus { get; set; } 
+        public Enums.ReminderLogStatus ReminderLogStatus { get;  set; } 
         public string? Descrpition { get; set; } 
 
     }

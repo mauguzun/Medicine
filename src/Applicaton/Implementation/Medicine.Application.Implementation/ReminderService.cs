@@ -14,8 +14,9 @@ namespace Medicine.Application.Implementation
         private readonly ILanguageService _languageService;
         private readonly IAppDbContext _context;
 
-        public ReminderService(ILanguageService languageService, IAppDbContext context)
+        public ReminderService(IUserService userService, ILanguageService languageService, IAppDbContext context)
         {
+            _userService = userService;
             _languageService = languageService;
             _context = context;
         }
@@ -27,20 +28,20 @@ namespace Medicine.Application.Implementation
             var lang = _languageService.DefaultLanguage();
 
 
-
-            var reminders = _context.Reminders
-                .Where(
-                    reminder => reminder.TimeInUtc == currentData.ToString("HH:mm")
-                     &&
-                   (
-                    reminder.DosingFrequencyReminders.Any(x => x.DosageLogs == null)
-                        ||
-                    reminder.DosingFrequencyReminders.Any(x => x.DosageLogs.Any(
-                        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= currentData
-                    )))
-                )
+            var reminedrs = _context.Reminders
+                //.Where(
+                //    reminder => reminder.TimeInUtc == currentData.ToString("HH:mm")
+                //     &&
+                //   (
+                //    reminder.DosingFrequencyReminders.Any(x => x.DosageLogs == null)
+                //        ||
+                //    reminder.DosingFrequencyReminders.Any(x => x.DosageLogs.Any(
+                //        y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= currentData
+                //    )))
+                //)
                 .Include(reminder => reminder.DosingFrequencyReminders)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
+                    .ThenInclude(t => t.Translations)
                 .Include(reminder => reminder.DosingFrequencyReminders)
                     .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
                     .ThenInclude(doseFrequency => doseFrequency.Course)
@@ -60,39 +61,33 @@ namespace Medicine.Application.Implementation
             IList<ReminderLog> logs = new List<ReminderLog>();
             List<User> users = new List<User>();
 
-            reminders.ForEach(reminder =>
+
+            foreach (var reminder in reminedrs)
             {
+
                 var user = users.Where(x => x.Id == reminder.UserId).FirstOrDefault();
                 if (user is null)
                 {
-                    user = _userService.GetUserById(reminder.UserId.Value);
-                    users.Add(user);
+                    user = _userService.GetUserById(reminder.UserId.Value) ??
+                            throw new Exception($"{nameof(ReminderService)} user not found");
                 }
+                ReminderLog log = new ReminderLog() { ReminderId = reminder.Id };
 
+                foreach (var item in reminder.DosingFrequencyReminders)
+                {
+                    var dosingFrequenciesTranslate = 
+                        item.DosingFrequency.Translations.Where(x => x.Language == user.Language) ?? item.DosingFrequency.Translations.Where(x => x.Language == _languageService.DefaultLanguage());
+                    
+                    item.DosingFrequency.Translations = dosingFrequenciesTranslate.ToList();
 
-                ReminderLog log = new ReminderLog()
-                { };
-
-                reminder
-                .DosingFrequencyReminders
-                .ForEach(x => x.DosingFrequency.Translations.Where(x => x.Language == user.Language).ToList());
-
-                reminder
-                .DosingFrequencyReminders
-                .ForEach(x => x.DosingFrequency.Course.Translations.Where(x => x.Language == user.Language).ToList());
-
-                reminder
-                .DosingFrequencyReminders
-                .ForEach(x => x.DosingFrequency.Course.Therapy.Translations.Where(x => x.Language == user.Language).ToList());
+                }
+            }
 
 
 
-            });
-
-
-            return reminders;
+          
+            return reminedrs.ToList();
 
         }
     }
-
 }
