@@ -1,24 +1,21 @@
-using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.DataLoader;
 using Medicine.Web.UseCases.Responses;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.WebApplication.GraphQL.Entities.Reminder.Query
+namespace Medicine.WebApplication.GraphQL.Reminders
 {
-
     public class ReminderQuery
     {
 
         [UseProjection]
         [UseSorting()]
         [UseFiltering()]
-        public async Task<IEnumerable<ReminderResponse>> GetAll(
-            IResponseLoader<int, Medicine.Entities.Models.Reminder, ReminderResponse> dataLoader)
+        public async Task<IEnumerable<ReminderDto>> GetAll(
+            IResponseLoader<int, Entities.Models.Reminder, ReminderDto> dataLoader)
         {
             var reminder = await dataLoader.LoadAsync();
             return reminder;
         }
-
-
 
     }
 

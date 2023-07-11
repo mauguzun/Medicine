@@ -2,7 +2,7 @@
 using Medicine.Entities.Models.Base;
 using Medicine.Web.UseCases.Responses;
 
-namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
+namespace Medicine.Web.UseCases.DataLoaders.DataLoader
 {
     public interface IResponseLoader<TKey, TEntity, TResponse> : IDataLoader<TKey, TResponse>
         where TKey : notnull
@@ -10,7 +10,7 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
         where TResponse : class, IEntity
     {
         public Task<IEnumerable<TResponse>> LoadByCondition(Func<TEntity, bool> conditionLambda, CancellationToken ct = default);
-        public Task<IEnumerable<DrugCategoryResponse>> LoadCategoriesByDrugId(int ids, CancellationToken ct = default);
+        public Task<IEnumerable<DrugCategoryDto>> LoadCategoriesByDrugId(int ids, CancellationToken ct = default);
     }
 
 }

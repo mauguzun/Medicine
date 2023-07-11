@@ -1,7 +1,7 @@
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
-using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.DataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
@@ -9,7 +9,7 @@ namespace Medicine.Web.UseCases.Responses
     {
         public int DrugId { get; set; }
         public double Quantity { get; set; }
-        public async Task<DrugResponse> Drug(IResponseLoader<int, Drug, DrugResponse> dataLoader, CancellationToken ct)
+        public async Task<DrugDto> Drug(IResponseLoader<int, Drug, DrugDto> dataLoader, CancellationToken ct)
         {
 
             var drugs = await dataLoader.LoadByCondition(x => x.Id == DrugId);

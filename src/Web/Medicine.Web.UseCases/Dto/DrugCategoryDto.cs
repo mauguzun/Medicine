@@ -5,10 +5,10 @@ using Medicine.Web.UseCases.Responses.Translates;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class DrugCategoryResponse : TranslationEntity<TranslatedDrugsCategory>
+    public class DrugCategoryDto : TranslationEntity<TranslatedDrugsCategory>
     {
-        public async Task<IEnumerable<TranslatedResponse>> Translations(
-            ITranslateResponseLoader<int,TranslatedDrugsCategory, TranslatedResponse> dataLoader,
+        public async Task<IEnumerable<TranslatedDto>> Translations(
+            ITranslateResponseLoader<int,TranslatedDrugsCategory, TranslatedDto> dataLoader,
             CancellationToken ct)
         {
          

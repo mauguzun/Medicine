@@ -4,7 +4,7 @@ using Medicine.Entities.Models.Base;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class CourseSettingsResponse : EntityAuthor
+    public class CourseSettingsDto : EntityAuthor
     {
         public int CourseId { get; set; }
         public Course Course { get; set; }

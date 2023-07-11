@@ -1,13 +1,13 @@
 ﻿using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
-using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.DataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class SimilarDrugsResponse : Entity
+    public class SimilarDrugsDto : Entity
     {
-        public async Task<IEnumerable<DrugResponse>> SimilarDrugsList(
-           IResponseLoader<int, Drug, DrugResponse> dataLoader,
+        public async Task<IEnumerable<DrugDto>> SimilarDrugsList(
+           IResponseLoader<int, Drug, DrugDto> dataLoader,
            CancellationToken ct)
         {
 

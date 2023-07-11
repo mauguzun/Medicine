@@ -1,11 +1,11 @@
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base.Interfaces;
 using Medicine.Entities.Models.Translated;
-using Medicine.Web.UseCases.DataLoaders.BaseDataLoader;
+using Medicine.Web.UseCases.DataLoaders.DataLoader;
 
 namespace Medicine.Web.UseCases.Responses
 {
-    public class DosingFrequencyReminderResponse : TranslationEntity<TranslatedDosingFrequencyReminder>
+    public class DosingFrequencyReminderDto : TranslationEntity<TranslatedDosingFrequencyReminder>
     {
         public double Quantity { get; set; }
         public string UsingDescription { get; set; }
@@ -14,16 +14,16 @@ namespace Medicine.Web.UseCases.Responses
 
         public int DosingFrequencyId { get; set; }
 
-        public async Task<DosingFrequencyResponse>
-            DosingFrequency(IResponseLoader<int, DosingFrequency, DosingFrequencyResponse> dataLoader, CancellationToken ct)
+        public async Task<DosingFrequencyDto>
+            DosingFrequency(IResponseLoader<int, DosingFrequency, DosingFrequencyDto> dataLoader, CancellationToken ct)
         {
             var dosingFrequency = await dataLoader.LoadByCondition(x => x.Id == DosingFrequencyId);
             return dosingFrequency?.FirstOrDefault();
         }
 
 
-        public async Task<IEnumerable<DosageLogResponse>>
-            DosageLogs(IResponseLoader<int, DosageLog, DosageLogResponse> dataLoader, CancellationToken ct)
+        public async Task<IEnumerable<DosageLogDto>>
+            DosageLogs(IResponseLoader<int, DosageLog, DosageLogDto> dataLoader, CancellationToken ct)
         {
             var dosageLogs = await dataLoader.LoadByCondition(x => x.DosageRecommendationId == Id);
             return dosageLogs;

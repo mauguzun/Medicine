@@ -1,6 +1,6 @@
 ﻿namespace Medicine.Web.UseCases.Responses.Translates
 {
-    public class TranslatedDrugsResponce  : TranslatedResponse
+    public class TranslatedDrugsResponce  : TranslatedDto
     {
         public string? Recomendation { get; set; }
     }

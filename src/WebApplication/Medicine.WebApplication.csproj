@@ -41,13 +41,4 @@
     <ProjectReference Include="..\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="GraphQL\BaseEntity\" />
-    <Folder Include="GraphQL\Entities\Course\" />
-    <Folder Include="GraphQL\Entities\DosageLog\" />
-    <Folder Include="GraphQL\Entities\DosageRecommendations\" />
-    <Folder Include="GraphQL\Entities\DosingFrequency\" />
-    <Folder Include="GraphQL\Entities\Drug\" />
-  </ItemGroup>
-
 </Project>

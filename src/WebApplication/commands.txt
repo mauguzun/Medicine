@@ -13,7 +13,15 @@ Update-Database  -context AppDbContext
          id
       }
  }
+ ---------
 
+  mutation{
+      updateReminder (reminder: {id:1 ,title : "Morning remindersss",descrptioin:"DEEEESSS" }){
+         id
+      }
+ }
+
+ ------------
 
 
 query{

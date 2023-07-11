@@ -1,15 +1,11 @@
 ﻿using AutoMapper;
-using Medicine.Application.Interfaces;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
 using Medicine.Infrastructure.Interfcases.DataAccess;
 using Medicine.Web.UseCases.Responses;
 using Microsoft.EntityFrameworkCore;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq.Expressions;
 
-namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
+namespace Medicine.Web.UseCases.DataLoaders.DataLoader
 {
     public class ResponseLoader<TKey, TEntity, TResponse> : IResponseLoader<TKey, TEntity, TResponse>
        where TKey : notnull
@@ -26,20 +22,20 @@ namespace Medicine.Web.UseCases.DataLoaders.BaseDataLoader
             _mapper = mapper;
         }
 
-        public void Clear() 
+        public void Clear()
         {
             throw new NotImplementedException();
         }
 
 
-        public async Task<IEnumerable<DrugCategoryResponse>> LoadCategoriesByDrugId(int id, CancellationToken ct = default)
+        public async Task<IEnumerable<DrugCategoryDto>> LoadCategoriesByDrugId(int id, CancellationToken ct = default)
         {
             IEnumerable<DrugCategory> items = _dbContext.Drugs
                 .Where(x => x.Id == id)
                 .Include(x => x.DrugCategories)
                 .SelectMany(x => x.DrugCategories);
 
-            var convertedItems =  _mapper.Map<IEnumerable<DrugCategoryResponse>>(items) ;
+            var convertedItems = _mapper.Map<IEnumerable<DrugCategoryDto>>(items);
             return convertedItems;
         }
 
