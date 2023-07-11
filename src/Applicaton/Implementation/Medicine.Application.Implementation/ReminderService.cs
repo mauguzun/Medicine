@@ -64,7 +64,6 @@ namespace Medicine.Application.Implementation
 
             foreach (var reminder in reminedrs)
             {
-
                 var user = users.Where(x => x.Id == reminder.UserId).FirstOrDefault();
                 if (user is null)
                 {
@@ -79,12 +78,8 @@ namespace Medicine.Application.Implementation
                         item.DosingFrequency.Translations.Where(x => x.Language == user.Language) ?? item.DosingFrequency.Translations.Where(x => x.Language == _languageService.DefaultLanguage());
                     
                     item.DosingFrequency.Translations = dosingFrequenciesTranslate.ToList();
-
                 }
             }
-
-
-
           
             return reminedrs.ToList();
 

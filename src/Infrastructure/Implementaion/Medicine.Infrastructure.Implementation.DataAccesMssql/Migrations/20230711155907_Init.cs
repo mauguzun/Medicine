@@ -68,7 +68,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -82,7 +82,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     UserMedicineWorkerRelationStatus = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -202,7 +202,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false, defaultValueSql: "nextval('\"TransatedEntityWithDescriptionSequence\"')"),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -222,7 +222,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -242,7 +242,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TimeInUtc = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
                     Descrptioin = table.Column<string>(type: "text", nullable: true)
@@ -266,7 +266,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -290,7 +290,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     UserMedicineWorkerRelationStatus = table.Column<int>(type: "integer", nullable: false),
                     CreatedRequest = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     AcceptedRequest = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -316,7 +316,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     OneUnitSizeInGramm = table.Column<double>(type: "double precision", nullable: false),
                     SimilarDrugsId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -343,7 +343,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CourseGroupId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -371,7 +371,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DrugCategoryId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -400,7 +400,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     ReminderId = table.Column<int>(type: "integer", nullable: false),
                     ReminderLogStatus = table.Column<int>(type: "integer", nullable: false),
                     Descrpition = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -422,7 +422,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     TherapyId = table.Column<int>(type: "integer", nullable: false),
                     CourseGroupID = table.Column<int>(type: "integer", nullable: true),
                     CourseType = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -454,7 +454,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     TherapyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -482,7 +482,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -534,7 +534,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Recomendation = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -565,7 +565,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     MinAge = table.Column<int>(type: "integer", nullable: true),
                     MaxAge = table.Column<int>(type: "integer", nullable: true),
                     Weight = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -594,7 +594,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Total = table.Column<double>(type: "double precision", nullable: false),
                     IntervalInDays = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -628,7 +628,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     CourseId = table.Column<int>(type: "integer", nullable: false),
                     Version = table.Column<string>(type: "text", nullable: true),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -656,7 +656,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     ActiveElementId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -687,7 +687,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     ReminderId = table.Column<int>(type: "integer", nullable: false),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -720,7 +720,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
@@ -750,7 +750,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
@@ -778,7 +778,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: false),
                     UsingDescription = table.Column<string>(type: "text", nullable: false),
                     DosageRecommendationId = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
                     UserId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
