@@ -21,7 +21,7 @@ namespace Medicine.Application.Implementation
             _context = context;
         }
 
-        public IList<Reminder> Get()
+        public async Task<IList<Reminder>>  Get()
         {
             DateTime currentData = new DateTime(1900, 1, 3, 7, 20, 0, 0);
 
@@ -70,17 +70,22 @@ namespace Medicine.Application.Implementation
                     user = _userService.GetUserById(reminder.UserId.Value) ??
                             throw new Exception($"{nameof(ReminderService)} user not found");
                 }
-                ReminderLog log = new ReminderLog() { ReminderId = reminder.Id };
+
+                ReminderLog log = new ReminderLog(reminder.Id);
+                log.SetReminderLogStatus(Entities.Enums.ReminderLogStatus.Readed);
+
+
+                _context.ReminderLogs.Add(log);
 
                 foreach (var item in reminder.DosingFrequencyReminders)
                 {
-                    var dosingFrequenciesTranslate = 
+                    var dosingFrequenciesTranslate =
                         item.DosingFrequency.Translations.Where(x => x.Language == user.Language) ?? item.DosingFrequency.Translations.Where(x => x.Language == _languageService.DefaultLanguage());
-                    
+
                     item.DosingFrequency.Translations = dosingFrequenciesTranslate.ToList();
                 }
             }
-          
+            await _context.SaveChagesAsync();
             return reminedrs.ToList();
 
         }

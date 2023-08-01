@@ -1,14 +1,6 @@
-﻿using HotChocolate.Authorization;
-using Medicine.Application.Interfaces;
-using Medicine.Entities.Enums;
+﻿using Medicine.Application.Interfaces;
 using Medicine.Entities.Models;
-using Medicine.Entities.Models.Auth;
-using Medicine.Entities.Models.Translated;
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Medicine.Web.UseCases.Auth.Dto;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace Medicine.WebApplication.Controllers
 {
@@ -24,12 +16,7 @@ namespace Medicine.WebApplication.Controllers
             _reminderService = reminderService;
         }
 
-
-        public IList<Reminder> Get()
-        {
-            return _reminderService.Get();
-        }
-
+        public async Task<IList<Reminder>> GetAsync() => await _reminderService.Get();
 
 
     }

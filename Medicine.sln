@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C3F5933-8A09-4C48-B287-70767DB1732D}"
+	ProjectSection(SolutionItems) = preProject
+		src\WebApplication\commands.txt = src\WebApplication\commands.txt
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Entities", "Entities", "{2E495802-17D1-4CCC-B8EE-98E659BD0C74}"
 EndProject
@@ -46,6 +49,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Interfcases.DataAccess", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj", "{8003E111-CE7D-49CD-AC27-0184D0E4BF55}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Interfcases.Notification", "src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj", "{FEAA8523-AF79-459E-AA6B-9B7F5F681406}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "front", "front", "{17A404E6-9E12-496E-90E4-F58EF6AAB494}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
