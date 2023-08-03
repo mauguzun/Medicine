@@ -1,0 +1,24 @@
+<div class="module">
+
+
+
+  <mat-card>
+    <mat-card-title>{{'confirm.header'|translate}} </mat-card-title>
+    <mat-card-subtitle>{{'confirm.header'|translate}} </mat-card-subtitle>
+
+    <mat-card-content>
+
+      <mat-form-field class="full-w">
+
+        <span matPrefix>{{ user.Email }} &nbsp; &nbsp; </span>
+        <input [(ngModel)]="user.Password" type="tel" length="4" matInput placeholder="{{'confirm.header'|translate}}">
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
+
+
+  </mat-card>
+  <mat-card><button (click)="confirm()" mat-raised-button color="warn">Warn</button></mat-card>
+
+</div>

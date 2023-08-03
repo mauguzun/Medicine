@@ -1,0 +1,57 @@
+<div> </div>
+
+<div>
+  <mat-card>
+    <mat-card-title>{{'register.header' | translate }}</mat-card-title>
+    <mat-card-subtitle>{{'register.subtitle' | translate }}</mat-card-subtitle>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+
+        <mat-form-field class="full-w">
+          <input autocomplete="off" autocomplete="new-password" matInput type="email"
+            placeholder="{{'email' | translate }}" formControlName="Email" required>
+          <mat-hint *ngIf="form.get('Email').touched && form.get('Email').invalid">
+            <small *ngIf="form.get('Email').errors.required">{{'email.required' | translate }}</small>
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="full-w">
+          <input autocomplete="off" matInput type="password" placeholder="{{'passwrod' | translate }}"
+            formControlName="Password" required>
+          <mat-hint *ngIf="form.get('Password').touched && form.get('Password').invalid">
+            <small *ngIf="form.get('Password').errors.required">{{'password.required' | translate }}</small>
+          </mat-hint>
+        </mat-form-field>
+
+
+
+        <br>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
+        <br>
+        <button cdkFocusInitial [disabled]="form.invalid " mat-raised-button color="primary">{{'send' | translate }}l</button>
+        <br>
+        <br>
+
+
+        <div class="two-col">
+          <div>
+            <mat-card-subtitle><a [routerLink]="['/auth/login']">{{'login' | translate }} </a></mat-card-subtitle>
+          </div>
+          <div>
+            <mat-card-subtitle><a [routerLink]="['/auth/reset']"> {{'reset' | translate }} </a></mat-card-subtitle>
+          </div>
+        </div>
+
+
+      </form>
+
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div>
+</div>
