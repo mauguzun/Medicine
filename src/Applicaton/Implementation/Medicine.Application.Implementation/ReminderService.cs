@@ -27,7 +27,6 @@ namespace Medicine.Application.Implementation
 
             var lang = _languageService.DefaultLanguage();
 
-
             var reminedrs = _context.Reminders
                 //.Where(
                 //    reminder => reminder.TimeInUtc == currentData.ToString("HH:mm")

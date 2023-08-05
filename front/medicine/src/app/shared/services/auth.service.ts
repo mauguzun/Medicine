@@ -7,6 +7,7 @@ import { ApiResponse } from "../models/viewModels/ApiResponse";
 import { LoginData } from "../models/viewModels/LoginData";
 import { TokenData } from "../models/viewModels/TokenData";
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { map } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root",
@@ -17,7 +18,7 @@ export class AuthService {
   private TOKEN_SELECTOR = "TOKEN";
   private LANG = "LANG";
   private TIMEZONE = "TIMEZONE";
-  private authUrl? : string ;
+  private authUrl?: string;
 
   constructor(
     protected http: HttpClient,
@@ -28,14 +29,15 @@ export class AuthService {
     this.authUrl = `${environment.apiUrl}auth`;
   }
 
-  private _setTokenAndRedirect(resp: ApiResponse<string>, redirect = true) {
-    
-    const TokenData = new JwtHelperService().decodeToken<TokenData>( resp.PayLoad );
+  private _setTokenAndRedirect(token: string) {
+    // const TokenData = new JwtHelperService().decodeToken<TokenData>( token);
+    localStorage.setItem(this.TOKEN_SELECTOR, token);
 
-    localStorage.setItem(this.TOKEN_SELECTOR, resp.PayLoad);
-    if (redirect) {
-      this.router.navigate(["/therapy-lists"]);
-    }
+  }
+
+  public getUser(): TokenData | null {
+    const token = localStorage.getItem(this.TOKEN_SELECTOR)
+    return token ? new JwtHelperService().decodeToken<TokenData>(token) : null;
   }
 
   public getToken(): string | null {
@@ -43,93 +45,52 @@ export class AuthService {
   }
 
   async login(user: LoginData) {
-    
-     this.http.post<ApiResponse<string>>(this.authUrl + "/login", user);
+
+    return this.http.post<ApiResponse<string>>(this.authUrl + "/login", user)
+      .pipe(map(response => {
+        if (response.Error === false) {
+          this._setTokenAndRedirect(response.PayLoad)
+          return true;
+        } else {
+          alert('show error')
+          return false;
+        }
+      }));
 
   }
 
   async register(user: LoginData) {
-    await this.http
-      .post(this.authUrl + "/register", user)
-      .subscribe((resp: ApiResponse<string>) => {
-        this.messageService.show(resp.PayLoad);
-        if (resp.Error === false) {
-          this.router.navigate([`auth/confirm/${user.Email}`]);
-        }
-        return true;
-      }, (err) => {
-        this.messageService.error(err.message);
 
-      });
+    return this.http.post<ApiResponse<string>>(this.authUrl + "/register", user)
+      .pipe(map(response => {
+        if (response.Error === false) {
+          this._setTokenAndRedirect(response.PayLoad)
+          return true;
+        } else {
+
+          alert('show error')
+          return false;
+
+        }
+      }));
   }
 
   confirm(user: LoginData) {
-    this.http
-      .post(this.authUrl + "/confirm", user)
-      .subscribe((resp: ApiResponse<string>) => {
-        if (resp.Error === false) {
-          this._setTokenAndRedirect(resp);
+    return this.http.post<ApiResponse<string>>(this.authUrl + "/confirm", user)
+      .pipe(map(response => {
+        if (response.Error === false) {
+          this._setTokenAndRedirect(response.PayLoad)
+          return true;
         } else {
-          this.messageService.errorList(resp.Errors);
+
+          alert('show error')
+          return false;
+
         }
-      }, (err) => {
-        this.messageService.error(err.message);
-
-      });
-  }
-  udpateUser(currentToken: TokenData) {
-    this.http
-      .post(this.authUrl + "/UpdateUser", currentToken)
-      .subscribe((resp: ApiResponse<string>) => {
-        if (resp.Error === false) {
-          this._setTokenAndRedirect(resp, false);
-          this.messageService.show("user.settings.was.updated");
-        } else {
-          this.messageService.errorList(resp.Errors);
-        }
-      }, (err) => {
-        this.messageService.error(err.message);
-      });
+      }));
   }
 
-  setLang(lang: string) {
-    localStorage.setItem(this.LANG, lang);
-  }
 
-  getLang(): string | null {
-    return localStorage.getItem(this.LANG);
-  }
 
-  logout() {
-    localStorage.removeItem(this.TOKEN_SELECTOR);
-    this.router.navigate(["auth/login"]);
-  }
 
-  langList() {
-    return environment.locales;
-  }
-
-  public get logIn(): boolean {
-    return localStorage.getItem(this.TOKEN_SELECTOR) !== null;
-  }
-
-  public getUserConverted(): TokenData {
-    let token: TokenData = new JwtHelperService().decodeToken(
-      localStorage.getItem(this.TOKEN_SELECTOR)
-    );
-    token.IsMan = token.IsMan.toString() === "True" ? true : false;
-    token.BirthDay = new Date(token.BirthDay);
-    return token;
-  }
-
-  public getUser(): TokenData {
-    return new JwtHelperService().decodeToken(localStorage.getItem(this.TOKEN_SELECTOR));
-  }
-
-  public getUserId() {
-    const decodedToken: TokenData = new JwtHelperService().decodeToken(
-      localStorage.getItem(this.TOKEN_SELECTOR)
-    );
-    return decodedToken.Id;
-  }
 }

@@ -1,0 +1,30 @@
+<mat-sidenav-container fullscreen>
+
+  <mat-sidenav #sidenav mode="over" class="app-sidenav">
+
+    <mat-nav-list>
+      <a mat-list-item> First Page </a>
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar style="background-color: white;" class="mat-elevation-z2">
+    <button mat-button class="app-menu-button" (click)="sidenav.toggle()">
+      <i class="material-icons">menu</i>
+    </button>
+
+  </mat-toolbar>
+
+
+  <div class="app-content" fullscreen>
+    <div class="container" style="min-height: 100vh;">
+      <div class="page">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+    <footer>
+      Footer go here
+    </footer>
+
+  </div>
+</mat-sidenav-container>

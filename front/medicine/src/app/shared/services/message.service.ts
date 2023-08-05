@@ -6,9 +6,7 @@ import { TranslateService } from "@ngx-translate/core";
   providedIn: "root",
 })
 export class MessageService {
-  private settings!: {
-    duration: 3000;
-  };
+  private _settings!: { duration: 3000;};
 
   constructor(
     private _snackBar: MatSnackBar,
@@ -16,23 +14,19 @@ export class MessageService {
   ) {}
 
   show(message: string): void {
-    this._snackBar.open(this.translate.instant(message), null, this.settings);
+    this._snackBar.open(this.translate.instant(message), undefined, this._settings);
   }
 
   dialog(message: string): void {
     this._snackBar.open(
       this.translate.instant(message),
       this.translate.instant("agreed"),
-      this.settings
+      this._settings
     );
   }
 
   error(error: string, extraMessage = ""): void {
-    this._snackBar.open(
-      `${this.translate.instant(error)}${extraMessage}`,
-      null,
-      null
-    );
+    this._snackBar.open( `${this.translate.instant(error)}${extraMessage}`);
   }
 
   errorList(errorList: string[], extraMessage = ""): void {
