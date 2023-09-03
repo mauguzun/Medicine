@@ -21,7 +21,7 @@ export class AuthService {
   private authUrl?: string;
 
   constructor(
-    protected http: HttpClient,
+    private http: HttpClient,
     private router: Router,
     private messageService: MessageService,
 
