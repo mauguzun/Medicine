@@ -1,3 +1,4 @@
+import { HttpResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -35,9 +36,9 @@ export class LoginComponent implements OnInit {
       Object.assign(user, this.form.value);
 
       this.authService.login(user)
-        .subscribe ((resp : ApiResponse<string>) => {
-          if (resp.Error === true) {
-            alert(111)
+        .subscribe ((resp : HttpResponse<string>) => {
+          if (resp.ok === true) {
+           
 
           } else {
             alert(1)

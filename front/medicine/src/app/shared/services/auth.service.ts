@@ -1,7 +1,7 @@
 import { MessageService } from "src/app/shared/services/message.service";
 import { Injectable } from "@angular/core";
 import { environment } from "src/assets/environments/environment";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { ApiResponse } from "../models/viewModels/ApiResponse";
 import { LoginData } from "../models/viewModels/LoginData";
@@ -46,16 +46,14 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_SELECTOR);
   }
 
-  login(user: LoginData): Observable<ApiResponse<string>> {
-
-    return this.http.post<ApiResponse<string>>(this.authUrl + "/login", user)
-      .pipe(map(response => {
-        if (response.Error === false) {
-          this.setToken(response.PayLoad)
+  login(user: LoginData): Observable<HttpResponse<string>> {
+    return this.http.post<string>(this.authUrl + "/login", user, { observe: 'response' })
+      .pipe(map((response) => {
+        if (response.status === 200 && response.body != null) {
+          this.setToken(response.body)
         }
         return response;
       }));
-
   }
 
 
