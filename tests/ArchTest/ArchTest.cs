@@ -8,6 +8,8 @@ namespace ArchTest
 {
     public class ArchTest
     {
+      
+
         [Fact]
         public void Test1()
         {

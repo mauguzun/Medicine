@@ -22,6 +22,7 @@ namespace Medicine.WebApplication.Controllers.Auth
             _signInManager = signInManager;
             _tokenOptions = tokenOptions.Value;
         }
+        public string Index() => "work";
 
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] LoginDto loginDto)
