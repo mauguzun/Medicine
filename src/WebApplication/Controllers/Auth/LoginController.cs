@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
@@ -46,27 +47,20 @@ namespace Medicine.WebApplication.Controllers.Auth
 
                 string token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                return Ok(token);
+
+                return Ok(new JsonResult(token));
             }
             if (result.RequiresTwoFactor)
             {
-                return new ContentResult()
-                {
-                    StatusCode = (int)HttpStatusCode.Forbidden,
-                    Content = "RequiresTwoFactor"
-                };
+                return NotFound(new JsonResult($"RequiresTwoFactor"));
+              
             }
             else if (result.IsLockedOut)
             {
-                return new ContentResult()
-                {
-                    StatusCode = (int)HttpStatusCode.Forbidden,
-                    Content = "User Locked"
-                };
+                return NotFound(new JsonResult($"\"User Locked"));
             }
 
-            return NotFound($"Unable to load user with email '{loginDto.Email}'.");
-
+            return NotFound(new JsonResult($"Unable to load user with email '{loginDto.Email}'."));
         }
     }
 }

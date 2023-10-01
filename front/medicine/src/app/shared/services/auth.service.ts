@@ -3,12 +3,12 @@ import { Injectable } from "@angular/core";
 import { environment } from "src/assets/environments/environment";
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
-import { ApiResponse } from "../models/viewModels/ApiResponse";
+import { ApiResponse, JsonResult } from "../models/viewModels/ApiResponse";
 import { LoginData } from "../models/viewModels/LoginData";
 import { TokenData } from "../models/viewModels/TokenData";
 import { JwtHelperService } from "@auth0/angular-jwt";
-import { map } from "rxjs/operators";
-import { BehaviorSubject, Observable } from "rxjs";
+import { catchError, map } from "rxjs/operators";
+import { BehaviorSubject, Observable, of } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -46,14 +46,23 @@ export class AuthService {
     return localStorage.getItem(this.TOKEN_SELECTOR);
   }
 
-  login(user: LoginData): Observable<HttpResponse<string>> {
-    return this.http.post<string>(this.authUrl + "/login", user, { observe: 'response' })
-      .pipe(map((response) => {
+  login(user: LoginData): Observable<HttpResponse<JsonResult>> {
+    return this.http.post<JsonResult>(this.authUrl + "/login", user, { observe: 'response' })
+    .pipe(
+      catchError((error: any) => {
+        // Handle the error here (e.g., log it or perform other actions).
+        console.error('Error:', error);
+        // Return an observable with an error response or re-throw the error if needed.
+        return of(new HttpResponse<JsonResult>({ status: 500 }));
+      }),
+      map((response) => {
         if (response.status === 200 && response.body != null) {
-          this.setToken(response.body)
+          console.log(response.body);
+          this.setToken(response.body.value);
         }
         return response;
-      }));
+      })
+    );
   }
 
 

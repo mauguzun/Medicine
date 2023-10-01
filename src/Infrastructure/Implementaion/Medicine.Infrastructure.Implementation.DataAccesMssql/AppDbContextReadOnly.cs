@@ -5,6 +5,7 @@ using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Translated;
 using Medicine.Entities.Models.Translated.Base;
 using Medicine.Infrastructure.Interfcases.DataAccess;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -30,10 +31,44 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
             modelBuilder.Entity<TranslatedCourse>().HasIndex(p => new { p.Language, p.CourseId }).IsUnique();
             modelBuilder.Entity<TranslatedCourseGroup>().HasIndex(p => new { p.Language, p.CourseGroupId }).IsUnique();
             modelBuilder.Entity<TranslatedDosingFrequencyReminder>().HasIndex(p => new { p.Language, p.DosageRecommendationId }).IsUnique();
-            modelBuilder.Entity<TranslatedActiveElement>().HasIndex(p => new { p.Language, p.ActiveElementId }).IsUnique();
             modelBuilder.Entity<TranslatedDrugs>().HasIndex(p => new { p.Language, p.DrugId }).IsUnique();
             modelBuilder.Entity<TranslatedDrugsCategory>().HasIndex(p => new { p.Language, p.DrugCategoryId }).IsUnique();
             modelBuilder.Entity<TranslatedTherapy>().HasIndex(p => new { p.Language, p.TherapyId }).IsUnique();
+            modelBuilder.Entity<TranslatedActiveElement>().HasIndex(p => new { p.Language, p.ActiveElementId }).IsUnique();
+
+
+            //modelBuilder.Entity<TranslatedCourseGroup>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<ActiveElement>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<CourseSettings>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<CourseSettings>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<DosingFrequencyReminder>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<DrugCategory>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Therapy>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<DosingFrequency>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Entities.Models.DosageLog>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Reminder>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<SimilarDrugs>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Drug>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Course>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<ReminderLog>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<UserMedicineWorkerLog>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<UserMedicineWorker>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedTherapy>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedDrugs>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedDrugsCategory>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedDosingFrequency>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedDosingFrequencyReminder>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedCourse>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<TranslatedActiveElement>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<User>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<Role>().Property(p => p.Id).UseIdentityAlwaysColumn();
+
+            //modelBuilder.Entity<IdentityRoleClaim<int>>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<IdentityRole<int>>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<IdentityRoleClaim<int>>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<IdentityUserClaim<int>>().Property(p => p.Id).UseIdentityAlwaysColumn();
+
+
 
             // seeding
             modelBuilder.Entity<Role>().HasData(

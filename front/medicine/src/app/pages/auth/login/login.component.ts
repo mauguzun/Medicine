@@ -3,7 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
 import { first } from "rxjs";
-import { ApiResponse } from "src/app/shared/models/viewModels/ApiResponse";
+import { ApiResponse, JsonResult } from "src/app/shared/models/viewModels/ApiResponse";
 import { LoginData } from "src/app/shared/models/viewModels/LoginData";
 import { AuthService } from "src/app/shared/services/auth.service";
 
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
       Object.assign(user, this.form.value);
 
       this.authService.login(user)
-        .subscribe ((resp : HttpResponse<string>) => {
+        .subscribe ((resp : HttpResponse<JsonResult>) => {
           if (resp.ok === true) {
-           
+            alert(12)
 
           } else {
             alert(1)
