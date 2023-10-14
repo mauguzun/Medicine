@@ -6,6 +6,7 @@ import { first } from "rxjs";
 import { ApiResponse, JsonResult } from "src/app/shared/models/viewModels/ApiResponse";
 import { LoginData } from "src/app/shared/models/viewModels/LoginData";
 import { AuthService } from "src/app/shared/services/auth.service";
+import { environment } from "src/assets/environments/environment";
 
 @Component({
   selector: "app-login",
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
       this.authService.login(user)
         .subscribe ((resp : HttpResponse<JsonResult>) => {
           if (resp.ok === true) {
-            alert(12)
+            this.router.navigate([`/${environment.backUrl}/settings`])
 
           } else {
             alert(1)

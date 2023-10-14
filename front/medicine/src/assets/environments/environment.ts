@@ -8,6 +8,7 @@ export const environment = {
   defaultLocale: 'en',
   apiUrl: 'https://localhost:7036/',
 
+  backUrl : 'main',
 
   minQuanity: 0.1,
 

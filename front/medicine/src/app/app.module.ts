@@ -28,6 +28,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutComponent } from './pages/auth/auth-layout.component';
 import { LoginComponent } from './pages/auth/login/login.component';
+import { MainLayoutComponent } from './pages/main/main-layout.component';
+import { SettingsComponent } from './pages/main/settings/settings.component';
 
 
 
@@ -43,6 +45,8 @@ const intProvider: Provider = {
     AppComponent,
     AuthLayoutComponent,
     LoginComponent,
+    MainLayoutComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
