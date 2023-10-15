@@ -1,31 +1,60 @@
 <mat-sidenav-container fullscreen>
-  
-    <mat-sidenav #sidenav mode="over" class="app-sidenav">
-  
-      <mat-nav-list>
-        <a mat-list-item> First Page </a>
-      </mat-nav-list>
-  
-    </mat-sidenav>
-  
-    <mat-toolbar style="background-color: white;" class="mat-elevation-z2">
-      <button mat-button class="app-menu-button" (click)="sidenav.toggle()">
+
+  <mat-sidenav #sidenav mode="side" class="app-sidenav">
+
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="['/therapy']"> {{ 'menu.therapy_create' | translate }} </a>
+      <a mat-list-item [routerLink]="['/therapy-lists']"> {{ 'menu.therapy_lists' | translate }} </a>
+      <a mat-list-item [routerLink]="['/history']"> {{ 'menu.history' | translate }} </a>
+      <a mat-list-item [routerLink]="['/course-list']"> {{ 'menu.course_lists' | translate }} </a>
+      <a mat-list-item [routerLink]="['/course']"> {{ 'menu.course' | translate }} </a>
+      <a mat-list-item [routerLink]="['/assign-therapy']"> {{ 'menu.assign_therapy' | translate }} </a>
+      <a mat-list-item [routerLink]="['/choose-doctor']"> {{ 'menu.choose_doctor' | translate }} </a>
+      <a mat-list-item [routerLink]="['/doctor-list']"> {{ 'menu.doctor_lists' | translate }} </a>
+
+    
+    </mat-nav-list>
+
+  </mat-sidenav>
+
+  <mat-toolbar style="background-color: white;" class="mat-elevation-z2">
+    <mat-toolbar-row>
+
+      <button mat-icon-button (click)="sidenav.toggle()">
         <i class="material-icons">menu</i>
       </button>
-  
-    </mat-toolbar>
-  
-  
-    <div class="app-content" fullscreen>
-      <div class="container" style="min-height: 100vh;">
-        <div class="page">
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-  
-      <footer>
-        Footer go here
-      </footer>
-  
+      <span class="example-spacer"></span> <!-- This will push the element to the right -->
+
+
+
+      <span class="example-spacer"></span>
+
+      <!-- <button matBadge="1"  matBadgeSize="small"  mat-icon-button>
+        <mat-icon>notifications_none</mat-icon> 
+      </button> -->
+
+      <button [matMenuTriggerFor]="userMenu" mat-icon-button>
+        <!-- <mat-icon>translate</mat-icon> -->
+        <mat-icon>settings</mat-icon>
+        <mat-menu #userMenu="matMenu">
+          <button [routerLink]="['/settings']" mat-menu-item>{{'settings'|translate}} </button>
+          <button (click)="logout()" mat-menu-item>{{'logout'|translate}} </button>
+        </mat-menu>
+
+      </button>
+
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+
+  <div class="app-content" fullscreen>
+    <div class="container" style="min-height: 100vh;">
+      <router-outlet></router-outlet>
     </div>
-  </mat-sidenav-container>
+
+    <footer>
+      Footer go here
+    </footer>
+
+  </div>
+</mat-sidenav-container>

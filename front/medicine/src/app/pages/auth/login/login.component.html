@@ -13,8 +13,7 @@
                 <small *ngIf="form.get('Email')?.errors">{{'required' | translate }}</small>
               </mat-hint>
             </mat-form-field>
-     
-  
+    
 
           <mat-form-field style="width: 100%;">
             <input autocomplete="off" matInput type="password" placeholder="{{'passwrod' | translate }}"
@@ -31,7 +30,6 @@
           <mat-progress-bar *ngIf="loader" mode="indeterminate"></mat-progress-bar>
 
           <br>
-
           <button cdkFocusInitial [disabled]="form.invalid " mat-raised-button color="primary">{{'send' | translate }}l</button>
           <br>
           <br>

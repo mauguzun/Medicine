@@ -5,21 +5,19 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
-using System.Net;
 using System.Security.Claims;
 
 namespace Medicine.WebApplication.Controllers.Auth
 {
     [ApiController]
     [Route("auth/[controller]")]
-    public class LoginController : Controller
+    public class UserSettingsController : Controller
     {
         private readonly SignInManager<User> _signInManager;
         private readonly TokenSettings _tokenOptions;
 
-        public LoginController(SignInManager<User> signInManager, IOptions<TokenSettings> tokenOptions)
+        public UserSettingsController(SignInManager<User> signInManager, IOptions<TokenSettings> tokenOptions)
         {
             _signInManager = signInManager;
             _tokenOptions = tokenOptions.Value;

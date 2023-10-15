@@ -5,17 +5,19 @@ import { LoginComponent } from './pages/auth/login/login.component';
 import { MainLayoutComponent } from './pages/main/main-layout.component';
 import { environment } from 'src/assets/environments/environment';
 import { SettingsComponent } from './pages/main/settings/settings.component';
+import { AuthGuard } from './shared/auth.guard';
 
 const routes: Routes = [
   {
     path: "",
     component: AuthLayoutComponent,
     children: [
-      { path: "", component: LoginComponent },
+      { path: "", component: LoginComponent  },
     ],
   },
   {
     path: environment.backUrl,
+    canActivate: [AuthGuard],
     component: MainLayoutComponent,
     children: [
       { path: "settings", component: SettingsComponent },

@@ -1,7 +1,9 @@
+import { Language } from "../../enums/Language";
+
 export class TokenData {
   Email!: string;
   Id!: string;
-  Language!: string;
+  Language:Language = Language.en;
   Name!: string;
   TimeZone!: string;
   Group!: string;
@@ -9,3 +11,4 @@ export class TokenData {
   BirthDay!: Date;
   PhoneNumber!: string;
 }
+
