@@ -45,32 +45,31 @@ namespace Medicine.WebApplication.Controllers.Auth
             if (result.Succeeded)
             {
 
-                User user = await _userManager.FindByEmailAsync(loginDto.Email);
-                var roles = await _userManager.GetRolesAsync(user);
+                var user = await _userManager.FindByEmailAsync(loginDto.Email);
+                if (user is not null)
+                {
+                    var roles = await _userManager.GetRolesAsync(user);
+                    UserSettingsDto userSettings = _mapper.Map<UserSettingsDto>(user);
 
+                    var claims = new List<Claim> { new Claim("Id", user.Id.ToString()) };
 
-                TokenData tokenData = _mapper.Map<TokenData>(user);
-                //tokenData.Role = 
+                    var jwt = new JwtSecurityToken(
+                            issuer: _tokenOptions.Issuer,
+                            audience: _tokenOptions.Audience,
+                            claims: claims,
+                            expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(_tokenOptions.ExpireInMin)),
+                            signingCredentials: new SigningCredentials(_tokenOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
 
-                var claims = new List<Claim> { 
-                    new Claim("TokenData",JsonSerializer.Serialize(tokenData)),
-                };  
+                    string token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                var jwt = new JwtSecurityToken(
-                        issuer: _tokenOptions.Issuer,
-                        audience: _tokenOptions.Audience,
-                        claims: claims,
-                        expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(_tokenOptions.ExpireInMin)),
-                        signingCredentials: new SigningCredentials(_tokenOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                    return Ok(new ApiResponse<(string, UserSettingsDto)>(ValueTuple.Create(token, userSettings)));
+                }
 
-                string token = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-                return Ok(new ApiResponse<string>(token));
             }
             if (result.RequiresTwoFactor)
             {
                 return Unauthorized(new ApiResponse<string>("RequiresTwoFactor"));
-              
+
             }
             else if (result.IsLockedOut)
             {

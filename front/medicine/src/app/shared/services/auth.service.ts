@@ -3,11 +3,11 @@ import { environment } from "src/assets/environments/environment";
 import { HttpClient, HttpErrorResponse, HttpResponse } from "@angular/common/http";
 import { Router } from "@angular/router";
 import { LoginDto } from "../models/viewModels/Dto/LoginDto";
-import { TokenData } from "../models/viewModels/TokenData";
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { catchError, map } from "rxjs/operators";
 import { BehaviorSubject, Observable, of } from "rxjs";
 import { ApiResponse } from "../models/viewModels/ApiResponse";
+import { UserSettingsDto } from "../models/viewModels/Dto/UserSettingsDto";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +21,7 @@ export class AuthService {
 
 
   private authUrl = `${environment.apiUrl}auth`;
-  private _user: TokenData | null;
+  private _user: UserSettingsDto | null;
 
   constructor(
     private http: HttpClient,
@@ -35,7 +35,7 @@ export class AuthService {
     localStorage.getItem(this.TOKEN_SELECTOR);
   }
 
-  public getUser(): TokenData | null {
+  public getUser(): UserSettingsDto | null {
     if (this._user === null) {
       const token = localStorage.getItem(this.TOKEN_SELECTOR)
       const tokeDataOrNull: string | null = token ? new JwtHelperService().decodeToken(token)?.TokenData : null;
@@ -56,8 +56,8 @@ export class AuthService {
     this._user = null;
   }
 
-  login(user: LoginDto): Observable<HttpResponse<ApiResponse<string>>> {
-    return this.http.post<ApiResponse<string>>(this.authUrl + "/login", user, { observe: 'response' })
+  login(user: LoginDto): Observable<HttpResponse<ApiResponse<[string,UserSettingsDto]>>> {
+    return this.http.post<ApiResponse<[string,UserSettingsDto]>>(this.authUrl + "/login", user, { observe: 'response' })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           // Handle the error here (e.g., log it or perform other actions).
@@ -66,7 +66,8 @@ export class AuthService {
         }),
         map((response) => {
           if (response.status === 200 && response.body != null) {
-            this.setToken(response.body.message);
+            this.setToken(response.body.message[0]);
+            this.setUset(response.body.message[0]);
           }
           return response;
         })
