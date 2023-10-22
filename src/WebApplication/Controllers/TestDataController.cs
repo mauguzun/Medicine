@@ -27,8 +27,8 @@ namespace Medicine.WebApplication.Controllers
 
             var user = new User()
             {
-                Birthday = DateTimeOffset.UtcNow,
-                UserName = "mauguzun@gmail.com",
+                Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
+                 UserName = "mauguzun@gmail.com",
                 Email = "mauguzun@gmail.com",
                 EmailConfirmed  = true,
             };

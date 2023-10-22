@@ -1,14 +1,21 @@
 import { Language } from "../../enums/Language";
+import { Role } from "../../enums/Role";
+import { Sex } from "../../enums/Sex";
+import { TimeZone } from "../../enums/Timezone";
+
 
 export class TokenData {
+
   Email!: string;
-  Id!: string;
-  Language:Language = Language.en;
+  Id!: number;
+  Language: Language = Language.en;
   Name!: string;
-  TimeZone!: string;
-  Group!: string;
-  IsMan: boolean = true;
-  BirthDay!: Date;
+
+  TimeZone: TimeZone = TimeZone["(UTC) Coordinated Universal Time"];
+  Role: Role = Role.user;
+  Sex: Sex = Sex.male;
+  Birthday!: Date;
   PhoneNumber!: string;
 }
+
 

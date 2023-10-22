@@ -122,8 +122,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("integer");
 
-                    b.Property<DateTimeOffset?>("Birthday")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<DateOnly?>("Birthday")
+                        .HasColumnType("date");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
@@ -168,9 +168,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int?>("Sex")
                         .HasColumnType("integer");
 
-                    b.Property<string>("TimeZone")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("TimeZone")
+                        .HasColumnType("integer");
 
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");

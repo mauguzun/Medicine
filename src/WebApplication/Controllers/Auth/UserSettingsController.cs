@@ -1,4 +1,6 @@
+using HotChocolate.Authorization;
 using Medicine.Entities.Models.Auth;
+using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Medicine.Web.UseCases.Auth.Dto;
 using Medicine.Web.UseCases.Common;
 using Microsoft.AspNetCore.Identity;
@@ -14,51 +16,24 @@ namespace Medicine.WebApplication.Controllers.Auth
     [Route("auth/[controller]")]
     public class UserSettingsController : Controller
     {
-        private readonly SignInManager<User> _signInManager;
-        private readonly TokenSettings _tokenOptions;
 
-        public UserSettingsController(SignInManager<User> signInManager, IOptions<TokenSettings> tokenOptions)
-        {
-            _signInManager = signInManager;
-            _tokenOptions = tokenOptions.Value;
-        }
-        public string Index() => "work";
+        private readonly AppDbContext _context;
 
+        public UserSettingsController(AppDbContext context) => _context = context;
+
+
+        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> Index([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Index([FromBody] UserSettingsDto userSettingsDto)
         {
 
-            //ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+           
 
-            var result = await _signInManager.PasswordSignInAsync(loginDto.Email, loginDto.Password, true, lockoutOnFailure: false);
+            var user = await _context.Users.FindAsync(userSettingsDto.UserId);
 
-            if (result.Succeeded)
-            {
 
-                var claims = new List<Claim> { new Claim(ClaimTypes.Email, loginDto.Email) };
-
-                var jwt = new JwtSecurityToken(
-                        issuer: _tokenOptions.Issuer,
-                        audience: _tokenOptions.Audience,
-                        claims: claims,
-                        expires: DateTime.UtcNow.Add(TimeSpan.FromMinutes(_tokenOptions.ExpireInMin)),
-                        signingCredentials: new SigningCredentials(_tokenOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-
-                string token = new JwtSecurityTokenHandler().WriteToken(jwt);
-
-                return Ok(new ApiResponse<string>(token));
-            }
-            if (result.RequiresTwoFactor)
-            {
-                return Unauthorized(new ApiResponse<string>("RequiresTwoFactor"));
-              
-            }
-            else if (result.IsLockedOut)
-            {
-                return Unauthorized(new ApiResponse<string>("User Locked"));
-            }
-
-            return Unauthorized(new ApiResponse<string>($"Unable to load user with email '{loginDto.Email}'"));
+            return Ok(new ApiResponse<UserSettingsDto>(userSettingsDto));
         }
     }
 }

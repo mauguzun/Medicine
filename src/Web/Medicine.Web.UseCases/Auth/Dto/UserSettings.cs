@@ -2,7 +2,8 @@
 
 namespace Medicine.Web.UseCases.Auth.Dto
 {
-    public record  UserSettingsDto (int Id, Language Language, string Name , string TimeZone , Sex Sex , DateOnly Date , string PhoneNumber)
+
+    public record  UserSettingsDto (int UserId, Language Language, string Name , Entities.Enums.TimeZone TimeZone , Sex Sex , DateOnly Birthday , string PhoneNumber)
     {
     }
 

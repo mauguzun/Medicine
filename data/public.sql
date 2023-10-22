@@ -5,14 +5,14 @@
  Source Server Type    : PostgreSQL
  Source Server Version : 140001
  Source Host           : localhost:5432
- Source Catalog        : medicines
+ Source Catalog        : postgres
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 140001
  File Encoding         : 65001
 
- Date: 01/10/2023 15:20:03
+ Date: 22/10/2023 15:02:26
 */
 
 
@@ -381,10 +381,10 @@ MINVALUE  1
 MAXVALUE 2147483647
 START 1
 ),
-  "Birthday" timestamptz(6),
+  "Birthday" date,
   "Sex" int4,
   "Language" int4 NOT NULL,
-  "TimeZone" text COLLATE "pg_catalog"."default" NOT NULL,
+  "TimeZone" int4 NOT NULL,
   "UserName" varchar(256) COLLATE "pg_catalog"."default",
   "NormalizedUserName" varchar(256) COLLATE "pg_catalog"."default",
   "Email" varchar(256) COLLATE "pg_catalog"."default",
@@ -405,7 +405,7 @@ START 1
 -- ----------------------------
 -- Records of AspNetUsers
 -- ----------------------------
-INSERT INTO "public"."AspNetUsers" VALUES (1, '2023-10-01 12:55:58.060794+00', NULL, 0, '(UTC) Coordinated Universal Time', 'mauguzun@gmail.com', 'MAUGUZUN@GMAIL.COM', 'mauguzun@gmail.com', 'MAUGUZUN@GMAIL.COM', 't', 'AQAAAAIAAYagAAAAED0g1p9m48toL9YuHto4I89dpeQwfoR+5i51HGxPij0eelBh0JZGljawO8ReaTLtQA==', 'P6TLTI3B7MGYSZZ4CQ5LSP7XZXG2ZB3X', '93de9712-8377-4c3b-893a-9c86f0acdb92', NULL, 'f', 'f', NULL, 't', 0);
+INSERT INTO "public"."AspNetUsers" VALUES (1, '2023-10-22', NULL, 0, 46, 'mauguzun@gmail.com', 'MAUGUZUN@GMAIL.COM', 'mauguzun@gmail.com', 'MAUGUZUN@GMAIL.COM', 't', 'AQAAAAIAAYagAAAAEL6llm9W0hfvj+JwLv65d5nvWnBtX2WZ/TRO5WbDHJ4FPGnNCDXW4PI+qwOgocDruw==', 'THIT5EO5HWNYRFNBNHH4XIIGDN75BSBL', 'f51603fe-5eaa-4d6e-be9f-30ce6b4e8982', NULL, 'f', 'f', NULL, 't', 0);
 
 -- ----------------------------
 -- Table structure for CourseGroup
@@ -472,7 +472,7 @@ START 1
 -- ----------------------------
 -- Records of Courses
 -- ----------------------------
-INSERT INTO "public"."Courses" VALUES (1, 1, NULL, 0, '2023-10-01 12:56:15.734827+00', 1);
+INSERT INTO "public"."Courses" VALUES (1, 1, NULL, 0, '2023-10-22 12:59:00.232851+00', 1);
 
 -- ----------------------------
 -- Table structure for DosageLogs
@@ -521,7 +521,7 @@ START 1
 -- ----------------------------
 -- Records of DosingFrequencies
 -- ----------------------------
-INSERT INTO "public"."DosingFrequencies" VALUES (1, 1, 1, 10, 2, '2023-10-01 12:56:15.735336+00', NULL);
+INSERT INTO "public"."DosingFrequencies" VALUES (1, 1, 1, 10, 2, '2023-10-22 12:59:00.233011+00', NULL);
 
 -- ----------------------------
 -- Table structure for DosingFrequencyReminders
@@ -547,7 +547,7 @@ START 1
 -- ----------------------------
 -- Records of DosingFrequencyReminders
 -- ----------------------------
-INSERT INTO "public"."DosingFrequencyReminders" VALUES (1, 'Title', 'before eat', 1, 1, 1, '2023-10-01 12:56:15.531715+00', NULL);
+INSERT INTO "public"."DosingFrequencyReminders" VALUES (1, 'Title', 'before eat', 1, 1, 1, '2023-10-22 12:59:00.144986+00', NULL);
 
 -- ----------------------------
 -- Table structure for DrugCategories
@@ -568,10 +568,10 @@ START 1
 -- ----------------------------
 -- Records of DrugCategories
 -- ----------------------------
-INSERT INTO "public"."DrugCategories" VALUES (1, '2023-10-01 12:56:13.685748+00', NULL);
-INSERT INTO "public"."DrugCategories" VALUES (2, '2023-10-01 12:56:13.685783+00', NULL);
-INSERT INTO "public"."DrugCategories" VALUES (3, '2023-10-01 12:56:13.685787+00', NULL);
-INSERT INTO "public"."DrugCategories" VALUES (4, '2023-10-01 12:56:13.685791+00', NULL);
+INSERT INTO "public"."DrugCategories" VALUES (1, '2023-10-22 12:58:59.790146+00', NULL);
+INSERT INTO "public"."DrugCategories" VALUES (2, '2023-10-22 12:58:59.790156+00', NULL);
+INSERT INTO "public"."DrugCategories" VALUES (3, '2023-10-22 12:58:59.790158+00', NULL);
+INSERT INTO "public"."DrugCategories" VALUES (4, '2023-10-22 12:58:59.790159+00', NULL);
 
 -- ----------------------------
 -- Table structure for DrugDrugCategory
@@ -617,8 +617,8 @@ START 1
 -- ----------------------------
 -- Records of Drugs
 -- ----------------------------
-INSERT INTO "public"."Drugs" VALUES (1, 'Drug LatinName 0', 1, 3, '2023-10-01 12:56:14.632526+00', 1);
-INSERT INTO "public"."Drugs" VALUES (2, 'Drug LatinName 1', 2, 3, '2023-10-01 12:56:14.633028+00', 1);
+INSERT INTO "public"."Drugs" VALUES (1, 'Drug LatinName 0', 1, 3, '2023-10-22 12:58:59.935833+00', 1);
+INSERT INTO "public"."Drugs" VALUES (2, 'Drug LatinName 1', 2, 3, '2023-10-22 12:58:59.936119+00', 1);
 
 -- ----------------------------
 -- Table structure for ReminderLogs
@@ -664,8 +664,8 @@ START 1
 -- ----------------------------
 -- Records of Reminders
 -- ----------------------------
-INSERT INTO "public"."Reminders" VALUES (1, '07:20', '2023-10-01 12:56:15.378776+00', 1, 'Morning Reminder', NULL);
-INSERT INTO "public"."Reminders" VALUES (2, '0:20', '2023-10-01 12:56:15.444974+00', 1, 'Evning Reminder', NULL);
+INSERT INTO "public"."Reminders" VALUES (1, '07:20', '2023-10-22 12:59:00.093125+00', 1, 'Morning Reminder', NULL);
+INSERT INTO "public"."Reminders" VALUES (2, '0:20', '2023-10-22 12:59:00.120733+00', 1, 'Evning Reminder', NULL);
 
 -- ----------------------------
 -- Table structure for SimilarDrugs
@@ -685,9 +685,9 @@ START 1
 -- ----------------------------
 -- Records of SimilarDrugs
 -- ----------------------------
-INSERT INTO "public"."SimilarDrugs" VALUES (1, '2023-10-01 12:56:14.632526+00');
-INSERT INTO "public"."SimilarDrugs" VALUES (2, '2023-10-01 12:56:14.633027+00');
-INSERT INTO "public"."SimilarDrugs" VALUES (3, '2023-10-01 12:56:14.631964+00');
+INSERT INTO "public"."SimilarDrugs" VALUES (1, '2023-10-22 12:58:59.935832+00');
+INSERT INTO "public"."SimilarDrugs" VALUES (2, '2023-10-22 12:58:59.936119+00');
+INSERT INTO "public"."SimilarDrugs" VALUES (3, '2023-10-22 12:58:59.935464+00');
 
 -- ----------------------------
 -- Table structure for Therapies
@@ -710,7 +710,7 @@ START 1
 -- ----------------------------
 -- Records of Therapies
 -- ----------------------------
-INSERT INTO "public"."Therapies" VALUES (1, 1, 200, 1, '2023-10-01 12:56:15.733303+00');
+INSERT INTO "public"."Therapies" VALUES (1, 1, 200, 1, '2023-10-22 12:59:00.232349+00');
 
 -- ----------------------------
 -- Table structure for TranslatedActiveElement
@@ -750,8 +750,8 @@ CREATE TABLE "public"."TranslatedCourse" (
 -- ----------------------------
 -- Records of TranslatedCourse
 -- ----------------------------
-INSERT INTO "public"."TranslatedCourse" VALUES (15, 'AutoCrated2', 'AutoCreated2', 1, NULL, '2023-10-01 12:56:15.735128+00', NULL, 1);
-INSERT INTO "public"."TranslatedCourse" VALUES (16, 'AutoCrated', 'AutoCreated', 1, NULL, '2023-10-01 12:56:15.735137+00', NULL, 0);
+INSERT INTO "public"."TranslatedCourse" VALUES (15, 'AutoCrated2', 'AutoCreated2', 1, NULL, '2023-10-22 12:59:00.232935+00', NULL, 1);
+INSERT INTO "public"."TranslatedCourse" VALUES (16, 'AutoCrated', 'AutoCreated', 1, NULL, '2023-10-22 12:59:00.232938+00', NULL, 0);
 
 -- ----------------------------
 -- Table structure for TranslatedCourseGroup
@@ -790,8 +790,8 @@ CREATE TABLE "public"."TranslatedDosingFrequency" (
 -- ----------------------------
 -- Records of TranslatedDosingFrequency
 -- ----------------------------
-INSERT INTO "public"."TranslatedDosingFrequency" VALUES (17, 'TranslatedDosingFrequency', 'TranslatedDosingFrequency Description', 1, '2023-10-01 12:56:15.775587+00', NULL, 0);
-INSERT INTO "public"."TranslatedDosingFrequency" VALUES (18, 'TranslatedDosingFrequency', 'TranslatedDosingFrequency Description', 1, '2023-10-01 12:56:15.775605+00', NULL, 1);
+INSERT INTO "public"."TranslatedDosingFrequency" VALUES (17, 'TranslatedDosingFrequency', 'TranslatedDosingFrequency Description', 1, '2023-10-22 12:59:00.252582+00', NULL, 0);
+INSERT INTO "public"."TranslatedDosingFrequency" VALUES (18, 'TranslatedDosingFrequency', 'TranslatedDosingFrequency Description', 1, '2023-10-22 12:59:00.252588+00', NULL, 1);
 
 -- ----------------------------
 -- Table structure for TranslatedDosingFrequencyReminder
@@ -836,10 +836,10 @@ CREATE TABLE "public"."TranslatedDrugs" (
 -- ----------------------------
 -- Records of TranslatedDrugs
 -- ----------------------------
-INSERT INTO "public"."TranslatedDrugs" VALUES (9, '0 TranslatedDrugs  en ', '0 TranslatedDrugs  Description  en', 1, 'Use befor', '2023-10-01 12:56:14.632156+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugs" VALUES (10, '0 TranslatedDrugs  lv ', '0 TranslatedDrugs  Description  lv', 1, 'Use befor', '2023-10-01 12:56:14.632288+00', NULL, 1);
-INSERT INTO "public"."TranslatedDrugs" VALUES (11, '1 TranslatedDrugs  en ', '1 TranslatedDrugs  Description  en', 2, 'Use befor', '2023-10-01 12:56:14.63302+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugs" VALUES (12, '1 TranslatedDrugs  lv ', '1 TranslatedDrugs  Description  lv', 2, 'Use befor', '2023-10-01 12:56:14.633025+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugs" VALUES (9, '0 TranslatedDrugs  en ', '0 TranslatedDrugs  Description  en', 1, 'Use befor', '2023-10-22 12:58:59.935589+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugs" VALUES (10, '0 TranslatedDrugs  lv ', '0 TranslatedDrugs  Description  lv', 1, 'Use befor', '2023-10-22 12:58:59.935698+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugs" VALUES (11, '1 TranslatedDrugs  en ', '1 TranslatedDrugs  Description  en', 2, 'Use befor', '2023-10-22 12:58:59.936116+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugs" VALUES (12, '1 TranslatedDrugs  lv ', '1 TranslatedDrugs  Description  lv', 2, 'Use befor', '2023-10-22 12:58:59.936118+00', NULL, 1);
 
 -- ----------------------------
 -- Table structure for TranslatedDrugsCategory
@@ -859,14 +859,14 @@ CREATE TABLE "public"."TranslatedDrugsCategory" (
 -- ----------------------------
 -- Records of TranslatedDrugsCategory
 -- ----------------------------
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (1, '0 TranslatedActiveElement  en', '0 DrugCategory  Description  en', 1, '2023-10-01 12:56:13.684102+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (2, '0 TranslatedActiveElement  lv', '0 DrugCategory  Description  lv', 1, '2023-10-01 12:56:13.684141+00', NULL, 1);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (3, '1 TranslatedActiveElement  en', '1 DrugCategory  Description  en', 2, '2023-10-01 12:56:13.685767+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (4, '1 TranslatedActiveElement  lv', '1 DrugCategory  Description  lv', 2, '2023-10-01 12:56:13.685782+00', NULL, 1);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (5, '2 TranslatedActiveElement  en', '2 DrugCategory  Description  en', 3, '2023-10-01 12:56:13.685784+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (6, '2 TranslatedActiveElement  lv', '2 DrugCategory  Description  lv', 3, '2023-10-01 12:56:13.685786+00', NULL, 1);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (7, '3 TranslatedActiveElement  en', '3 DrugCategory  Description  en', 4, '2023-10-01 12:56:13.685789+00', NULL, 0);
-INSERT INTO "public"."TranslatedDrugsCategory" VALUES (8, '3 TranslatedActiveElement  lv', '3 DrugCategory  Description  lv', 4, '2023-10-01 12:56:13.68579+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (1, '0 TranslatedActiveElement  en', '0 DrugCategory  Description  en', 1, '2023-10-22 12:58:59.789882+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (2, '0 TranslatedActiveElement  lv', '0 DrugCategory  Description  lv', 1, '2023-10-22 12:58:59.789894+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (3, '1 TranslatedActiveElement  en', '1 DrugCategory  Description  en', 2, '2023-10-22 12:58:59.790152+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (4, '1 TranslatedActiveElement  lv', '1 DrugCategory  Description  lv', 2, '2023-10-22 12:58:59.790155+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (5, '2 TranslatedActiveElement  en', '2 DrugCategory  Description  en', 3, '2023-10-22 12:58:59.790157+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (6, '2 TranslatedActiveElement  lv', '2 DrugCategory  Description  lv', 3, '2023-10-22 12:58:59.790157+00', NULL, 1);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (7, '3 TranslatedActiveElement  en', '3 DrugCategory  Description  en', 4, '2023-10-22 12:58:59.790158+00', NULL, 0);
+INSERT INTO "public"."TranslatedDrugsCategory" VALUES (8, '3 TranslatedActiveElement  lv', '3 DrugCategory  Description  lv', 4, '2023-10-22 12:58:59.790159+00', NULL, 1);
 
 -- ----------------------------
 -- Table structure for TranslatedTherapy
@@ -886,8 +886,8 @@ CREATE TABLE "public"."TranslatedTherapy" (
 -- ----------------------------
 -- Records of TranslatedTherapy
 -- ----------------------------
-INSERT INTO "public"."TranslatedTherapy" VALUES (13, 'AutoCrated', 'AutoCreated', 1, '2023-10-01 12:56:15.734188+00', NULL, 0);
-INSERT INTO "public"."TranslatedTherapy" VALUES (14, 'AutoCrated2', 'AutoCreated2', 1, '2023-10-01 12:56:15.734202+00', NULL, 1);
+INSERT INTO "public"."TranslatedTherapy" VALUES (13, 'AutoCrated', 'AutoCreated', 1, '2023-10-22 12:59:00.23268+00', NULL, 0);
+INSERT INTO "public"."TranslatedTherapy" VALUES (14, 'AutoCrated2', 'AutoCreated2', 1, '2023-10-22 12:59:00.232683+00', NULL, 1);
 
 -- ----------------------------
 -- Table structure for UserMedicineWorkerLogs
@@ -946,7 +946,7 @@ CREATE TABLE "public"."__EFMigrationsHistory" (
 -- ----------------------------
 -- Records of __EFMigrationsHistory
 -- ----------------------------
-INSERT INTO "public"."__EFMigrationsHistory" VALUES ('20231001125236_Init', '7.0.5');
+INSERT INTO "public"."__EFMigrationsHistory" VALUES ('20231022123323_Init', '7.0.5');
 
 -- ----------------------------
 -- Alter sequences owned by

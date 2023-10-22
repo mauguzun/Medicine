@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Medicine.Entities.Models;
+using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Translated;
+using Medicine.Web.UseCases.Common;
 using Medicine.Web.UseCases.Responses;
 using Medicine.Web.UseCases.Responses.Base;
 using Medicine.Web.UseCases.Responses.Translates;
@@ -31,6 +33,10 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<TranslatedTherapy, TranslatedDto>().ReverseMap();
             CreateMap<TranslatedDrugs, TranslatedDrugsResponce>().ReverseMap();
             CreateMap<TranslatedDrugsCategory, TranslatedDto>().ReverseMap();
+
+            CreateMap<User, TokenData>()
+                            .ForMember(dest => dest.Role, opt => opt.Ignore());
+
 
         }
     }

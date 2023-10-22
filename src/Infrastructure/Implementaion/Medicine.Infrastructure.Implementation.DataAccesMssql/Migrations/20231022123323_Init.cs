@@ -38,10 +38,10 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    Birthday = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
+                    Birthday = table.Column<DateOnly>(type: "date", nullable: true),
                     Sex = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false),
-                    TimeZone = table.Column<string>(type: "text", nullable: false),
+                    TimeZone = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
