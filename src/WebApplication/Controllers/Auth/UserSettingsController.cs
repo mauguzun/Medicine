@@ -1,13 +1,8 @@
 using HotChocolate.Authorization;
-using Medicine.Entities.Models.Auth;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Medicine.Web.UseCases.Auth.Dto;
 using Medicine.Web.UseCases.Common;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 namespace Medicine.WebApplication.Controllers.Auth

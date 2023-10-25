@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { ApiResponse } from "src/app/shared/models/viewModels/ApiResponse";
 import { LoginDto } from "src/app/shared/models/viewModels/Dto/LoginDto";
+import { UserSettingsDto } from "src/app/shared/models/viewModels/Dto/UserSettingsDto";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { environment } from "src/assets/environments/environment";
@@ -40,12 +41,13 @@ export class LoginComponent implements OnInit {
       Object.assign(user, this.form.value);
 
       this.authService.login(user)
-        .subscribe((resp: HttpResponse<ApiResponse<string>>) => {
+        .subscribe((response: HttpResponse<ApiResponse<[string,UserSettingsDto]>>) => {
           this.loader = false;
-          if (resp.ok === true) {
+          if (response.ok === true) {
             this.router.navigate([`/${environment.backUrl}/settings`])
-          } else if (resp.body) {
-            this.notification.error(resp.body.message);
+          } else if (response.body) {
+            const { item1 } = response.body.Message as any;
+            this.notification.error(item1);
           }
         })
     }

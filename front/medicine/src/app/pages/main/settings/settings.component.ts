@@ -8,9 +8,7 @@ import { LoginDto } from "src/app/shared/models/viewModels/Dto/LoginDto";
 import { AuthService } from "src/app/shared/services/auth.service";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { environment } from "src/assets/environments/environment";
-import { TokenData } from 'src/app/shared/models/viewModels/TokenData';
 import { Sex } from 'src/app/shared/enums/Sex';
-import { TimeoutError } from 'rxjs';
 import { TimeZone } from 'src/app/shared/enums/Timezone';
 import { UserSettingsDto } from 'src/app/shared/models/viewModels/Dto/UserSettingsDto';
 import { Language } from 'src/app/shared/enums/Language';
@@ -22,7 +20,7 @@ import { Language } from 'src/app/shared/enums/Language';
 })
 export class SettingsComponent implements OnInit {
 
-  tokenData: TokenData = new TokenData();
+  userSettingsDto: UserSettingsDto 
   loader: boolean = false;
 
   sex = Object.entries(Sex).filter(e => !isNaN(e[0] as any)).map(e => ({ name: e[1], id: e[0] }));
@@ -37,17 +35,16 @@ export class SettingsComponent implements OnInit {
     private notification: NotificationService,
     private translate: TranslateService) {
 
-    this.tokenData = this.authService.getUser() ?? new TokenData();
+    this.userSettingsDto = this.authService.user ?? new UserSettingsDto(1);
+
     this.form = new FormGroup({
-      Language: new FormControl(this.languages.find(x => x.id === this.tokenData.Language.toString()), [Validators.required]),
-      Name: new FormControl(this.tokenData.Name, [Validators.required]),
-      TimeZone: new FormControl(this.timezones.find(x => x.id === this.tokenData.TimeZone.toString()), [Validators.required]),
-      Sex: new FormControl(this.sex.find(x => x.id === this.tokenData.Sex.toString()), [Validators.required]),
-      Birthday: new FormControl(this.tokenData.Birthday, [Validators.required]),
-      PhoneNumber: new FormControl(this.tokenData.PhoneNumber, [Validators.required]),
+      Language: new FormControl(this.languages.find(x => x.id === this.userSettingsDto.Language.toString()), [Validators.required]),
+      Name: new FormControl(this.userSettingsDto.Name, [Validators.required]),
+      TimeZone: new FormControl(this.timezones.find(x => x.id === this.userSettingsDto.TimeZone.toString()), [Validators.required]),
+      Sex: new FormControl(this.sex.find(x => x.id === this.userSettingsDto.Sex.toString()), [Validators.required]),
+      Birthday: new FormControl(this.userSettingsDto.Birthday, [Validators.required]),
+      PhoneNumber: new FormControl(this.userSettingsDto.PhoneNumber, [Validators.required]),
     });
-
-
 
   }
 
@@ -56,10 +53,9 @@ export class SettingsComponent implements OnInit {
 
     if (this.form.valid) {
 
-      const user = new UserSettingsDto(this.tokenData.Id);
+      const user = new UserSettingsDto(this.userSettingsDto.UserId);
       Object.assign(user, this.form.value);
 
-      console.log(user);
     }
 
   }

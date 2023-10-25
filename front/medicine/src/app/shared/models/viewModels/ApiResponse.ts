@@ -1,3 +1,4 @@
 export class ApiResponse<T>{
-  constructor(public message: T) { }
+  constructor(public Message: T) { }
 }
+

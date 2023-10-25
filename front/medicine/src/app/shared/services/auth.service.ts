@@ -15,13 +15,31 @@ import { UserSettingsDto } from "../models/viewModels/Dto/UserSettingsDto";
 export class AuthService {
 
 
-
-
   private TOKEN_SELECTOR = "TOKEN";
-
+  private USER_SELECTOR = "USER";
 
   private authUrl = `${environment.apiUrl}auth`;
+
   private _user: UserSettingsDto | null;
+
+  public get user(): UserSettingsDto | null {
+
+    if (this._user === null) {
+      const token = localStorage.getItem(this.USER_SELECTOR)
+      const tokeDataOrNull: string | null = token ? new JwtHelperService().decodeToken(token)?.TokenData : null;
+      this._user = tokeDataOrNull ? JSON.parse(tokeDataOrNull) : null;
+
+      console.log(this._user);
+    }
+
+    return this._user;
+  }
+
+  private set user(value: UserSettingsDto) {
+    
+    localStorage.setItem(this.USER_SELECTOR, JSON.stringify(value));
+    this._user = value;
+  }
 
   constructor(
     private http: HttpClient,
@@ -35,20 +53,10 @@ export class AuthService {
     localStorage.getItem(this.TOKEN_SELECTOR);
   }
 
-  public getUser(): UserSettingsDto | null {
-    if (this._user === null) {
-      const token = localStorage.getItem(this.TOKEN_SELECTOR)
-      const tokeDataOrNull: string | null = token ? new JwtHelperService().decodeToken(token)?.TokenData : null;
-      this._user = tokeDataOrNull ? JSON.parse(tokeDataOrNull) : null;
-
-      console.log(this._user);
-    }
-
-    return this._user;
-  }
 
   isLoginded(): boolean {
-    return this.getUser() !== null;
+    console.log(this._user);
+    return this._user != null;
   }
 
   logout(): void {
@@ -56,18 +64,19 @@ export class AuthService {
     this._user = null;
   }
 
-  login(user: LoginDto): Observable<HttpResponse<ApiResponse<[string,UserSettingsDto]>>> {
-    return this.http.post<ApiResponse<[string,UserSettingsDto]>>(this.authUrl + "/login", user, { observe: 'response' })
+  login(user: LoginDto): Observable<HttpResponse<ApiResponse<[string, UserSettingsDto]>>> {
+    return this.http.post<ApiResponse<[string, UserSettingsDto]>>(this.authUrl + "/login", user, { observe: 'response' })
       .pipe(
         catchError((error: HttpErrorResponse) => {
           // Handle the error here (e.g., log it or perform other actions).
           console.error('Error:', error);
-          return of(new HttpResponse<ApiResponse<string>>({ status: error.status, body: error.error }));
+          return of(new HttpResponse<ApiResponse<[string, UserSettingsDto]>>({ status: error.status, body: error.error }));
         }),
         map((response) => {
-          if (response.status === 200 && response.body != null) {
-            this.setToken(response.body.message[0]);
-            this.setUset(response.body.message[0]);
+          if (response.status === 200 && response.body != null ) {
+            const { Item1, Item2 } = response.body.Message as any;
+            this.setToken(Item1);
+            this.user = Item2; 
           }
           return response;
         })

@@ -1,5 +1,4 @@
 using AutoMapper;
-using Medicine.Application.Interfaces;
 using Medicine.Entities.Models.Auth;
 using Medicine.Web.UseCases.Auth.Dto;
 using Medicine.Web.UseCases.Common;
@@ -7,11 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Medicine.WebApplication.Controllers.Auth
 {
@@ -62,7 +58,7 @@ namespace Medicine.WebApplication.Controllers.Auth
 
                     string token = new JwtSecurityTokenHandler().WriteToken(jwt);
 
-                    return Ok(new ApiResponse<(string, UserSettingsDto)>(ValueTuple.Create(token, userSettings)));
+                    return Ok(new ApiResponse<(string , UserSettingsDto)>(ValueTuple.Create(token, userSettings)));
                 }
 
             }
