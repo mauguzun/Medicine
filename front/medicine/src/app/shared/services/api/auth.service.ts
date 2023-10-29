@@ -7,6 +7,7 @@ import { catchError, map } from "rxjs/operators";
 import { ApiResponse, TupleReponse } from "../../models/viewModels/ApiResponse";
 import { UserSettingsDto } from "../../models/viewModels/Dto/UserSettingsDto";
 import { Observable, of } from 'rxjs';
+import { SettingsService } from "./settings.service";
 
 
 @Injectable({
@@ -16,46 +17,30 @@ import { Observable, of } from 'rxjs';
 export class AuthService {
 
   private TOKEN_SELECTOR = "TOKEN";
-  private USER_SELECTOR = "USER";
 
   private authUrl = `${environment.apiUrl}auth`;
-  private _user: UserSettingsDto | null;
-  // private _token: string | null
 
   public get token(): string | null {
     return localStorage.getItem(this.TOKEN_SELECTOR);
   }
-  public set token(value: string) {
+
+  private set token(value: string) {
     localStorage.setItem(this.TOKEN_SELECTOR, value);
   }
 
-  public get user(): UserSettingsDto | null {
-    if (this._user === null) {
-      const token = localStorage.getItem(this.USER_SELECTOR)
-      this._user = token ? JSON.parse(token) : null;
-    }
-    return this._user;
-  }
-
-  private set user(value: UserSettingsDto) {
-    localStorage.setItem(this.USER_SELECTOR, JSON.stringify(value));
-    this._user = value;
-  }
 
   constructor(
     private http: HttpClient,
-  ) {
-    this._user = null
-  }
+    private settingsService : SettingsService
+  ) {  }
 
   isLogined(): boolean {
-    return this.user !== null &&  this.token !== null;
+    return this.token !== null;
   }
 
   logout(): void {
     localStorage.removeItem(this.TOKEN_SELECTOR);
-    localStorage.removeItem(this.USER_SELECTOR);
-    this._user = null;
+    this.settingsService.logout();
   }
 
   login(user: LoginDto): Observable<HttpResponse<ApiResponse<TupleReponse<string, UserSettingsDto>>>> {
@@ -68,7 +53,7 @@ export class AuthService {
         map((response) => {
           if (response.status === 200 && response.body != null) {
             this.token = response.body.Message.Item1;
-            this.user = response.body.Message.Item2;
+            this.settingsService.user = response.body.Message.Item2;
           }
           return response;
         })

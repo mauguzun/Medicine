@@ -12,12 +12,34 @@ import { Observable, of } from 'rxjs';
 })
 export class SettingsService {
 
+  private USER_SELECTOR = "USER";
   private authUrl = `${environment.apiUrl}auth/userSettings`;
+
+  private _user: UserSettingsDto | null;
 
   constructor(
     private http: HttpClient,
-  ) { }
+  ) {
+    this._user = null;
+  }
 
+
+  public get user(): UserSettingsDto | null {
+    if (this._user === null) {
+      const token = localStorage.getItem(this.USER_SELECTOR)
+      this._user = token ? JSON.parse(token) : null;
+    }
+    return this._user;
+  }
+
+  public set user(value: UserSettingsDto) {
+    localStorage.setItem(this.USER_SELECTOR, JSON.stringify(value));
+    this._user = value;
+  }
+
+  logout(){
+    localStorage.removeItem(this.USER_SELECTOR);
+  }
 
   save(user: UserSettingsDto): Observable<HttpResponse<ApiResponse<string>>> {
     return this.http.post<ApiResponse<string>>(this.authUrl, user, { observe: 'response' })

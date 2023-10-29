@@ -31,12 +31,11 @@ export class SettingsComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private authService: AuthService,
     private settingService: SettingsService,
     private notification: NotificationService,
     private translate: TranslateService) {
 
-    this.userSettingsDto = this.authService.user ?? new UserSettingsDto(1);
+    this.userSettingsDto = this.settingService.user ?? new UserSettingsDto(0);
 
     this.form = new FormGroup({
       Language: new FormControl(this.languages.find(x => x.id === this.userSettingsDto.Language.toString()), [Validators.required]),
@@ -56,8 +55,6 @@ export class SettingsComponent implements OnInit {
     if (this.form.valid) {
 
       this.loader = true;
-
-
 
       this.form.value.Sex = this.form.value.Sex.id;
       this.form.value.TimeZone = this.form.value.TimeZone.id;
