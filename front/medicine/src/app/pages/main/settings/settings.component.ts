@@ -5,13 +5,14 @@ import { Router } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { ApiResponse } from "src/app/shared/models/viewModels/ApiResponse";
 import { LoginDto } from "src/app/shared/models/viewModels/Dto/LoginDto";
-import { AuthService } from "src/app/shared/services/auth.service";
+import { AuthService } from "src/app/shared/services/api/auth.service";
 import { NotificationService } from "src/app/shared/services/notification.service";
 import { environment } from "src/assets/environments/environment";
 import { Sex } from 'src/app/shared/enums/Sex';
 import { TimeZone } from 'src/app/shared/enums/Timezone';
 import { UserSettingsDto } from 'src/app/shared/models/viewModels/Dto/UserSettingsDto';
 import { Language } from 'src/app/shared/enums/Language';
+import { SettingsService } from 'src/app/shared/services/api/settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -20,18 +21,18 @@ import { Language } from 'src/app/shared/enums/Language';
 })
 export class SettingsComponent implements OnInit {
 
-  userSettingsDto: UserSettingsDto 
+  userSettingsDto: UserSettingsDto
   loader: boolean = false;
 
   sex = Object.entries(Sex).filter(e => !isNaN(e[0] as any)).map(e => ({ name: e[1], id: e[0] }));
   timezones = Object.entries(TimeZone).filter(e => !isNaN(e[0] as any)).map(e => ({ name: e[1], id: e[0] }));
   languages = Object.entries(Language).filter(e => !isNaN(e[0] as any)).map(e => ({ name: e[1], id: e[0] }));
 
-  form: FormGroup ;
+  form: FormGroup;
 
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private settingService: SettingsService,
     private notification: NotificationService,
     private translate: TranslateService) {
 
@@ -49,14 +50,32 @@ export class SettingsComponent implements OnInit {
   }
 
   ngOnInit() { }
+
   submit() {
 
     if (this.form.valid) {
 
-      const user = new UserSettingsDto(this.userSettingsDto.UserId);
+      this.loader = true;
+
+
+
+      this.form.value.Sex = this.form.value.Sex.id;
+      this.form.value.TimeZone = this.form.value.TimeZone.id;
+      this.form.value.Language = this.form.value.Language.id;
+
+      const user = new UserSettingsDto(this.userSettingsDto.Id);
       Object.assign(user, this.form.value);
 
-    }
+      console.log(user);
 
+      this.settingService.save(user)
+        .subscribe((response: HttpResponse<ApiResponse<string>>) => {
+          if (response.ok === true) {
+            this.notification.show(this.translate.instant('saved'));
+          } else if (response.body) {
+            this.notification.error(response.body.Message);
+          }
+        })
+    }
   }
 }

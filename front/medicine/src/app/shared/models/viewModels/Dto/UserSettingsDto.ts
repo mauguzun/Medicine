@@ -7,11 +7,11 @@ import { TimeZone } from "../../../enums/Timezone";
 
 export class UserSettingsDto {
 
-  constructor(UserId: number) {
-    this.UserId = UserId
+  constructor(Id: number) {
+    this.Id = Id
   }
 
-  UserId!: number;
+  Id!: number;
   Language: Language = Language.en;
   Name!: string;
   TimeZone: TimeZone = TimeZone["(UTC) Coordinated Universal Time"];

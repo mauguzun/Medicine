@@ -1,8 +1,10 @@
-using HotChocolate.Authorization;
 using Medicine.Infrastructure.Implementation.DataAccesMssql;
 using Medicine.Web.UseCases.Auth.Dto;
 using Medicine.Web.UseCases.Common;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
 using System.Security.Claims;
 
 namespace Medicine.WebApplication.Controllers.Auth
@@ -21,14 +23,25 @@ namespace Medicine.WebApplication.Controllers.Auth
         [HttpPost]
         public async Task<IActionResult> Index([FromBody] UserSettingsDto userSettingsDto)
         {
+            bool response = userSettingsDto.Id.ToString() == User.Claims.Where(x => x.Type == "Id").First().Value;
+            if (response)
+            {
+                var user = await _context.Users.FindAsync(userSettingsDto.Id);
 
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-           
+                user.Language = userSettingsDto.Language;
+                user.PhoneNumber = userSettingsDto.PhoneNumber;
+                user.Sex = userSettingsDto.Sex;
+                user.Language = userSettingsDto.Language;
+                user.Birthday = userSettingsDto.Birthday;
+                user.TimeZone = userSettingsDto.TimeZone; 
+                user.Name = userSettingsDto.Name;
 
-            var user = await _context.Users.FindAsync(userSettingsDto.UserId);
+                _context.Users.Update(user);
 
+                _context.SaveChagesAsync();
+            }
 
-            return Ok(new ApiResponse<UserSettingsDto>(userSettingsDto));
+            return Ok(new ApiResponse<bool>(response));
         }
     }
 }

@@ -36,7 +36,7 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<TranslatedDrugsCategory, TranslatedDto>().ReverseMap();
 
             CreateMap<User, UserSettingsDto>()
-                            .ForMember(dest => dest.Role, opt => opt.Ignore());
+                            .ForMember(dest => dest.Role, opt => opt.Ignore()).ReverseMap();
 
 
         }
