@@ -24,24 +24,23 @@ namespace Medicine.WebApplication.Controllers.Auth
         public async Task<IActionResult> Index([FromBody] UserSettingsDto userSettingsDto)
         {
             bool response = userSettingsDto.Id.ToString() == User.Claims.Where(x => x.Type == "Id").First().Value;
-            if (response)
-            {
-                var user = await _context.Users.FindAsync(userSettingsDto.Id);
+            var user = response == true ? await _context.Users.FindAsync(userSettingsDto.Id) : null;
 
+            if (user is not null)
+            {
                 user.Language = userSettingsDto.Language;
                 user.PhoneNumber = userSettingsDto.PhoneNumber;
                 user.Sex = userSettingsDto.Sex;
                 user.Language = userSettingsDto.Language;
-                user.Birthday = userSettingsDto.Birthday;
-                user.TimeZone = userSettingsDto.TimeZone; 
+                user.Birthday =   userSettingsDto.Birthday;
+                user.TimeZone = userSettingsDto.TimeZone;
                 user.Name = userSettingsDto.Name;
 
                 _context.Users.Update(user);
-
-                _context.SaveChagesAsync();
+                await _context.SaveChagesAsync();
+                return Ok(new ApiResponse<bool>(response));
             }
-
-            return Ok(new ApiResponse<bool>(response));
+            return NotFound(new ApiResponse<bool>(response));
         }
     }
 }

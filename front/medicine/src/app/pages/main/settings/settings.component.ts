@@ -42,7 +42,7 @@ export class SettingsComponent implements OnInit {
       Name: new FormControl(this.userSettingsDto.Name, [Validators.required]),
       TimeZone: new FormControl(this.timezones.find(x => x.id === this.userSettingsDto.TimeZone.toString()), [Validators.required]),
       Sex: new FormControl(this.sex.find(x => x.id === this.userSettingsDto.Sex.toString()), [Validators.required]),
-      Birthday: new FormControl(this.userSettingsDto.Birthday, [Validators.required]),
+      Birthday: new FormControl(new Date(this.userSettingsDto.Birthday), [Validators.required]),
       PhoneNumber: new FormControl(this.userSettingsDto.PhoneNumber, [Validators.required]),
     });
 
@@ -59,15 +59,18 @@ export class SettingsComponent implements OnInit {
       this.form.value.Sex = this.form.value.Sex.id;
       this.form.value.TimeZone = this.form.value.TimeZone.id;
       this.form.value.Language = this.form.value.Language.id;
-
       const user = new UserSettingsDto(this.userSettingsDto.Id);
+
       Object.assign(user, this.form.value);
 
-      console.log(user);
+      this.form.value.Birthday.setDate(this.form.value.Birthday.getDate() + 1);
+      user.Birthday = this.form.value.Birthday.toISOString().split('T')[0];
 
       this.settingService.save(user)
         .subscribe((response: HttpResponse<ApiResponse<string>>) => {
+          this.loader = false;
           if (response.ok === true) {
+            this.settingService.user = user;
             this.notification.show(this.translate.instant('saved'));
           } else if (response.body) {
             this.notification.error(response.body.Message);

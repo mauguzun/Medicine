@@ -20,14 +20,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatSelectModule} from '@angular/material/select';
-import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 
-import {MatNativeDateModule} from '@angular/material/core';
+import { MAT_DATE_LOCALE, MatNativeDateModule } from '@angular/material/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthLayoutComponent } from './pages/auth/auth-layout.component';
@@ -86,7 +86,8 @@ const intProvider: Provider = {
       }
     }),
   ],
-  providers: [intProvider],
+  providers: [intProvider,{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

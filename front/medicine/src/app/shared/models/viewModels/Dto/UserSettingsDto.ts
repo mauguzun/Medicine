@@ -3,8 +3,6 @@ import { Language } from "../../../enums/Language";
 import { Sex } from "../../../enums/Sex";
 import { TimeZone } from "../../../enums/Timezone";
 
-
-
 export class UserSettingsDto {
 
   constructor(Id: number) {
@@ -16,7 +14,7 @@ export class UserSettingsDto {
   Name!: string;
   TimeZone: TimeZone = TimeZone["(UTC) Coordinated Universal Time"];
   Sex: Sex = Sex.male;
-  Birthday!: Date;
+  Birthday!: string;
   PhoneNumber!: string;
   Roles: Role = Role.doctor;
 }
