@@ -6,6 +6,7 @@ import { MainLayoutComponent } from './pages/main/main-layout.component';
 import { environment } from 'src/assets/environments/environment';
 import { SettingsComponent } from './pages/main/settings/settings.component';
 import { AuthGuard } from './shared/auth.guard';
+import { DoctorSearchComponent } from './pages/main/doctors/doctor-search/DoctorSearchComponent';
 
 const routes: Routes = [
   {
@@ -21,8 +22,10 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: "settings", component: SettingsComponent },
+      { path: "doct", component: DoctorSearchComponent },
     ],
   },
+ 
 ];
   
 @NgModule({

@@ -24,7 +24,7 @@ namespace Medicine.WebApplication.GraphQL.Mutations
                 
             }
             current.Title = reminderDto.Title;
-            current.Descrptioin = reminderDto.Descrptioin;
+            current.Description = reminderDto.Description;
             current.TimeInUtc = reminderDto.TimeInUtc;
 
             ctx.Update(current);

@@ -443,7 +443,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Descrptioin")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("TimeInUtc")

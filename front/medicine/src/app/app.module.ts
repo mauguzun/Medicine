@@ -34,7 +34,9 @@ import { AuthLayoutComponent } from './pages/auth/auth-layout.component';
 import { LoginComponent } from './pages/auth/login/login.component';
 import { MainLayoutComponent } from './pages/main/main-layout.component';
 import { SettingsComponent } from './pages/main/settings/settings.component';
-
+import { GraphQLModule } from './graphql.module';
+import { ApolloModule, Apollo } from 'apollo-angular';
+import { DoctorSearchComponent } from './pages/main/doctors/doctor-search/DoctorSearchComponent';
 
 
 const intProvider: Provider = {
@@ -51,8 +53,13 @@ const intProvider: Provider = {
     LoginComponent,
     MainLayoutComponent,
     SettingsComponent,
+    DoctorSearchComponent
   ],
   imports: [
+    
+
+    ApolloModule,
+    
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -84,7 +91,7 @@ const intProvider: Provider = {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    }),
+    }), GraphQLModule
   ],
   providers: [intProvider,{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
 ],

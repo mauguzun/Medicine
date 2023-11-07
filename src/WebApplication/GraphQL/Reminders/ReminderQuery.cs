@@ -10,7 +10,7 @@ namespace Medicine.WebApplication.GraphQL.Reminders
         [UseProjection]
         [UseSorting()]
         [UseFiltering()]
-        public async Task<IEnumerable<ReminderDto>> GetAll(
+        public async Task<IEnumerable<ReminderDto>> Find(
             IResponseLoader<int, Entities.Models.Reminder, ReminderDto> dataLoader)
         {
             var reminder = await dataLoader.LoadAsync();
