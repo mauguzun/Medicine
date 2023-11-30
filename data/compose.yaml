@@ -1,9 +1,9 @@
-version: '3'
+version: '2.12.2'
 
 services:
 
   postgres:
-    image: postgres:latest
+    image: postgres:14
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -11,17 +11,5 @@ services:
     ports:
       - "5432:5432"  
     volumes:
-      - ./sql:/docker-entrypoint-initdb.d
-
-  db-importer:
-    depends_on:
-      - postgres
-    image: postgres:latest
-    volumes:
-      - ./sql:/docker-entrypoint-initdb.d
-    entrypoint: ["/bin/bash", "-c"]
-    command: |
-      echo "--------------------------------Contents of SQL script:"
-      cat /docker-entrypoint-initdb.d/init.sql
-      
-      psql -h postgres -U postgres -d mydb -f /docker-entrypoint-initdb.d/public.sql
+      - ./postgres/data:/var/lib/postgresql/data
+      - ./public.sql:/docker-entrypoint-initdb.d/public.sql

@@ -10,7 +10,7 @@ namespace Medicine.Entities.Models.Auth
         public DateOnly? Birthday { get; set; }
         public Sex? Sex { get; set; }
         public Language Language { get; set; } = Language.en;
-        public string Name { get; set; }
+        public string? Name { get; set; }
         public TimeZone TimeZone { get; set; } = TimeZone.CoordinatedUniversalTime;
 
     }

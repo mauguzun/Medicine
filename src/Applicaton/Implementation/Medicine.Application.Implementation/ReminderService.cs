@@ -63,10 +63,10 @@ namespace Medicine.Application.Implementation
 
             foreach (var reminder in reminedrs)
             {
-                var user = users.Where(x => x.Id == reminder.UserId).FirstOrDefault();
+                var user = users.Where(x => x.Id == reminder.AuthorId).FirstOrDefault();
                 if (user is null)
                 {
-                    user = _userService.GetUserById(reminder.UserId.Value) ??
+                    user = _userService.GetUserById(reminder.AuthorId.Value) ??
                             throw new Exception($"{nameof(ReminderService)} user not found");
                 }
 

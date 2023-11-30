@@ -24,13 +24,12 @@ namespace Medicine.WebApplication.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
-
             var user = new User()
             {
                 Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
-                 UserName = "mauguzun@gmail.com",
                 Email = "mauguzun@gmail.com",
                 EmailConfirmed  = true,
+                UserName = "Ss",
             };
             var result = await _userManager.CreateAsync(user, "De171717!");
             var roleResult = await  _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
@@ -106,7 +105,7 @@ namespace Medicine.WebApplication.Controllers
 
                 var drug = new Drug
                 {
-                    UserId = userId,
+                    AuthorId = userId,
                     OneUnitSizeInGramm = i + 1,
                     Translations = translations,
                     Title = $"Drug LatinName {i}",
@@ -124,12 +123,12 @@ namespace Medicine.WebApplication.Controllers
 
             _context.Reminders.Add(new Reminder
             {
-                UserId = userId,
+                AuthorId = userId,
                 Title = "Morning Reminder",
                 TimeInUtc = "07:20"
             });
 
-            _context.Reminders.Add(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
+            _context.Reminders.Add(new Reminder { AuthorId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
 
             _context.SaveChanges();
 
@@ -168,7 +167,7 @@ namespace Medicine.WebApplication.Controllers
                     {
                        new Course
                        {
-                             UserId = userId,
+                             AuthorId = userId,
                              Translations = new  List<TranslatedCourse>  {
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}

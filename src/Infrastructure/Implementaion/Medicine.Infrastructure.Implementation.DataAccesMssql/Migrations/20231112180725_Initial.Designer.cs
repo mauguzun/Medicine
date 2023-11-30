@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231022123323_Init")]
-    partial class Init
+    [Migration("20231112180725_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -50,6 +50,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -59,14 +62,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<double>("Quantity")
                         .HasColumnType("double precision");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DrugId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DrugId");
 
                     b.ToTable("ActiveElements");
                 });
@@ -148,6 +148,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -201,6 +204,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<int?>("CourseGroupID")
                         .HasColumnType("integer");
 
@@ -213,16 +219,13 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("TherapyId")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseGroupID");
 
                     b.HasIndex("TherapyId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Courses");
                 });
@@ -234,6 +237,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
@@ -250,17 +256,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("Sex")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Weight")
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CourseId");
 
                     b.ToTable("CourseSettings");
                 });
@@ -272,6 +275,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -288,14 +294,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("integer");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("DosageRecommendationId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DosageRecommendationId");
 
                     b.ToTable("DosageLogs");
                 });
@@ -307,6 +310,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<int>("CourseId")
                         .HasColumnType("integer");
@@ -323,16 +329,13 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("double precision");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("CourseId");
 
                     b.HasIndex("DrugId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("DosingFrequencies");
                 });
@@ -344,6 +347,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -361,20 +367,17 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("UsingDescription")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthorId");
+
                     b.HasIndex("DosingFrequencyId");
 
                     b.HasIndex("ReminderId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("DosingFrequencyReminders");
                 });
@@ -386,6 +389,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -399,14 +405,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("SimilarDrugsId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("SimilarDrugsId");
 
                     b.ToTable("Drugs");
                 });
@@ -419,15 +422,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("DrugCategories");
                 });
@@ -439,6 +442,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
@@ -453,12 +459,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Reminders");
                 });
@@ -514,6 +517,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -528,7 +534,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Therapies");
                 });
@@ -542,6 +548,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -553,9 +562,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
-
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -572,6 +578,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int?>("AuthorId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -585,18 +594,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("UsingDescription")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DosageRecommendationId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DosageRecommendationId");
 
                     b.HasIndex("Language", "DosageRecommendationId")
                         .IsUnique();
@@ -765,7 +771,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 {
                     b.HasBaseType("Medicine.Entities.Models.Translated.Base.TransatedEntityWithDescription");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("CourseGroup");
                 });
@@ -779,7 +785,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
                     b.HasIndex("ActiveElementId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("AuthorId");
 
                     b.HasIndex("Language", "ActiveElementId")
                         .IsUnique();
@@ -797,9 +803,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<string>("Version")
                         .HasColumnType("text");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CourseId");
 
                     b.HasIndex("Language", "CourseId")
                         .IsUnique();
@@ -814,9 +820,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("CourseGroupId")
                         .HasColumnType("integer");
 
-                    b.HasIndex("CourseGroupId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("CourseGroupId");
 
                     b.HasIndex("Language", "CourseGroupId")
                         .IsUnique();
@@ -831,9 +837,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("DosingFrequencyId")
                         .HasColumnType("integer");
 
-                    b.HasIndex("DosingFrequencyId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DosingFrequencyId");
 
                     b.ToTable("TranslatedDosingFrequency");
                 });
@@ -848,9 +854,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<string>("Recomendation")
                         .HasColumnType("text");
 
-                    b.HasIndex("DrugId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DrugId");
 
                     b.HasIndex("Language", "DrugId")
                         .IsUnique();
@@ -865,9 +871,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("DrugCategoryId")
                         .HasColumnType("integer");
 
-                    b.HasIndex("DrugCategoryId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("DrugCategoryId");
 
                     b.HasIndex("Language", "DrugCategoryId")
                         .IsUnique();
@@ -882,9 +888,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     b.Property<int>("TherapyId")
                         .HasColumnType("integer");
 
-                    b.HasIndex("TherapyId");
+                    b.HasIndex("AuthorId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("TherapyId");
 
                     b.HasIndex("Language", "TherapyId")
                         .IsUnique();
@@ -909,23 +915,27 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
             modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Drug", "Drug")
                         .WithMany("ActiveElements")
                         .HasForeignKey("DrugId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Drug");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Course", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.CourseGroup", "CourseGroup")
                         .WithMany("Courses")
                         .HasForeignKey("CourseGroupID");
@@ -936,53 +946,53 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("CourseGroup");
 
                     b.Navigation("Therapy");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.CourseSettings", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Course", "Course")
                         .WithMany("CourseSettings")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosageLog", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.DosingFrequencyReminder", "DosageRecommendation")
                         .WithMany("DosageLogs")
                         .HasForeignKey("DosageRecommendationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("DosageRecommendation");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosingFrequency", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Course", "Course")
                         .WithMany("DosingFrequencies")
                         .HasForeignKey("CourseId")
@@ -995,19 +1005,19 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Course");
 
                     b.Navigation("Drug");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DosingFrequencyReminder", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.DosingFrequency", "DosingFrequency")
                         .WithMany("DosingFrequencyReminders")
                         .HasForeignKey("DosingFrequencyId")
@@ -1020,50 +1030,46 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("DosingFrequency");
 
                     b.Navigation("Reminder");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Drug", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.SimilarDrugs", "SimilarDrugs")
                         .WithMany("SimilarDrugsList")
                         .HasForeignKey("SimilarDrugsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("SimilarDrugs");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.DrugCategory", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AuthorId");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Reminder", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AuthorId");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.ReminderLog", b =>
@@ -1079,30 +1085,28 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
             modelBuilder.Entity("Medicine.Entities.Models.Therapy", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorId");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequencyReminder", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.DosingFrequencyReminder", "DosageRecommendation")
                         .WithMany()
                         .HasForeignKey("DosageRecommendationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("DosageRecommendation");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.UserMedicineWorker", b =>
@@ -1173,11 +1177,11 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
             modelBuilder.Entity("Medicine.Entities.Models.CourseGroup", b =>
                 {
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AuthorId");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedActiveElement", b =>
@@ -1188,115 +1192,115 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("AuthorId");
 
                     b.Navigation("ActiveElement");
 
-                    b.Navigation("User");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedCourse", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Course", "Course")
                         .WithMany("Translations")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Course");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedCourseGroup", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.CourseGroup", "CourseGroup")
                         .WithMany("Translations")
                         .HasForeignKey("CourseGroupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("CourseGroup");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDosingFrequency", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.DosingFrequency", "DosingFrequency")
                         .WithMany("Translations")
                         .HasForeignKey("DosingFrequencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("DosingFrequency");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugs", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Drug", "Drug")
                         .WithMany("Translations")
                         .HasForeignKey("DrugId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Drug");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedDrugsCategory", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.DrugCategory", "DrugCategory")
                         .WithMany("Translations")
                         .HasForeignKey("DrugCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("DrugCategory");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.Translated.TranslatedTherapy", b =>
                 {
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId");
+
                     b.HasOne("Medicine.Entities.Models.Therapy", "Therapy")
                         .WithMany("Translations")
                         .HasForeignKey("TherapyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
+                    b.Navigation("Author");
 
                     b.Navigation("Therapy");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.ActiveElement", b =>

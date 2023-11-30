@@ -12,7 +12,7 @@ import { environment } from "src/assets/environments/environment";
 
 @Component({
   selector: "app-login",
-  templateUrl: "./login.component.html",
+  templateUrl: "./login.component.html", 
   styleUrls: ["./login.component.less"],
 })
 

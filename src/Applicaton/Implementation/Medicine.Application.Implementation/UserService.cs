@@ -9,10 +9,7 @@ namespace Medicine.Application.Implementation
         private readonly IAppDbContextReadonly _appDbContextReadOnly;
         private User _user;
 
-        public UserService(IAppDbContextReadonly appDbContextReadOnly)
-        {
-            _appDbContextReadOnly = appDbContextReadOnly;
-        }
+        public UserService(IAppDbContextReadonly appDbContextReadOnly) => _appDbContextReadOnly = appDbContextReadOnly;
 
         public User? GetUserByEmail(string email)
         {

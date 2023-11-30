@@ -5,9 +5,9 @@ namespace Medicine.Entities.Models.Base
 {
     public abstract class EntityAuthor : Entity
     {
-        public User? User { get; set; }
+        public User? Author { get; set; }
 
-        [ForeignKey(nameof(User))]
-        public int? UserId { get; set; }
+        [ForeignKey(nameof(Author))]
+        public int? AuthorId { get; set; }
     }
 }

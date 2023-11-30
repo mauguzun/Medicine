@@ -9,7 +9,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class Initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -41,6 +41,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Birthday = table.Column<DateOnly>(type: "date", nullable: true),
                     Sex = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false),
+                    Name = table.Column<string>(type: "text", nullable: true),
                     TimeZone = table.Column<int>(type: "integer", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -203,15 +204,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Title = table.Column<string>(type: "text", nullable: true),
                     Description = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseGroup_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_CourseGroup_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -223,14 +224,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DrugCategories", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DrugCategories_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_DrugCategories_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -243,16 +244,16 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     TimeInUtc = table.Column<string>(type: "text", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Title = table.Column<string>(type: "text", nullable: true),
-                    Descrptioin = table.Column<string>(type: "text", nullable: true)
+                    Description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Reminders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Reminders_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Reminders_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -266,17 +267,17 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     UserId = table.Column<int>(type: "integer", nullable: false),
                     Status = table.Column<int>(type: "integer", nullable: false),
                     Type = table.Column<int>(type: "integer", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Therapies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Therapies_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Therapies_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -317,14 +318,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     OneUnitSizeInGramm = table.Column<double>(type: "double precision", nullable: false),
                     SimilarDrugsId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Drugs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Drugs_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Drugs_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -344,15 +345,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     CourseGroupId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedCourseGroup", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedCourseGroup_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedCourseGroup_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -372,15 +373,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     DrugCategoryId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDrugsCategory", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedDrugsCategory_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedDrugsCategory_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -423,14 +424,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     CourseGroupID = table.Column<int>(type: "integer", nullable: true),
                     CourseType = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Courses", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Courses_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Courses_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -455,15 +456,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     TherapyId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedTherapy", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedTherapy_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedTherapy_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -483,14 +484,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ActiveElements", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ActiveElements_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_ActiveElements_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -535,15 +536,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     DrugId = table.Column<int>(type: "integer", nullable: false),
                     Recomendation = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDrugs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedDrugs_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedDrugs_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -566,14 +567,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     MaxAge = table.Column<int>(type: "integer", nullable: true),
                     Weight = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CourseSettings", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CourseSettings_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_CourseSettings_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -595,14 +596,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Total = table.Column<double>(type: "double precision", nullable: false),
                     IntervalInDays = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosingFrequencies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DosingFrequencies_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_DosingFrequencies_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -629,15 +630,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     CourseId = table.Column<int>(type: "integer", nullable: false),
                     Version = table.Column<string>(type: "text", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedCourse", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedCourse_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedCourse_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -657,7 +658,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     ActiveElementId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
@@ -670,8 +671,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TranslatedActiveElement_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedActiveElement_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -688,14 +689,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     ReminderId = table.Column<int>(type: "integer", nullable: false),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosingFrequencyReminders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DosingFrequencyReminders_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_DosingFrequencyReminders_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -721,15 +722,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Description = table.Column<string>(type: "text", nullable: true),
                     DosingFrequencyId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDosingFrequency", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedDosingFrequency_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedDosingFrequency_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -751,14 +752,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     Quantity = table.Column<double>(type: "double precision", nullable: false),
                     DateTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true)
+                    AuthorId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_DosageLogs", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DosageLogs_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_DosageLogs_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -779,15 +780,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                     UsingDescription = table.Column<string>(type: "text", nullable: false),
                     DosageRecommendationId = table.Column<int>(type: "integer", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    UserId = table.Column<int>(type: "integer", nullable: true),
+                    AuthorId = table.Column<int>(type: "integer", nullable: true),
                     Language = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_TranslatedDosingFrequencyReminder", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_TranslatedDosingFrequencyReminder_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_TranslatedDosingFrequencyReminder_AspNetUsers_AuthorId",
+                        column: x => x.AuthorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
@@ -808,14 +809,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_ActiveElements_AuthorId",
+                table: "ActiveElements",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ActiveElements_DrugId",
                 table: "ActiveElements",
                 column: "DrugId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActiveElements_UserId",
-                table: "ActiveElements",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -855,9 +856,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseGroup_UserId",
+                name: "IX_CourseGroup_AuthorId",
                 table: "CourseGroup",
-                column: "UserId");
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Courses_AuthorId",
+                table: "Courses",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Courses_CourseGroupID",
@@ -870,9 +876,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "TherapyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Courses_UserId",
-                table: "Courses",
-                column: "UserId");
+                name: "IX_CourseSettings_AuthorId",
+                table: "CourseSettings",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CourseSettings_CourseId",
@@ -880,9 +886,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_CourseSettings_UserId",
-                table: "CourseSettings",
-                column: "UserId");
+                name: "IX_DosageLogs_AuthorId",
+                table: "DosageLogs",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosageLogs_DosageRecommendationId",
@@ -890,9 +896,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DosageRecommendationId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DosageLogs_UserId",
-                table: "DosageLogs",
-                column: "UserId");
+                name: "IX_DosingFrequencies_AuthorId",
+                table: "DosingFrequencies",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosingFrequencies_CourseId",
@@ -905,9 +911,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DrugId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DosingFrequencies_UserId",
-                table: "DosingFrequencies",
-                column: "UserId");
+                name: "IX_DosingFrequencyReminders_AuthorId",
+                table: "DosingFrequencyReminders",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DosingFrequencyReminders_DosingFrequencyId",
@@ -920,14 +926,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "ReminderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DosingFrequencyReminders_UserId",
-                table: "DosingFrequencyReminders",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DrugCategories_UserId",
+                name: "IX_DrugCategories_AuthorId",
                 table: "DrugCategories",
-                column: "UserId");
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DrugDrugCategory_DrugsId",
@@ -935,14 +936,14 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DrugsId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Drugs_AuthorId",
+                table: "Drugs",
+                column: "AuthorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Drugs_SimilarDrugsId",
                 table: "Drugs",
                 column: "SimilarDrugsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Drugs_UserId",
-                table: "Drugs",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ReminderLogs_ReminderId",
@@ -950,19 +951,24 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "ReminderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Reminders_UserId",
+                name: "IX_Reminders_AuthorId",
                 table: "Reminders",
-                column: "UserId");
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Therapies_UserId",
+                name: "IX_Therapies_AuthorId",
                 table: "Therapies",
-                column: "UserId");
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedActiveElement_ActiveElementId",
                 table: "TranslatedActiveElement",
                 column: "ActiveElementId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_TranslatedActiveElement_AuthorId",
+                table: "TranslatedActiveElement",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedActiveElement_Language_ActiveElementId",
@@ -971,9 +977,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedActiveElement_UserId",
-                table: "TranslatedActiveElement",
-                column: "UserId");
+                name: "IX_TranslatedCourse_AuthorId",
+                table: "TranslatedCourse",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourse_CourseId",
@@ -987,9 +993,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedCourse_UserId",
-                table: "TranslatedCourse",
-                column: "UserId");
+                name: "IX_TranslatedCourseGroup_AuthorId",
+                table: "TranslatedCourseGroup",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedCourseGroup_CourseGroupId",
@@ -1003,9 +1009,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedCourseGroup_UserId",
-                table: "TranslatedCourseGroup",
-                column: "UserId");
+                name: "IX_TranslatedDosingFrequency_AuthorId",
+                table: "TranslatedDosingFrequency",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDosingFrequency_DosingFrequencyId",
@@ -1013,9 +1019,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 column: "DosingFrequencyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedDosingFrequency_UserId",
-                table: "TranslatedDosingFrequency",
-                column: "UserId");
+                name: "IX_TranslatedDosingFrequencyReminder_AuthorId",
+                table: "TranslatedDosingFrequencyReminder",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDosingFrequencyReminder_DosageRecommendationId",
@@ -1029,9 +1035,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedDosingFrequencyReminder_UserId",
-                table: "TranslatedDosingFrequencyReminder",
-                column: "UserId");
+                name: "IX_TranslatedDrugs_AuthorId",
+                table: "TranslatedDrugs",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugs_DrugId",
@@ -1045,9 +1051,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedDrugs_UserId",
-                table: "TranslatedDrugs",
-                column: "UserId");
+                name: "IX_TranslatedDrugsCategory_AuthorId",
+                table: "TranslatedDrugsCategory",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedDrugsCategory_DrugCategoryId",
@@ -1061,9 +1067,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_TranslatedDrugsCategory_UserId",
-                table: "TranslatedDrugsCategory",
-                column: "UserId");
+                name: "IX_TranslatedTherapy_AuthorId",
+                table: "TranslatedTherapy",
+                column: "AuthorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_TranslatedTherapy_Language_TherapyId",
@@ -1075,11 +1081,6 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 name: "IX_TranslatedTherapy_TherapyId",
                 table: "TranslatedTherapy",
                 column: "TherapyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_TranslatedTherapy_UserId",
-                table: "TranslatedTherapy",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMedicineWorkers_MedicineWorkerId",

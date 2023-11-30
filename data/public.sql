@@ -1,24 +1,4 @@
-/*
- Navicat Premium Data Transfer
 
- Source Server         : docker postgres
- Source Server Type    : PostgreSQL
- Source Server Version : 140001
- Source Host           : localhost:5432
- Source Catalog        : postgres
- Source Schema         : public
-
- Target Server Type    : PostgreSQL
- Target Server Version : 140001
- File Encoding         : 65001
-
- Date: 29/10/2023 16:44:32
-*/
-
-
--- ----------------------------
--- Sequence structure for ActiveElements_Id_seq
--- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."ActiveElements_Id_seq";
 CREATE SEQUENCE "public"."ActiveElements_Id_seq" 
 INCREMENT 1
