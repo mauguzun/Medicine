@@ -12,5 +12,6 @@ namespace Medicine.Entities.Models.Auth
         public Language Language { get; set; } = Language.en;
         public string? Name { get; set; }
         public TimeZone TimeZone { get; set; } = TimeZone.CoordinatedUniversalTime;
+        public SystemRole Role { get; set; } = SystemRole.User;
     }
 }

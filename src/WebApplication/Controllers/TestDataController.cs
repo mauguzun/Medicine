@@ -1,5 +1,4 @@
 ﻿using Medicine.Entities.Enums;
-using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Courses;
 using Medicine.Entities.Models.Dosages;
@@ -28,7 +27,6 @@ namespace Medicine.WebApplication.Controllers
             _userManager = userManager;
         }
 
-  
 
         public async Task<IActionResult> IndexAsync()
         {
@@ -205,8 +203,6 @@ namespace Medicine.WebApplication.Controllers
             return Ok();
       
         }
-
-
 
 
         #region users 
