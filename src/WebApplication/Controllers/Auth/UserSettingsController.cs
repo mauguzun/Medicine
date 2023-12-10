@@ -32,9 +32,11 @@ namespace Medicine.WebApplication.Controllers.Auth
                 user.Birthday =   userSettingsDto.Birthday;
                 user.TimeZone = userSettingsDto.TimeZone;
                 user.Name = userSettingsDto.Name;
+                user.Role = userSettingsDto.Role;
 
                 _context.Users.Update(user);
                 await _context.SaveChagesAsync();
+
                 return Ok(new ApiResponse<bool>(response));
             }
             return NotFound(new ApiResponse<bool>(response));
