@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using Medicine.Entities.Models;
 using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Drugs;
 using Medicine.Infrastructure.Interfcases.DataAccess;
-using Medicine.Web.UseCases.Responses;
+using Medicine.Web.UseCases.Models.GraphqlResponse.Drug;
 using Microsoft.EntityFrameworkCore;
 
 namespace Medicine.Web.UseCases.DataLoaders.DataLoader
@@ -28,14 +28,14 @@ namespace Medicine.Web.UseCases.DataLoaders.DataLoader
         }
 
 
-        public async Task<IEnumerable<DrugCategoryDto>> LoadCategoriesByDrugId(int id, CancellationToken ct = default)
+        public async Task<IEnumerable<DrugCategoryResponse>> LoadCategoriesByDrugId(int id, CancellationToken ct = default)
         {
             IEnumerable<DrugCategory> items = _dbContext.Drugs
                 .Where(x => x.Id == id)
                 .Include(x => x.DrugCategories)
                 .SelectMany(x => x.DrugCategories);
 
-            var convertedItems = _mapper.Map<IEnumerable<DrugCategoryDto>>(items);
+            var convertedItems = _mapper.Map<IEnumerable<DrugCategoryResponse>>(items);
             return convertedItems;
         }
 

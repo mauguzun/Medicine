@@ -281,7 +281,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserMedicineWorkers",
+                name: "UserDoctorRelations",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -1084,12 +1084,12 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMedicineWorkers_MedicineWorkerId",
-                table: "UserMedicineWorkers",
+                table: "UserDoctorRelations",
                 column: "MedicineWorkerId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UserMedicineWorkers_UserId",
-                table: "UserMedicineWorkers",
+                table: "UserDoctorRelations",
                 column: "UserId");
         }
 
@@ -1151,7 +1151,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql.Migrations
                 name: "UserMedicineWorkerLogs");
 
             migrationBuilder.DropTable(
-                name: "UserMedicineWorkers");
+                name: "UserDoctorRelations");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

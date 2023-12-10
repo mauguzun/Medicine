@@ -1,15 +1,19 @@
 ﻿using Medicine.Entities.Enums;
-using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Courses;
+using Medicine.Entities.Models.Dosages;
+using Medicine.Entities.Models.Drugs;
+using Medicine.Entities.Models.Reminders;
+using Medicine.Entities.Models.Therapies;
 using Medicine.Entities.Models.Translated;
 using Medicine.Entities.Models.Translated.Base;
+using Medicine.Entities.Models.UserDoctor;
 using Medicine.Infrastructure.Interfcases.DataAccess;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Medicine.Infrastructure.Implementation.DataAccesMssql
+namespace Medicine.Infrastructure.Implementation.DataAccesPsql
 {
     public class AppDbContextReadOnly : IdentityDbContext<User, Role, int>, IAppDbContextReadonly
     {
@@ -52,7 +56,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
             //modelBuilder.Entity<Course>().Property(p => p.Id).UseIdentityAlwaysColumn();
             //modelBuilder.Entity<ReminderLog>().Property(p => p.Id).UseIdentityAlwaysColumn();
             //modelBuilder.Entity<UserMedicineWorkerLog>().Property(p => p.Id).UseIdentityAlwaysColumn();
-            //modelBuilder.Entity<UserMedicineWorker>().Property(p => p.Id).UseIdentityAlwaysColumn();
+            //modelBuilder.Entity<UserDoctorRelations>().Property(p => p.Id).UseIdentityAlwaysColumn();
             //modelBuilder.Entity<TranslatedTherapy>().Property(p => p.Id).UseIdentityAlwaysColumn();
             //modelBuilder.Entity<TranslatedDrugs>().Property(p => p.Id).UseIdentityAlwaysColumn();
             //modelBuilder.Entity<TranslatedDrugsCategory>().Property(p => p.Id).UseIdentityAlwaysColumn();
@@ -87,15 +91,15 @@ namespace Medicine.Infrastructure.Implementation.DataAccesMssql
         public DbSet<SimilarDrugs> SimilarDrugs { get; set; }
         public DbSet<DrugCategory> DrugCategories { get; set; }
         public DbSet<Reminder> Reminders { get; set; }
-        public DbSet<Entities.Models.DosageLog> DosageLogs { get; set; }
+        public DbSet<DosageLog> DosageLogs { get; set; }
         public DbSet<TranslatedActiveElement> TranslatedActiveElements { get; set; }
         public DbSet<TranslatedCourse> TranslatedCourses { get; set; }
         public DbSet<TranslatedDosingFrequencyReminder> TranslatedDosageRecommendations { get; set; }
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; set; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; set; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; set; }
-        public DbSet<UserMedicineWorker> UserMedicineWorkers { get; set; }
-        public DbSet<UserMedicineWorkerLog> UserMedicineWorkerLogs { get; set; }
+        public DbSet<UserDoctorRelation> UserDoctorRelations { get; set; }
+        public DbSet<UserDoctorRelationLog> UserDoctorRelationLogs { get; set; }
         public DbSet<ReminderLog> ReminderLogs { get; set; }
 
         public new DbSet<T> Set<T>() where T : class, IEntity => base.Set<T>();

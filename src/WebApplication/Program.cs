@@ -1,7 +1,7 @@
 using Medicine.Application.Implementation;
 using Medicine.Application.Interfaces;
 using Medicine.Entities.Models.Auth;
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Medicine.Infrastructure.Implementation.DataAccesPsql;
 using Medicine.Infrastructure.Implementation.GmailNotification;
 using Medicine.Infrastructure.Interfcases.DataAccess;
 using Medicine.Infrastructure.Interfcases.Notification;

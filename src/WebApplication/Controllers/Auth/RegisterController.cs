@@ -1,7 +1,7 @@
 using Medicine.Entities.Enums;
 using Medicine.Entities.Models.Auth;
 using Medicine.Infrastructure.Interfcases.Notification;
-using Medicine.Web.UseCases.Auth.Dto;
+using Medicine.Web.UseCases.Models.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;

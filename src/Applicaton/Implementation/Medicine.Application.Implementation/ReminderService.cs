@@ -1,6 +1,6 @@
 ﻿using Medicine.Application.Interfaces;
-using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
+using Medicine.Entities.Models.Reminders;
 using Medicine.Infrastructure.Interfcases.DataAccess;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
@@ -63,10 +63,10 @@ namespace Medicine.Application.Implementation
 
             foreach (var reminder in reminedrs)
             {
-                var user = users.Where(x => x.Id == reminder.AuthorId).FirstOrDefault();
+                var user = users.Where(x => x.Id == reminder.UserId).FirstOrDefault();
                 if (user is null)
                 {
-                    user = _userService.GetUserById(reminder.AuthorId.Value) ??
+                    user = _userService.GetUserById(reminder.UserId.Value) ??
                             throw new Exception($"{nameof(ReminderService)} user not found");
                 }
 

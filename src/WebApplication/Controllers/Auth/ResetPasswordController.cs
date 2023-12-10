@@ -1,5 +1,5 @@
 using Medicine.Entities.Models.Auth;
-using Medicine.Web.UseCases.Auth.Dto;
+using Medicine.Web.UseCases.Models.Auth.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.WebUtilities;

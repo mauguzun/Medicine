@@ -1,11 +1,8 @@
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Medicine.Web.UseCases.Auth.Dto;
-using Medicine.Web.UseCases.Common;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Medicine.Infrastructure.Implementation.DataAccesPsql;
+using Medicine.Web.UseCases.Models.Auth.Dto;
+using Medicine.Web.UseCases.Response;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Security.Claims;
 
 namespace Medicine.WebApplication.Controllers.Auth
 {

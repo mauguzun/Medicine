@@ -1,52 +1,26 @@
 using AutoMapper;
 using HotChocolate.Authorization;
-using Medicine.Entities.Models;
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Medicine.Web.UseCases.Responses;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System.Numerics;
+using Medicine.Entities.Models.Reminders;
+using Medicine.Entities.Models.UserDoctor;
+using Medicine.Infrastructure.Implementation.DataAccesPsql;
+using Medicine.Web.UseCases.Models.GraphqlResponse.Reminder;
 
 namespace Medicine.WebApplication.GraphQL.Mutations
 {
     [Authorize]
-    public class ReminderMutation
+    public class UserDoctorRelationMutation
     {
         [UseSorting()]
         [UseFiltering()]
-        public ReminderDto UpdateReminder(
+        public UserDoctorRelation UpdateRelation(
             [Service] AppDbContext ctx,
             [Service] IMapper mapper,
-            ReminderDto reminderDto)
+            UserDoctorRelation reminderDto)
         {
-            var current = ctx.Reminders.Find(reminderDto.Id);
-            if(current == null)
-            {
-                
-            }
-            current.Title = reminderDto.Title;
-            current.Description = reminderDto.Description;
-            current.TimeInUtc = reminderDto.TimeInUtc;
 
-            ctx.Update(current);
-            ctx.SaveChanges();
-
-            return mapper.Map<ReminderDto>(current);
+            return null;
         }
 
-
-        [UseSorting()]
-        [UseFiltering()]
-        public ReminderDto AddReminder(
-            [Service] AppDbContext ctx,
-            [Service] IMapper mapper,
-            ReminderDto reminderDto)
-        {
-            var reminder = mapper.Map<Reminder>(reminderDto);
-            var current = ctx.Reminders.Add(reminder);
-            ctx.SaveChanges();
-
-            return mapper.Map<ReminderDto>(reminder);
-        }
     }
 
 }

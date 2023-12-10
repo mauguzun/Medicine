@@ -1,8 +1,8 @@
 ﻿using Medicine.Application.Interfaces;
-using Medicine.Entities.Models;
+using Medicine.Entities.Models.Reminders;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Medicine.WebApplication.Controllers
+namespace Medicine.WebApplication.Controllers.Api
 {
 
     [Route("Api/[controller]")]

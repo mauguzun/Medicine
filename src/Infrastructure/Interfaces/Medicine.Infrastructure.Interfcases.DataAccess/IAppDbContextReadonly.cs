@@ -1,7 +1,12 @@
-﻿using Medicine.Entities.Models;
-using Medicine.Entities.Models.Auth;
+﻿using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
+using Medicine.Entities.Models.Courses;
+using Medicine.Entities.Models.Dosages;
+using Medicine.Entities.Models.Drugs;
+using Medicine.Entities.Models.Reminders;
+using Medicine.Entities.Models.Therapies;
 using Medicine.Entities.Models.Translated;
+using Medicine.Entities.Models.UserDoctor;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,8 +32,8 @@ namespace Medicine.Infrastructure.Interfcases.DataAccess
         public DbSet<TranslatedDosingFrequency> TranslatedDosingFrequencies { get; }
         public DbSet<TranslatedDrugs> TranslatedDrugs { get; }
         public DbSet<TranslatedTherapy> TranslatedTherapies { get; }
-        public DbSet<UserMedicineWorker> UserMedicineWorkers { get; }
-        public DbSet<UserMedicineWorkerLog> UserMedicineWorkerLogs { get; }
+        public DbSet<UserDoctorRelation> UserDoctorRelations { get; }
+        public DbSet<UserDoctorRelationLog> UserDoctorRelationLogs { get; }
         public DbSet<ReminderLog> ReminderLogs { get; }
         public DbSet<Entities.Models.Auth.Role> Roles { get; }
         public DbSet<User> Users { get; }

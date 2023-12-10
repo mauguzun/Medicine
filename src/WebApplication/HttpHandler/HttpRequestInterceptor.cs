@@ -1,8 +1,6 @@
 ﻿using HotChocolate.AspNetCore;
 using HotChocolate.Execution;
 using Medicine.Application.Interfaces;
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
-using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace Medicine.WebApplication.HttpHandler

@@ -1,4 +1,4 @@
-﻿using Medicine.Entities.Models;
+﻿using Medicine.Entities.Models.Reminders;
 
 namespace Medicine.Application.Interfaces
 {

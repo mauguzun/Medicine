@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Medicine.Infrastructure.Interfcases.DataAccess": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:62622;http://localhost:62623"
+    }
+  }
+}

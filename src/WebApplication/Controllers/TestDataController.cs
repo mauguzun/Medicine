@@ -1,8 +1,14 @@
 ﻿using Medicine.Entities.Enums;
 using Medicine.Entities.Models;
 using Medicine.Entities.Models.Auth;
+using Medicine.Entities.Models.Courses;
+using Medicine.Entities.Models.Dosages;
+using Medicine.Entities.Models.Drugs;
+using Medicine.Entities.Models.Reminders;
+using Medicine.Entities.Models.Therapies;
 using Medicine.Entities.Models.Translated;
-using Medicine.Infrastructure.Implementation.DataAccesMssql;
+using Medicine.Entities.Models.UserDoctor;
+using Medicine.Infrastructure.Implementation.DataAccesPsql;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,20 +28,13 @@ namespace Medicine.WebApplication.Controllers
             _userManager = userManager;
         }
 
+  
+
         public async Task<IActionResult> IndexAsync()
         {
-            var user = new User()
-            {
-                Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
-                Email = "mauguzun@gmail.com",
-                EmailConfirmed  = true,
-                UserName = "Ss",
-            };
-            var result = await _userManager.CreateAsync(user, "De171717!");
-            var roleResult = await  _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
+            var (user, doctor) = await CreateUser();
 
-
-            _context.SaveChanges();
+            await CreateUserDoctorRelation(user, doctor);
 
             var userId = user.Id;
 
@@ -79,7 +78,7 @@ namespace Medicine.WebApplication.Controllers
                 }
 
                 drugsCategories.Add(new DrugCategory { Translations = translations });
-             
+
             }
             _context.DrugCategories.AddRange(drugsCategories);
             _context.SaveChanges();
@@ -105,7 +104,7 @@ namespace Medicine.WebApplication.Controllers
 
                 var drug = new Drug
                 {
-                    AuthorId = userId,
+                    UserId = userId,
                     OneUnitSizeInGramm = i + 1,
                     Translations = translations,
                     Title = $"Drug LatinName {i}",
@@ -123,12 +122,12 @@ namespace Medicine.WebApplication.Controllers
 
             _context.Reminders.Add(new Reminder
             {
-                AuthorId = userId,
+                UserId = userId,
                 Title = "Morning Reminder",
                 TimeInUtc = "07:20"
             });
 
-            _context.Reminders.Add(new Reminder { AuthorId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
+            _context.Reminders.Add(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
 
             _context.SaveChanges();
 
@@ -167,7 +166,7 @@ namespace Medicine.WebApplication.Controllers
                     {
                        new Course
                        {
-                             AuthorId = userId,
+                             UserId = userId,
                              Translations = new  List<TranslatedCourse>  {
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
@@ -204,58 +203,52 @@ namespace Medicine.WebApplication.Controllers
             _context.SaveChanges();
 
             return Ok();
-            //var dosageRecomendation = await _context.DosageRecommendations.FindAsync(1);
+      
+        }
 
 
 
 
-            //await _context.SaveChagesAsync();
-            //_context.ChangeTracker.Clear();
+        #region users 
+        private async Task CreateUserDoctorRelation(User user, User doctor)
+        {
+            UserDoctorRelation userDoctorRelactions = new UserDoctorRelation()
+            {
+                User = user,
+                MedicineWorker = doctor,
+                CreatedByUser = true
+            };
 
-            //DateTime firstData = new DateTime(1900, 1, 3, 7, 20, 0, 0);
+            _context.UserDoctorRelations.Add(userDoctorRelactions);
+            await _context.SaveChagesAsync();
+        }
+        private async Task<(User User, User Doctor)> CreateUser()
+        {
+            var user = new User()
+            {
+                Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
+                Email = "mauguzun@gmail.com",
+                EmailConfirmed = true,
+                UserName = "ma",
+            };
+            await _userManager.CreateAsync(user, "De171717!");
+            await _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
 
-            //var lang = Language.en;
+            var doctror = new User()
+            {
+                Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
+                Email = "mauguzun+doctor@gmail.com",
+                EmailConfirmed = true,
+                UserName = "doc",
+            };
+            await _userManager.CreateAsync(user, "De171717!");
+            await _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
 
+            _context.SaveChanges();
 
-            //var therapy = _context.Reminders
-            //    .Where(
-            //        reminder => reminder.TimeInUtc == firstData.ToString("HH:mm") && reminder.UserId == userId
-            //         &&
-            //       (
-            //        reminder.DosageRecommendations.Any(x => x.DosageLogs == null)
-            //            ||
-            //        reminder.DosageRecommendations.Any(x => x.DosageLogs.Any(
-            //            y => y.DateTime.AddDays(y.DosageRecommendation.DosingFrequency.IntervalInDays) <= firstData
-            //        )))
-            //    )
-            //    .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-            //    .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-            //        .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-            //    .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-            //        .ThenInclude(doseFrequency => doseFrequency.Course)
-            //        .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-            //    .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-            //        .ThenInclude(doseFrequency => doseFrequency.Course)
-            //        .ThenInclude(course => course.Therapy)
-            //        .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-            //    .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(dosageRecomendation => dosageRecomendation.DosingFrequency)
-            //        .ThenInclude(doseFrequency => doseFrequency.Drug)
-            //        .ThenInclude(t => t.Translations.Where(t => t.Language == lang))
-            //   .Include(reminder => reminder.DosageRecommendations)
-            //        .ThenInclude(dosageRecomendation => dosageRecomendation.DosageLogs.Where(x => x.UserId == userId))
-            //        .ToList();
-
-
-
-
-
-            //return Json(therapy);
+            return (User: user, Doctor: doctror);
 
         }
+        #endregion
     }
 }
