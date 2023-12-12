@@ -1,9 +1,7 @@
 using AutoMapper;
 using HotChocolate.Authorization;
-using Medicine.Entities.Models.Reminders;
 using Medicine.Entities.Models.UserDoctor;
 using Medicine.Infrastructure.Implementation.DataAccesPsql;
-using Medicine.Web.UseCases.Models.GraphqlResponse.Reminder;
 
 namespace Medicine.WebApplication.GraphQL.Mutations
 {

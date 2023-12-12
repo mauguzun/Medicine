@@ -9,5 +9,10 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql
 
         public Task<int> SaveChagesAsync(CancellationToken cancellationToken = default) => base.SaveChangesAsync(cancellationToken);
 
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

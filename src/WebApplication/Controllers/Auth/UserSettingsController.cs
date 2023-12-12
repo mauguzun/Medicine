@@ -1,4 +1,5 @@
 using Medicine.Infrastructure.Implementation.DataAccesPsql;
+using Medicine.Infrastructure.Interfcases.DataAccess;
 using Medicine.Web.UseCases.Models.Auth.Dto;
 using Medicine.Web.UseCases.Response;
 using Microsoft.AspNetCore.Authorization;
@@ -11,9 +12,9 @@ namespace Medicine.WebApplication.Controllers.Auth
     public class UserSettingsController : Controller
     {
 
-        private readonly AppDbContext _context;
+        private readonly IAppDbContext _context;
 
-        public UserSettingsController(AppDbContext context) => _context = context;
+        public UserSettingsController(IAppDbContext context) => _context = context;
 
 
         [Authorize]

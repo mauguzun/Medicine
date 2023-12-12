@@ -4,7 +4,7 @@ using Medicine.Entities.Models.Dosages;
 namespace Medicine.Entities.Models.Reminders
 {
     /// <summary>
-    /// User create reminder select time and then can assing drugs for this reminder 
+    /// CreatedBy create reminder select time and then can assing drugs for this reminder 
     /// for example each day in 17:00
     /// </summary>
     public class Reminder : EntityTitleDescription

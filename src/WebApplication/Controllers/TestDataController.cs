@@ -7,7 +7,7 @@ using Medicine.Entities.Models.Reminders;
 using Medicine.Entities.Models.Therapies;
 using Medicine.Entities.Models.Translated;
 using Medicine.Entities.Models.UserDoctor;
-using Medicine.Infrastructure.Implementation.DataAccesPsql;
+using Medicine.Infrastructure.Interfcases.DataAccess;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -17,11 +17,11 @@ namespace Medicine.WebApplication.Controllers
     [Route("[controller]")]
     public class TestDataController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IAppDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly RoleManager<User> _roleManager;
 
-        public TestDataController(AppDbContext context, UserManager<User> userManager)
+        public TestDataController(IAppDbContext context, UserManager<User> userManager)
         {
             _context = context;
             _userManager = userManager;
@@ -42,9 +42,10 @@ namespace Medicine.WebApplication.Controllers
 
             await CreateReminder(userId);
 
-            var dosingFreqency =  await CraeteDosingFrequencyAsync(_context.Reminders.First().Id);
+           
 
-            var course = await CreateCourseAsync(userId, dosingFreqency);
+            var course = await CreateCourseAsync(userId);
+            var dosingFreqency = await DosingFrequencyReminderAsync(_context.Reminders.First().Id ,course.DosingFrequencies.First().Id);
 
             await CreateTherapy(userId, course);
 
@@ -52,17 +53,18 @@ namespace Medicine.WebApplication.Controllers
 
         }
 
-        private async Task<DosingFrequencyReminder> CraeteDosingFrequencyAsync(int reminderId)
+        private async Task<DosingFrequencyReminder> DosingFrequencyReminderAsync(int reminderId,int dosingFreqencyId)
         {
             var dosingFreqency = new DosingFrequencyReminder
             {
                 Quantity = 1,
                 ReminderId = reminderId,
                 Title = "Title",
-                UsingDescription = "before eat"
+                UsingDescription = "before eat",
+                DosingFrequencyId = dosingFreqencyId
             };
 
-            await _context.DosingFrequencyReminders.AddAsync(dosingFreqency);
+            _context.DosingFrequencyReminders.Add(dosingFreqency);
             await _context.SaveChagesAsync();
             return dosingFreqency;
         }
@@ -71,21 +73,21 @@ namespace Medicine.WebApplication.Controllers
         {
             _context.Reminders.Add(new Reminder
             {
-                UserId = userId,
+                CreatedById = userId,
                 Title = "Morning Reminder",
                 TimeInUtc = "07:20"
             });
 
-            await _context.Reminders.AddAsync(new Reminder { UserId = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
+            await _context.Reminders.AddAsync(new Reminder { CreatedById = userId, Title = "Evning Reminder", TimeInUtc = "0:20" });
 
             await _context.SaveChagesAsync();
         }
 
-        private async Task<Course> CreateCourseAsync(int userId, DosingFrequencyReminder dosingFreqency)
+        private async Task<Course> CreateCourseAsync(int userId)
         {
             var course = new Course
             {
-                UserId = userId,
+                CreatedById = userId,
                 Translations = new List<TranslatedCourse>  {
                                new TranslatedCourse { Title = "AutoCrated2", Description = "AutoCreated2",Language = Language.lv },
                                new TranslatedCourse { Title = "AutoCrated", Description = "AutoCreated"}
@@ -111,14 +113,12 @@ namespace Medicine.WebApplication.Controllers
                                              Language = Language.lv
                                          }
                                     },
-                                    DosingFrequencyReminders = new List<DosingFrequencyReminder>(){ dosingFreqency }
-
                                }
                            }
             };
 
             await _context.Courses.AddAsync(course);
-            await _context.SaveChangesAsync();
+            await _context.SaveChagesAsync();
             return course;
         }
 
@@ -127,7 +127,7 @@ namespace Medicine.WebApplication.Controllers
             _context.Therapies.Add(
                 new Therapy
                 {
-                    UserId = userId,
+                    AssingedToId = userId,
 
                     Type = TherapyType.AutoCreated,
                     Status = TherapyStatus.Statret,
@@ -147,7 +147,7 @@ namespace Medicine.WebApplication.Controllers
                     }
                 });
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChagesAsync();
         }
 
         private async Task CreateDrugs(int userId, List<DrugCategory> drugsCategories)
@@ -172,7 +172,7 @@ namespace Medicine.WebApplication.Controllers
 
                 var drug = new Drug
                 {
-                    UserId = userId,
+                    CreatedById = userId,
                     OneUnitSizeInGramm = i + 1,
                     Translations = translations,
                     Title = $"Drug LatinName {i}",
@@ -184,9 +184,9 @@ namespace Medicine.WebApplication.Controllers
             similarDrugs.SimilarDrugsList = drugs;
 
             _context.Drugs.AddRange(drugs);
-            _context.SimilarDrugs.Add(similarDrugs);
+            //_context.SimilarDrugs.Add(similarDrugs);
 
-            await _context.SaveChangesAsync();
+            await _context.SaveChagesAsync();
         }
 
         private async Task<List<DrugCategory>> CreateDrugsCategoriesAsync()
@@ -210,7 +210,7 @@ namespace Medicine.WebApplication.Controllers
 
             }
             _context.DrugCategories.AddRange(drugsCategories);
-            await _context.SaveChangesAsync();
+            await _context.SaveChagesAsync();
 
             return drugsCategories;
         }
@@ -252,7 +252,7 @@ namespace Medicine.WebApplication.Controllers
         {
             UserDoctorRelation userDoctorRelactions = new UserDoctorRelation()
             {
-                User = user,
+                CreatedBy = user,
                 MedicineWorker = doctor,
                 CreatedByUser = true
             };
@@ -278,7 +278,7 @@ namespace Medicine.WebApplication.Controllers
                 Role = SystemRole.MedicineWorker,
                 UserName = "doc",
             };
-            await _userManager.CreateAsync(user, "De171717!");
+            await _userManager.CreateAsync(doctror, "De171717!");
             _context.SaveChanges();
 
             return (User: user, Doctor: doctror);

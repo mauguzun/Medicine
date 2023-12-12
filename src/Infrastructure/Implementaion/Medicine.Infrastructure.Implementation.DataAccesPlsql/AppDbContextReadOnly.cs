@@ -1,5 +1,4 @@
-﻿using Medicine.Entities.Enums;
-using Medicine.Entities.Models.Auth;
+﻿using Medicine.Entities.Models.Auth;
 using Medicine.Entities.Models.Base;
 using Medicine.Entities.Models.Courses;
 using Medicine.Entities.Models.Dosages;
@@ -44,7 +43,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql
 
             // seeding
             //modelBuilder.Entity<Role>().HasData(
-            //    new Role { Id = 1, Name = SystemRole.User.ToString(), NormalizedName = SystemRole.User.ToString().ToUpper() },
+            //    new Role { Id = 1, Name = SystemRole.CreatedBy.ToString(), NormalizedName = SystemRole.CreatedBy.ToString().ToUpper() },
             //    new Role { Id = 2, Name = SystemRole.MedicineWorker.ToString(), NormalizedName = SystemRole.MedicineWorker.ToString().ToUpper() }
             //);
         }

@@ -8,8 +8,8 @@ namespace Medicine.Entities.Models.Courses
 {
     public class Course : TranslationEntity<TranslatedCourse>
     {
-        public int TherapyId { get; set; }
-        public Therapy Therapy { get; set; }
+        public int? TherapyId { get; set; }
+        public Therapy? Therapy { get; set; }
         public CourseGroup? CourseGroup { get; set; }
         public int? CourseGroupID { get; set; }
         public CourseType CourseType { get; set; } = CourseType.None;

@@ -52,8 +52,8 @@ namespace Medicine.WebApplication.Controllers.Auth
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User created a new account with password.");
-                //await _userManager.AddToRoleAsync(user, SystemRole.User.ToString());
+                _logger.LogInformation("CreatedBy created a new account with password.");
+                //await _userManager.AddToRoleAsync(user, SystemRole.CreatedBy.ToString());
 
                 var userId = await _userManager.GetUserIdAsync(user);
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

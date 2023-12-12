@@ -34,7 +34,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj" />
     <ProjectReference Include="..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
-    <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesMssql\Medicine.Infrastructure.Implementation.DataAccesPsql.csproj" />
+    <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesPlsql\Medicine.Infrastructure.Implementation.DataAccesPlsql.csproj" />
     <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.GmailNotification\Medicine.Infrastructure.Implementation.GmailNotification.csproj" />
     <ProjectReference Include="..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj" />
     <ProjectReference Include="..\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj" />

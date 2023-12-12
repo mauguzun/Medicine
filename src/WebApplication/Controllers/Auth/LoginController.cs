@@ -62,7 +62,7 @@ namespace Medicine.WebApplication.Controllers.Auth
                 }
             }
 
-            var response = result.IsLockedOut ? "User Locked" : result.RequiresTwoFactor 
+            var response = result.IsLockedOut ? "CreatedBy Locked" : result.RequiresTwoFactor 
                 ? "RequiresTwoFactor" : $"Unable to load user with email '{loginDto.Email}'";
 
             return Unauthorized(new ApiResponse<(string, UserSettingsDto?)>((response, null)));

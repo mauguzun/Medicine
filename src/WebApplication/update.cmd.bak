@@ -1,0 +1,4 @@
+@echo off
+
+dotnet ef migrations add Init --context AppDbContext -p path\to\Medicine.Infrastructure.Implementation.DataAccesPsql
+dotnet ef database update --context AppDbContext -p path\to\Medicine.Infrastructure.Implementation.DataAccesPsql

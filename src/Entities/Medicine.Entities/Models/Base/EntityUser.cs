@@ -5,9 +5,9 @@ namespace Medicine.Entities.Models.Base
 {
     public abstract class EntityUser : Entity
     {
-        public User? User { get; set; }
+        public User? CreatedBy { get; set; }
 
-        [ForeignKey(nameof(User))]
-        public int? UserId { get; set; }
+        [ForeignKey(nameof(CreatedBy))]
+        public int? CreatedById { get; set; }
     }
 }
