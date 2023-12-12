@@ -80,7 +80,7 @@ var connnectionString = builder.Configuration["connectionString"];
 
 
 //dataAcess
-builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseNpgsql(connnectionString));
+builder.Services.AddDbContext<IAppDbContext,AppDbContext>(builder => builder.UseNpgsql(connnectionString));
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseNpgsql(connnectionString));
 
 
