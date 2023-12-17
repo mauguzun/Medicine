@@ -7,10 +7,10 @@ namespace Medicine.Entities.Models.UserDoctor
 {
     public class UserDoctorRelation : EntityUser
     {
-        public User? MedicineWorker { get; set; }
+        public User? Doctor { get; set; }
 
-        [ForeignKey(nameof(MedicineWorker))]
-        public int? MedicineWorkerId { get; set; }
+        [ForeignKey(nameof(Doctor))]
+        public int? DoctorId { get; set; }
 
         public UserDoctorRelationType UserDoctorRelationType { get; set; } = UserDoctorRelationType.None;
         public bool CreatedByUser { get; set; }

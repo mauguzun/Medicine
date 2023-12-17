@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class _20231217_143217 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -276,7 +276,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    MedicineWorkerId = table.Column<int>(type: "integer", nullable: true),
+                    DoctorId = table.Column<int>(type: "integer", nullable: true),
                     UserDoctorRelationType = table.Column<int>(type: "integer", nullable: false),
                     CreatedByUser = table.Column<bool>(type: "boolean", nullable: false),
                     AcceptedAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
@@ -292,8 +292,8 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_UserDoctorRelations_AspNetUsers_MedicineWorkerId",
-                        column: x => x.MedicineWorkerId,
+                        name: "FK_UserDoctorRelations_AspNetUsers_DoctorId",
+                        column: x => x.DoctorId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id");
                 });
@@ -1099,9 +1099,9 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
                 column: "CreatedById");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserDoctorRelations_MedicineWorkerId",
+                name: "IX_UserDoctorRelations_DoctorId",
                 table: "UserDoctorRelations",
-                column: "MedicineWorkerId");
+                column: "DoctorId");
         }
 
         /// <inheritdoc />

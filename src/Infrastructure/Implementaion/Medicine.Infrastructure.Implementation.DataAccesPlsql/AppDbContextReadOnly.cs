@@ -44,7 +44,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPsql
             // seeding
             //modelBuilder.Entity<Role>().HasData(
             //    new Role { Id = 1, Name = SystemRole.CreatedBy.ToString(), NormalizedName = SystemRole.CreatedBy.ToString().ToUpper() },
-            //    new Role { Id = 2, Name = SystemRole.MedicineWorker.ToString(), NormalizedName = SystemRole.MedicineWorker.ToString().ToUpper() }
+            //    new Role { Id = 2, Name = SystemRole.Doctor.ToString(), NormalizedName = SystemRole.Doctor.ToString().ToUpper() }
             //);
         }
 

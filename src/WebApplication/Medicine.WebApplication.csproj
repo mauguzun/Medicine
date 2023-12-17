@@ -36,6 +36,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\data\Medicine.Testdata\Medicine.TestData.csproj" />
     <ProjectReference Include="..\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj" />
     <ProjectReference Include="..\Entities\Medicine.Entities\Medicine.Entities.csproj" />
     <ProjectReference Include="..\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesPlsql\Medicine.Infrastructure.Implementation.DataAccesPlsql.csproj" />

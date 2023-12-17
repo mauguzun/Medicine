@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20231212211854_Init")]
-    partial class Init
+    [Migration("20231217145752_20231217_155735")]
+    partial class _20231217_155735
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -621,7 +621,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
                     b.Property<bool>("CreatedByUser")
                         .HasColumnType("boolean");
 
-                    b.Property<int?>("MedicineWorkerId")
+                    b.Property<int?>("DoctorId")
                         .HasColumnType("integer");
 
                     b.Property<int>("UserDoctorRelationType")
@@ -631,7 +631,7 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
 
                     b.HasIndex("CreatedById");
 
-                    b.HasIndex("MedicineWorkerId");
+                    b.HasIndex("DoctorId");
 
                     b.ToTable("UserDoctorRelations");
                 });
@@ -1115,13 +1115,13 @@ namespace Medicine.Infrastructure.Implementation.DataAccesPlsql.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedById");
 
-                    b.HasOne("Medicine.Entities.Models.Auth.User", "MedicineWorker")
+                    b.HasOne("Medicine.Entities.Models.Auth.User", "Doctor")
                         .WithMany()
-                        .HasForeignKey("MedicineWorkerId");
+                        .HasForeignKey("DoctorId");
 
                     b.Navigation("CreatedBy");
 
-                    b.Navigation("MedicineWorker");
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Medicine.Entities.Models.UserDoctor.UserDoctorRelationLog", b =>
