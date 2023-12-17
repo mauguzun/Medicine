@@ -10,7 +10,7 @@ namespace ArchTest
         }
 
         [Test]
-        public void Test1()
+        public void Entity_Should_NotRefernce()
         {
             var assembly = typeof(Medicine.Entities.Models.Base.Entity).Assembly;
 

@@ -18,8 +18,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Applicaton\Implementation\Medicine.Application.Implementation\Medicine.Application.Implementation.csproj" />
     <ProjectReference Include="..\..\src\Applicaton\Interfaces\Medicine.Application.Interfaces\Medicine.Application.Interfaces.csproj" />
     <ProjectReference Include="..\..\src\Entities\Medicine.Entities\Medicine.Entities.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesPlsql\Medicine.Infrastructure.Implementation.DataAccesPlsql.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.GmailNotification\Medicine.Infrastructure.Implementation.GmailNotification.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.DataAccess\Medicine.Infrastructure.Interfcases.DataAccess.csproj" />
+    <ProjectReference Include="..\..\src\Infrastructure\Interfaces\Medicine.Infrastructure.Interfcases.Notification\Medicine.Infrastructure.Interfcases.Notification.csproj" />
+    <ProjectReference Include="..\..\src\Utils\Utils\Medicine.Utils.csproj" />
+    <ProjectReference Include="..\..\src\WebApplication\Medicine.WebApplication.csproj" />
+    <ProjectReference Include="..\..\src\Web\Medicine.Web.UseCases\Medicine.Web.UseCases.csproj" />
   </ItemGroup>
 
 </Project>
