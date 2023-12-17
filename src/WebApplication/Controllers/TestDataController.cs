@@ -269,7 +269,6 @@ namespace Medicine.WebApplication.Controllers
                 EmailConfirmed = true,
                 UserName = "ma",
             };
-            await _userManager.CreateAsync(user, "De171717!");
             var doctror = new User()
             {
                 Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
@@ -278,7 +277,6 @@ namespace Medicine.WebApplication.Controllers
                 Role = SystemRole.MedicineWorker,
                 UserName = "doc",
             };
-            await _userManager.CreateAsync(doctror, "De171717!");
             _context.SaveChanges();
 
             return (User: user, Doctor: doctror);
