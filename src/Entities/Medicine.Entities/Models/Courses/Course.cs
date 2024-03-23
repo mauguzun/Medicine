@@ -6,6 +6,7 @@ using Medicine.Entities.Models.Translated;
 
 namespace Medicine.Entities.Models.Courses
 {
+
     public class Course : TranslationEntity<TranslatedCourse>
     {
         public int? TherapyId { get; set; }
@@ -16,4 +17,5 @@ namespace Medicine.Entities.Models.Courses
         public List<CourseSettings> CourseSettings { get; set; } = new List<CourseSettings>();
         public List<DosingFrequency> DosingFrequencies { get; set; } = new List<DosingFrequency>();
     }
+
 }

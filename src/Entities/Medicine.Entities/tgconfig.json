@@ -1,0 +1,21 @@
+{
+  "propertyNameConverters": [ "UnderscoreCaseToPascalCase" ],
+  "enumValueNameConverters": [ "UnderscoreCaseToPascalCase" ],
+  "fileNameConverters ": [ "UnderscoreCaseToPascalCase" ],
+  "csNullableTranslation": null,
+  "clearOutputDirectory": true,
+  "typeScriptFileExtension": "ts",
+  "outputPath": "C:\\Users\\maugu\\source\\repos\\Medicine\\front\\medicine\\src\\app\\shared\\models\\entities",
+  "tabLength": 2,
+  "explicitPublicAccessor": true,
+  "defaultValuesForTypes": {
+    "Date | null": "null",
+  },
+  "customTypeMappings": {
+    "System.DateTime": "Date",
+  },
+  "typeUnionsForTypes": {
+    "string": [ "null" ],
+    "Date": [ "Date" ]
+  }
+}
