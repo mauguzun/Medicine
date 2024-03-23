@@ -6,7 +6,7 @@ import { MainLayoutComponent } from './pages/main/main-layout.component';
 import { environment } from 'src/assets/environments/environment';
 import { SettingsComponent } from './pages/main/settings/settings.component';
 import { AuthGuard } from './shared/auth.guard';
-import { DoctorSearchComponent } from './pages/main/doctors/doctor-search/DoctorSearchComponent';
+import { DoctorSearchComponent } from './pages/main/doctors/doctor-search/doctor-search.component';
 
 const routes: Routes = [
   {
@@ -25,9 +25,9 @@ const routes: Routes = [
       { path: "doct", component: DoctorSearchComponent },
     ],
   },
- 
+
 ];
-  
+
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]

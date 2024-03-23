@@ -56,7 +56,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{0E08C358-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.TestData", "data\Medicine.Testdata\Medicine.TestData.csproj", "{C5D6F863-C711-44A3-8F77-303D21F16A50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArchTest", "tests\ArchTest\ArchTest.csproj", "{024B620F-4E36-477F-BF22-94E7AC9ECE2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ArchTest", "tests\ArchTest\ArchTest.csproj", "{024B620F-4E36-477F-BF22-94E7AC9ECE2C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

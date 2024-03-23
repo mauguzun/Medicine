@@ -10,7 +10,7 @@ export class CourseSettingsDto {
   minAge?: number;
   maxAge?: number;
   weight!: number;
-  user!: User;
+  author!: User;
   userId!: number;
   id!: number;
   createdAt?: Date;
