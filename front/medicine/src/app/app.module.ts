@@ -56,10 +56,10 @@ const intProvider: Provider = {
     DoctorSearchComponent
   ],
   imports: [
-    
 
+    GraphQLModule,
     ApolloModule,
-    
+
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -91,11 +91,11 @@ const intProvider: Provider = {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient]
       }
-    })  
+    })
   ],
   providers: [intProvider,{ provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
 ],
-  bootstrap: [AppComponent]  
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 

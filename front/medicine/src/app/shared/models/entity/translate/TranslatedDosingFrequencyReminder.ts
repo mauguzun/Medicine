@@ -14,3 +14,6 @@ export class TranslatedDosingFrequencyReminder {
   id!: number;
   createdAt?: Date;
 }
+
+
+

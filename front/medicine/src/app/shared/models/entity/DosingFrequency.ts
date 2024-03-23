@@ -2,6 +2,7 @@ import { User } from "./User";
 import { DosingFrequencyReminder } from "./DosingFrequencyReminder";
 import { Drug } from "./Drug";
 import { Course } from "./Course";
+import { TranslatedDosingFrequency } from "./translate/TranslatedDosingFrequency";
 
 
 export class DosingFrequency {

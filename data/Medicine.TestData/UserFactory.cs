@@ -12,15 +12,14 @@ namespace Medicine.TestData
             var users = new List<User>();
             for (int i = 0; i < count; i++)
             {
-                var randome = new Random().Next(1123413, 1341234123);
                 users.Add(
                     new User()
                     {
                         Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
-                        Email = isDoctor ? $"mauguzun+doc{randome}@gmail.com" : $"mauguzun+{randome}@gmail.com",
+                        Email = isDoctor ? $"mauguzun+doc{count}@gmail.com" : $"mauguzun+{count}@gmail.com",
                         EmailConfirmed = true,
                         Role = isDoctor ? Entities.Enums.SystemRole.MedicineWorker : Entities.Enums.SystemRole.User,
-                        UserName = isDoctor ? $"mauguzun+doc{randome}@gmail.com" : $"mauguzun+{randome}@gmail.com",
+                        UserName = isDoctor ? $"mauguzun+doc{count}@gmail.com" : $"mauguzun+{count}@gmail.com",
                     });
             }
             return users;

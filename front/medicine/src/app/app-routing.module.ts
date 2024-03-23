@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: environment.backUrl,
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: MainLayoutComponent,
     children: [
       { path: "settings", component: SettingsComponent },

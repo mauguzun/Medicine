@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   locales: ['en', 'lv'],
   defaultLocale: 'en',
-  apiUrl: 'http://localhost:5004/graphql/',
+  apiUrl: 'https://localhost:44375/',
+  graphURL: 'https://localhost:44375/',
 
   backUrl : 'main',
 

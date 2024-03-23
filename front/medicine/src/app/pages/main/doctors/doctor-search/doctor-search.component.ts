@@ -19,8 +19,8 @@ export class DoctorSearchComponent implements OnInit {
     this.apollo
     .query<GqlResponse<ReminderDto>>({
       query: gql`
-        query YourQueryName {
-          all {
+        query find {
+          find {
             id
             title
             createdAt
@@ -75,9 +75,10 @@ export class DoctorSearchComponent implements OnInit {
       `,
     })
     .subscribe(({ data }) => {
-       console.log(data.find)
-    });
+       alert(data.find)
+    })
 
+    alert(1)
 
   }
 

@@ -14,3 +14,4 @@ export class TranslatedActiveElement {
   id!: number;
   createdAt?: Date;
 }
+
