@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Medicine.TestData
 {
-    public static class UserFactory
+    public static class UserAndDoctorFactory
     {
         public static List<User> Users(int count, bool isDoctor)
         {
@@ -16,10 +16,11 @@ namespace Medicine.TestData
                     new User()
                     {
                         Birthday = DateOnly.FromDateTime(DateTime.UtcNow),
-                        Email = isDoctor ? $"mauguzun+doc{count}@gmail.com" : $"mauguzun+{count}@gmail.com",
+                        Email = isDoctor ? $"mauguzun+doc{i}@gmail.com" : $"mauguzun+{i}@gmail.com",
                         EmailConfirmed = true,
+                        Name = isDoctor ? $"mauguzun+doc{i}" : $"mauguzun+{i}",
                         Role = isDoctor ? Entities.Enums.SystemRole.MedicineWorker : Entities.Enums.SystemRole.User,
-                        UserName = isDoctor ? $"mauguzun+doc{count}@gmail.com" : $"mauguzun+{count}@gmail.com",
+                        UserName = isDoctor ? $"mauguzun+doc{i}@gmail.com" : $"mauguzun+{i}@gmail.com",
                     });
             }
             return users;

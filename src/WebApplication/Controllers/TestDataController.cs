@@ -27,8 +27,8 @@ namespace Medicine.WebApplication.Controllers
         public async Task<IActionResult> IndexAsync()
         {
 
-            var users = UserFactory.Users(3, false);
-            var doctors = UserFactory.Users(3, true);
+            var users = UserAndDoctorFactory.Users(3, false);
+            var doctors = UserAndDoctorFactory.Users(8, true);
 
             var userCreationTasks = users.Select(async user =>
             {
@@ -60,7 +60,7 @@ namespace Medicine.WebApplication.Controllers
             _context.ActiveElements.AddRange(activeElements);
             _context.DrugCategories.AddRange(drugsCategories);
 
-            var userId = users.First().Id;
+            var userId = _context.Users.First().Id;
 
             var drugs = DrugsFactory.Drugs(2, userId, drugsCategories.OrderBy(x => new Random().Next(2, 10)).ToList());
             drugs.AddRange(DrugsFactory.Drugs(2, userId, drugsCategories.OrderBy(x => new Random().Next(2, 10)).ToList()));
@@ -77,24 +77,28 @@ namespace Medicine.WebApplication.Controllers
             _context.Courses.AddRange(courses);
             await _context.SaveChagesAsync();
 
-            var dosingFreqencies = CourseFactory.DosingFrequencies(courses[0].Id,
-                new List<(int drugId, int total, int interval)>() { (drugs[0].Id, 2, 10), (drugs[1].Id, 1, 20) });
+            var courseID = _context.Courses.First().Id;
+            var drugID = _context.Courses.First().Id;
+
+            var dosingFreqencies = CourseFactory.DosingFrequencies(courseID,
+                new List<(int drugId, int total, int interval)>() { (courseID, 2, 10), (drugID, 1, 20) });
 
             _context.DosingFrequencies.AddRange(dosingFreqencies);
             await _context.SaveChagesAsync();
 
+            var doctorUID = _context.Users.First(x => x.Role == Entities.Enums.SystemRole.MedicineWorker).Id;
 
-            var therapy = TherapyFactory.Therapy(doctors[0].Id, userId, courses);
-            var dosingFrequencyReminder = ReminderFactory.DosingFrequencyReminder(remniders[0].Id, dosingFreqencies[0].CourseId) ;
+            var therapy = TherapyFactory.Therapy(doctorUID, userId, courses);
+            var dosingFrequencyReminder = ReminderFactory.DosingFrequencyReminder(doctorUID, dosingFreqencies[0].CourseId) ;
 
-            var relation = UserFactory.UserDoctorRelation(userId, doctors[0].Id);
+            var relation = UserAndDoctorFactory.UserDoctorRelation(userId, doctorUID);
 
             _context.Therapies.AddRange(therapy);
             _context.DosingFrequencyReminders.AddRange(dosingFrequencyReminder);
             _context.UserDoctorRelations.Add(relation);
 
             await _context.SaveChagesAsync();
-            return Ok();
+            return Ok("saved");
         }
 
     }

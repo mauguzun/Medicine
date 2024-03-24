@@ -5,14 +5,14 @@
  Source Server Type    : PostgreSQL
  Source Server Version : 140010
  Source Host           : localhost:5432
- Source Catalog        : medicine4
+ Source Catalog        : medicine
  Source Schema         : public
 
  Target Server Type    : PostgreSQL
  Target Server Version : 140010
  File Encoding         : 65001
 
- Date: 17/12/2023 16:04:37
+ Date: 24/03/2024 18:50:23
 */
 
 
@@ -21,6 +21,17 @@
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."ActiveElements_Id_seq";
 CREATE SEQUENCE "public"."ActiveElements_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for ActiveElements_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."ActiveElements_Id_seq1";
+CREATE SEQUENCE "public"."ActiveElements_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -39,10 +50,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for AspNetRoleClaims_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."AspNetRoleClaims_Id_seq1";
+CREATE SEQUENCE "public"."AspNetRoleClaims_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for AspNetRoles_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."AspNetRoles_Id_seq";
 CREATE SEQUENCE "public"."AspNetRoles_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for AspNetRoles_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."AspNetRoles_Id_seq1";
+CREATE SEQUENCE "public"."AspNetRoles_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -61,10 +94,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for AspNetUserClaims_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."AspNetUserClaims_Id_seq1";
+CREATE SEQUENCE "public"."AspNetUserClaims_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for AspNetUsers_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."AspNetUsers_Id_seq";
 CREATE SEQUENCE "public"."AspNetUsers_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for AspNetUsers_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."AspNetUsers_Id_seq1";
+CREATE SEQUENCE "public"."AspNetUsers_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -83,10 +138,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for CourseSettings_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."CourseSettings_Id_seq1";
+CREATE SEQUENCE "public"."CourseSettings_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for Courses_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."Courses_Id_seq";
 CREATE SEQUENCE "public"."Courses_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for Courses_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."Courses_Id_seq1";
+CREATE SEQUENCE "public"."Courses_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -105,10 +182,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for DosageLogs_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."DosageLogs_Id_seq1";
+CREATE SEQUENCE "public"."DosageLogs_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for DosingFrequencies_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."DosingFrequencies_Id_seq";
 CREATE SEQUENCE "public"."DosingFrequencies_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for DosingFrequencies_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."DosingFrequencies_Id_seq1";
+CREATE SEQUENCE "public"."DosingFrequencies_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -127,10 +226,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for DosingFrequencyReminders_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."DosingFrequencyReminders_Id_seq1";
+CREATE SEQUENCE "public"."DosingFrequencyReminders_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for DrugCategories_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."DrugCategories_Id_seq";
 CREATE SEQUENCE "public"."DrugCategories_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for DrugCategories_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."DrugCategories_Id_seq1";
+CREATE SEQUENCE "public"."DrugCategories_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -149,10 +270,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for Drugs_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."Drugs_Id_seq1";
+CREATE SEQUENCE "public"."Drugs_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for ReminderLogs_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."ReminderLogs_Id_seq";
 CREATE SEQUENCE "public"."ReminderLogs_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for ReminderLogs_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."ReminderLogs_Id_seq1";
+CREATE SEQUENCE "public"."ReminderLogs_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -171,6 +314,17 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for Reminders_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."Reminders_Id_seq1";
+CREATE SEQUENCE "public"."Reminders_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for SimilarDrugs_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."SimilarDrugs_Id_seq";
@@ -182,10 +336,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for SimilarDrugs_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."SimilarDrugs_Id_seq1";
+CREATE SEQUENCE "public"."SimilarDrugs_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for Therapies_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."Therapies_Id_seq";
 CREATE SEQUENCE "public"."Therapies_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for Therapies_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."Therapies_Id_seq1";
+CREATE SEQUENCE "public"."Therapies_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -215,6 +391,17 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for TranslatedDosingFrequencyReminder_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."TranslatedDosingFrequencyReminder_Id_seq1";
+CREATE SEQUENCE "public"."TranslatedDosingFrequencyReminder_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for UserDoctorRelationLogs_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."UserDoctorRelationLogs_Id_seq";
@@ -226,10 +413,32 @@ START 1
 CACHE 1;
 
 -- ----------------------------
+-- Sequence structure for UserDoctorRelationLogs_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."UserDoctorRelationLogs_Id_seq1";
+CREATE SEQUENCE "public"."UserDoctorRelationLogs_Id_seq1" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
 -- Sequence structure for UserDoctorRelations_Id_seq
 -- ----------------------------
 DROP SEQUENCE IF EXISTS "public"."UserDoctorRelations_Id_seq";
 CREATE SEQUENCE "public"."UserDoctorRelations_Id_seq" 
+INCREMENT 1
+MINVALUE  1
+MAXVALUE 2147483647
+START 1
+CACHE 1;
+
+-- ----------------------------
+-- Sequence structure for UserDoctorRelations_Id_seq1
+-- ----------------------------
+DROP SEQUENCE IF EXISTS "public"."UserDoctorRelations_Id_seq1";
+CREATE SEQUENCE "public"."UserDoctorRelations_Id_seq1" 
 INCREMENT 1
 MINVALUE  1
 MAXVALUE 2147483647
@@ -1054,138 +1263,271 @@ INSERT INTO "public"."__EFMigrationsHistory" VALUES ('20231217150101_20231217_16
 -- ----------------------------
 ALTER SEQUENCE "public"."ActiveElements_Id_seq"
 OWNED BY "public"."ActiveElements"."Id";
-SELECT setval('"public"."ActiveElements_Id_seq"', 2, false);
+SELECT setval('"public"."ActiveElements_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."ActiveElements_Id_seq1"
+OWNED BY "public"."ActiveElements"."Id";
+SELECT setval('"public"."ActiveElements_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."AspNetRoleClaims_Id_seq"
 OWNED BY "public"."AspNetRoleClaims"."Id";
-SELECT setval('"public"."AspNetRoleClaims_Id_seq"', 2, false);
+SELECT setval('"public"."AspNetRoleClaims_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."AspNetRoleClaims_Id_seq1"
+OWNED BY "public"."AspNetRoleClaims"."Id";
+SELECT setval('"public"."AspNetRoleClaims_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."AspNetRoles_Id_seq"
 OWNED BY "public"."AspNetRoles"."Id";
-SELECT setval('"public"."AspNetRoles_Id_seq"', 2, false);
+SELECT setval('"public"."AspNetRoles_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."AspNetRoles_Id_seq1"
+OWNED BY "public"."AspNetRoles"."Id";
+SELECT setval('"public"."AspNetRoles_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."AspNetUserClaims_Id_seq"
 OWNED BY "public"."AspNetUserClaims"."Id";
-SELECT setval('"public"."AspNetUserClaims_Id_seq"', 2, false);
+SELECT setval('"public"."AspNetUserClaims_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."AspNetUserClaims_Id_seq1"
+OWNED BY "public"."AspNetUserClaims"."Id";
+SELECT setval('"public"."AspNetUserClaims_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."AspNetUsers_Id_seq"
 OWNED BY "public"."AspNetUsers"."Id";
-SELECT setval('"public"."AspNetUsers_Id_seq"', 7, true);
+SELECT setval('"public"."AspNetUsers_Id_seq"', 8, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."AspNetUsers_Id_seq1"
+OWNED BY "public"."AspNetUsers"."Id";
+SELECT setval('"public"."AspNetUsers_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."CourseSettings_Id_seq"
 OWNED BY "public"."CourseSettings"."Id";
-SELECT setval('"public"."CourseSettings_Id_seq"', 2, false);
+SELECT setval('"public"."CourseSettings_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."CourseSettings_Id_seq1"
+OWNED BY "public"."CourseSettings"."Id";
+SELECT setval('"public"."CourseSettings_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."Courses_Id_seq"
 OWNED BY "public"."Courses"."Id";
-SELECT setval('"public"."Courses_Id_seq"', 3, true);
+SELECT setval('"public"."Courses_Id_seq"', 4, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."Courses_Id_seq1"
+OWNED BY "public"."Courses"."Id";
+SELECT setval('"public"."Courses_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."DosageLogs_Id_seq"
 OWNED BY "public"."DosageLogs"."Id";
-SELECT setval('"public"."DosageLogs_Id_seq"', 2, false);
+SELECT setval('"public"."DosageLogs_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."DosageLogs_Id_seq1"
+OWNED BY "public"."DosageLogs"."Id";
+SELECT setval('"public"."DosageLogs_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."DosingFrequencies_Id_seq"
 OWNED BY "public"."DosingFrequencies"."Id";
-SELECT setval('"public"."DosingFrequencies_Id_seq"', 3, true);
+SELECT setval('"public"."DosingFrequencies_Id_seq"', 4, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."DosingFrequencies_Id_seq1"
+OWNED BY "public"."DosingFrequencies"."Id";
+SELECT setval('"public"."DosingFrequencies_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."DosingFrequencyReminders_Id_seq"
 OWNED BY "public"."DosingFrequencyReminders"."Id";
-SELECT setval('"public"."DosingFrequencyReminders_Id_seq"', 2, true);
+SELECT setval('"public"."DosingFrequencyReminders_Id_seq"', 3, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."DosingFrequencyReminders_Id_seq1"
+OWNED BY "public"."DosingFrequencyReminders"."Id";
+SELECT setval('"public"."DosingFrequencyReminders_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."DrugCategories_Id_seq"
 OWNED BY "public"."DrugCategories"."Id";
-SELECT setval('"public"."DrugCategories_Id_seq"', 11, true);
+SELECT setval('"public"."DrugCategories_Id_seq"', 12, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."DrugCategories_Id_seq1"
+OWNED BY "public"."DrugCategories"."Id";
+SELECT setval('"public"."DrugCategories_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."Drugs_Id_seq"
 OWNED BY "public"."Drugs"."Id";
-SELECT setval('"public"."Drugs_Id_seq"', 7, true);
+SELECT setval('"public"."Drugs_Id_seq"', 8, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."Drugs_Id_seq1"
+OWNED BY "public"."Drugs"."Id";
+SELECT setval('"public"."Drugs_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."ReminderLogs_Id_seq"
 OWNED BY "public"."ReminderLogs"."Id";
-SELECT setval('"public"."ReminderLogs_Id_seq"', 2, false);
+SELECT setval('"public"."ReminderLogs_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."ReminderLogs_Id_seq1"
+OWNED BY "public"."ReminderLogs"."Id";
+SELECT setval('"public"."ReminderLogs_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."Reminders_Id_seq"
 OWNED BY "public"."Reminders"."Id";
-SELECT setval('"public"."Reminders_Id_seq"', 3, true);
+SELECT setval('"public"."Reminders_Id_seq"', 4, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."Reminders_Id_seq1"
+OWNED BY "public"."Reminders"."Id";
+SELECT setval('"public"."Reminders_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."SimilarDrugs_Id_seq"
 OWNED BY "public"."SimilarDrugs"."Id";
-SELECT setval('"public"."SimilarDrugs_Id_seq"', 7, true);
+SELECT setval('"public"."SimilarDrugs_Id_seq"', 8, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."SimilarDrugs_Id_seq1"
+OWNED BY "public"."SimilarDrugs"."Id";
+SELECT setval('"public"."SimilarDrugs_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."Therapies_Id_seq"
 OWNED BY "public"."Therapies"."Id";
-SELECT setval('"public"."Therapies_Id_seq"', 2, true);
+SELECT setval('"public"."Therapies_Id_seq"', 3, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
-SELECT setval('"public"."TransatedEntityWithDescriptionSequence"', 43, true);
+ALTER SEQUENCE "public"."Therapies_Id_seq1"
+OWNED BY "public"."Therapies"."Id";
+SELECT setval('"public"."Therapies_Id_seq1"', 2, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+SELECT setval('"public"."TransatedEntityWithDescriptionSequence"', 44, true);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."TranslatedDosingFrequencyReminder_Id_seq"
 OWNED BY "public"."TranslatedDosingFrequencyReminder"."Id";
-SELECT setval('"public"."TranslatedDosingFrequencyReminder_Id_seq"', 2, false);
+SELECT setval('"public"."TranslatedDosingFrequencyReminder_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."TranslatedDosingFrequencyReminder_Id_seq1"
+OWNED BY "public"."TranslatedDosingFrequencyReminder"."Id";
+SELECT setval('"public"."TranslatedDosingFrequencyReminder_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."UserDoctorRelationLogs_Id_seq"
 OWNED BY "public"."UserDoctorRelationLogs"."Id";
-SELECT setval('"public"."UserDoctorRelationLogs_Id_seq"', 2, false);
+SELECT setval('"public"."UserDoctorRelationLogs_Id_seq"', 3, false);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."UserDoctorRelationLogs_Id_seq1"
+OWNED BY "public"."UserDoctorRelationLogs"."Id";
+SELECT setval('"public"."UserDoctorRelationLogs_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Alter sequences owned by
 -- ----------------------------
 ALTER SEQUENCE "public"."UserDoctorRelations_Id_seq"
 OWNED BY "public"."UserDoctorRelations"."Id";
-SELECT setval('"public"."UserDoctorRelations_Id_seq"', 2, true);
+SELECT setval('"public"."UserDoctorRelations_Id_seq"', 3, true);
+
+-- ----------------------------
+-- Alter sequences owned by
+-- ----------------------------
+ALTER SEQUENCE "public"."UserDoctorRelations_Id_seq1"
+OWNED BY "public"."UserDoctorRelations"."Id";
+SELECT setval('"public"."UserDoctorRelations_Id_seq1"', 2, false);
 
 -- ----------------------------
 -- Indexes structure for table ActiveElements

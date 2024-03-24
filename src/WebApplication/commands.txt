@@ -24,8 +24,9 @@ docker-compose up -d
  ------------
 
 
+
 query{
-  all(){
+  reminderFind(){
     id,
     title,
     createdAt,
@@ -84,5 +85,17 @@ query{
       }
        
     }
+  }
+}
+
+
+--
+
+query {
+  userFind(where: { role: { eq: MEDICINE_WORKER } }) {
+    id
+    email
+    name
+    role
   }
 }

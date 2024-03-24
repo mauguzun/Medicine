@@ -10,13 +10,15 @@ using Medicine.Web.UseCases.DataLoaders.TranslateDataLoader;
 using Medicine.Web.UseCases.Utils;
 using Medicine.WebApplication;
 using Medicine.WebApplication.GraphQL.Mutations;
-using Medicine.WebApplication.GraphQL.Reminders;
+using Medicine.WebApplication.GraphQL.Queries;
+using Medicine.WebApplication.GraphQL.Queries.Reminders;
 using Medicine.WebApplication.HttpHandler;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.IdentityModel.Tokens;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,8 +83,8 @@ var connnectionString = builder.Configuration["connectionString"];
 
 //dataAcess
 
-builder.Services.AddDbContext<IAppDbContext,AppDbContext>(builder => builder.UseNpgsql(connnectionString),
-    ServiceLifetime.Transient,ServiceLifetime.Transient);
+builder.Services.AddDbContext<IAppDbContext, AppDbContext>(builder => builder.UseNpgsql(connnectionString),
+    ServiceLifetime.Transient, ServiceLifetime.Transient);
 builder.Services.AddDbContext<IAppDbContextReadonly, AppDbContextReadOnly>(builder => builder.UseNpgsql(connnectionString), ServiceLifetime.Transient);
 
 
@@ -103,7 +105,10 @@ builder.Services.AddGraphQLServer()
     .AddHttpRequestInterceptor<HttpRequestInterceptor>()
     .AddAuthorization()
 
-    .AddQueryType<ReminderQuery>()
+    .AddQueryType<Queries>()
+                .AddTypeExtension<ReminderQuery>()
+                .AddTypeExtension<UserQuery>()
+
     .AddMutationType<ReminderMutation>()
 
     .AddProjections()

@@ -14,3 +14,4 @@ export class CourseSettings {
   id!: number;
   createdAt?: Date;
 }
+

@@ -13,6 +13,7 @@ using Medicine.Web.UseCases.Models.GraphqlResponse.Dosage;
 using Medicine.Web.UseCases.Models.GraphqlResponse.Drug;
 using Medicine.Web.UseCases.Models.GraphqlResponse.Reminder;
 using Medicine.Web.UseCases.Models.GraphqlResponse.Therapy;
+using Medicine.Web.UseCases.Models.GraphqlResponse.Users;
 
 namespace Medicine.Web.UseCases.Utils
 {
@@ -34,12 +35,14 @@ namespace Medicine.Web.UseCases.Utils
             CreateMap<DrugCategoryResponse, DrugCategory>().ReverseMap();
             CreateMap<ActiveElementResponse, ActiveElement>().ReverseMap();
             CreateMap<SimilarDrugsDto, SimilarDrugs>().ReverseMap();
+            CreateMap<User, UserResponse>().ReverseMap();
 
             CreateMap<TranslatedDosingFrequency, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedCourse, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedTherapy, TranslatedResponse>().ReverseMap();
             CreateMap<TranslatedDrugs, TranslatedDrugsResponce>().ReverseMap();
             CreateMap<TranslatedDrugsCategory, TranslatedResponse>().ReverseMap();
+
 
             CreateMap<User, UserSettingsDto>()
                             .ForMember(dest => dest.Role, opt => opt.Ignore()).ReverseMap();

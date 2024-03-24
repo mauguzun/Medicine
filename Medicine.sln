@@ -52,7 +52,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCaseTests", "tests\Useca
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.Infrastructure.Implementation.DataAccesPlsql", "src\Infrastructure\Implementaion\Medicine.Infrastructure.Implementation.DataAccesPlsql\Medicine.Infrastructure.Implementation.DataAccesPlsql.csproj", "{65150814-C8B9-4D6A-BD42-3ED172172AE0}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{0E08C358-8D31-4635-BD4A-3CEA95E190C6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "testData", "testData", "{0E08C358-8D31-4635-BD4A-3CEA95E190C6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Medicine.TestData", "data\Medicine.Testdata\Medicine.TestData.csproj", "{C5D6F863-C711-44A3-8F77-303D21F16A50}"
 EndProject

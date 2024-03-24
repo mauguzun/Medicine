@@ -22,7 +22,7 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: "settings", component: SettingsComponent },
-      { path: "doct", component: DoctorSearchComponent },
+      { path: "doctor", component: DoctorSearchComponent },
     ],
   },
 
